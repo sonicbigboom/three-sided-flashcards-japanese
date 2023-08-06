@@ -16,13 +16,14 @@ public class JapaneseVerb extends JapaneseFlashcard {
      * Creates a new {@link JapaneseVerb} with the kanji and furigana bases, the ending, and the definition.
      * @param kanjiBase The kanji base.
      * @param furiganaBase The furigana base.
-     * @param ending The ending for both kanji and furigana. This should be in furigana.
+     * @param ending The dictionary form ending of the verb. This should be in furigana.
      * @param definition The definition
      */
     public JapaneseVerb(String kanjiBase, String furiganaBase, String ending, String definition) {
         super(kanjiBase + ending, furiganaBase + ending, definition);
         this.kanjiBase = kanjiBase;
         this.furiganaBase = furiganaBase;
+        this.ending = ending;
     }
 
     /**
@@ -32,6 +33,30 @@ public class JapaneseVerb extends JapaneseFlashcard {
      */
     public JapanesePhrase conjugate(JapaneseVerbForm form) {
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Gets the kanji base of the verb.
+     * @return The kanji base.
+     */
+    public String getKanjiBase() {
+        return kanjiBase;
+    }
+
+    /**
+     * Gets the furigana base of the verb.
+     * @return The furigana base.
+     */
+    public String getFuriganaBase() {
+        return furiganaBase;
+    }
+
+    /**
+     * Gets the dictionary form ending of the verb.  This should be in furigana.
+     * @return The ending.
+     */
+    public String getEnding() {
+        return ending;
     }
 
     /**

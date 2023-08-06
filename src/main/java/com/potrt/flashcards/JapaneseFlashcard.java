@@ -42,14 +42,6 @@ public class JapaneseFlashcard extends Flashcard {
     }
 
     /**
-     * Sets the kanji of the phrase.
-     * @param kanji The kanji.
-     */
-    public void setKanji(String kanji) {
-        setSide(0, kanji);
-    }
-
-    /**
      * Gets the furigana of the phrase.
      * @return The furigana.
      */
@@ -58,26 +50,10 @@ public class JapaneseFlashcard extends Flashcard {
     }
 
     /**
-     * Sets the furigana of the phrase.
-     * @param furigana The furigana.
-     */
-    public void setFurigana(String furigana) {
-        setSide(1, furigana);
-    }
-
-    /**
      * Gets the definition of the phrase.
      * @return The defintion.
      */
     public String getDefinition() {
         return getSide(2);
-    }
-
-    /**
-     * Sets the defintion of the phrase.
-     * @param definition The definition.
-     */
-    public void setDefinition(String definition) {
-        setSide(2, definition);
     }
 }

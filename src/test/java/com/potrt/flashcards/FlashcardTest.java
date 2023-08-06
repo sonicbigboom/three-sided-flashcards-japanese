@@ -4,16 +4,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-public class FlashcardTest {
+public class FlashcardTest implements TestingConstants {
     
     /**
      * Checks that a basic two sided flashcard works.
      */
     @Test
     public void twoSidedFlashcardTest() {
-        Flashcard flashcard = new Flashcard("A", "B");
-        assertThat(flashcard.getSide(0)).contains("A");
-        assertThat(flashcard.getSide(1)).contains("B");
+        Flashcard flashcard = new Flashcard(wordIFurigana, wordIDefinition);
+        assertThat(flashcard.getSide(0)).contains(wordIFurigana);
+        assertThat(flashcard.getSide(1)).contains(wordIDefinition);
         assertThat(flashcard.getSize()).isEqualTo(2);
     }
 
@@ -22,23 +22,10 @@ public class FlashcardTest {
      */
     @Test
     public void threeSidedFlashcardTest() {
-        Flashcard flashcard = new Flashcard("A", "B", "C");
-        assertThat(flashcard.getSide(0)).contains("A");
-        assertThat(flashcard.getSide(1)).contains("B");
-        assertThat(flashcard.getSide(2)).contains("C");
+        Flashcard flashcard = new Flashcard(phraseOnePersonKanji, phraseOnePersonFurigana, phraseOnePersonDefinition);
+        assertThat(flashcard.getSide(0)).contains(phraseOnePersonKanji);
+        assertThat(flashcard.getSide(1)).contains(phraseOnePersonFurigana);
+        assertThat(flashcard.getSide(2)).contains(phraseOnePersonDefinition);
         assertThat(flashcard.getSize()).isEqualTo(3);
-    }
-
-    /**
-     * Check that a flashcard with no initial values works.
-     */
-    @Test
-    public void emptyFlashcardTest() {
-        Flashcard flashcard = new Flashcard(2);
-        flashcard.setSide(0, "A");
-        flashcard.setSide(1, "B");
-        assertThat(flashcard.getSide(0)).contains("A");
-        assertThat(flashcard.getSide(1)).contains("B");
-        assertThat(flashcard.getSize()).isEqualTo(2);
     }
 }

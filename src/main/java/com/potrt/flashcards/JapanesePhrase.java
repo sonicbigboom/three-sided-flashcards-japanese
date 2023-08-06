@@ -22,9 +22,9 @@ public class JapanesePhrase {
 
     /**
      * Creates a new {@link JapanesePhrase} with the kanji, the furigana, and the definition.
-     * @param kanji The kanji
-     * @param furigana The furigana
-     * @param definition The definition
+     * @param kanji The kanji.
+     * @param furigana The furigana.
+     * @param definition The definition.
      */
     public JapanesePhrase(String kanji, String furigana, String definition) {
         this.kanji = kanji;
@@ -33,24 +33,11 @@ public class JapanesePhrase {
     }
 
     /**
-     * Child classes that have conjugation may not use a single string to represent kanji and furigana.
-     */
-    protected JapanesePhrase() {}
-
-    /**
      * Gets the kanji of the phrase.
      * @return The kanji.
      */
     public String getKanji() {
         return kanji;
-    }
-
-    /**
-     * Sets the kanji of the phrase.
-     * @param kanji The kanji
-     */
-    public void setKanji(String kanji) {
-        this.kanji = kanji;
     }
 
     /**
@@ -62,26 +49,10 @@ public class JapanesePhrase {
     }
 
     /**
-     * Sets the furigana of the phrase.
-     * @param furigana The furigana.
-     */
-    public void setFurigana(String furigana) {
-        this.furigana = furigana;
-    }
-
-    /**
      * Gets the defintion of the phrase.
      * @return The defintion.
      */
     public String getDefinition() {
         return definition;
-    }
-
-    /**
-     * Sets the defintion of the phrase.
-     * @param definition The defintion.
-     */
-    public void setDefinition(String definition) {
-        this.definition = definition;
     }
 }

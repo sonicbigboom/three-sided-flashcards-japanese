@@ -26,11 +26,11 @@ public class JapaneseVerb extends JapaneseFlashcard {
     }
 
     /**
-     * Creates a new {@link JapaneseWord} that is a conjugated version of this verb to the given form.
+     * Creates a new {@link JapanesePhrase} that is a conjugated version of this verb to the given form.
      * @param form The {@link JapaneseVerbForm} that the verb is being conjugated to.
-     * @return A {@link JapaneseWord} representing this verb conjugated to the given form.
+     * @return A {@link JapanesePhrase} representing this verb conjugated to the given form.
      */
-    public JapaneseWord conjugate(JapaneseVerbForm form) {
+    public JapanesePhrase conjugate(JapaneseVerbForm form) {
         throw new UnsupportedOperationException();
     }
 

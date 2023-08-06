@@ -3,25 +3,25 @@ package com.potrt.flashcards;
 import com.potrt.flashcards.JapaneseVerb.JapaneseVerbForm;
 
 /**
- * A {@link JapaneseFlashcard} represents a Japanese word with three descriptions: the kanji, the furigana, and the definition.
+ * A {@link JapaneseFlashcard} represents a Japanese phrase with three descriptions: the kanji, the furigana, and the definition.
  */
 public class JapaneseFlashcard extends Flashcard {
     /**
      * Creates a new {@link JapaneseFlashcard} with the kanji, the furigana, and the definition.
-     * @param kanji The kanji for the word.
-     * @param furigana The furigana for the word.
-     * @param definition The definition for the word.
+     * @param kanji The kanji for the phrase.
+     * @param furigana The furigana for the phrase.
+     * @param definition The definition for the phrase.
      */
     public JapaneseFlashcard(String kanji, String furigana, String definition) {
         super(kanji, furigana, definition);
     }
 
     /**
-     * Creates a new {@link JapaneseFlashcard} with a {@link JapaneseWord}.
-     * @param word The word.
+     * Creates a new {@link JapaneseFlashcard} with a {@link JapanesePhrase}.
+     * @param phrase The phrase.
      */
-    public JapaneseFlashcard(JapaneseWord word) {
-        this(word.getKanji(), word.getFurigana(), word.getDefinition());
+    public JapaneseFlashcard(JapanesePhrase phrase) {
+        this(phrase.getKanji(), phrase.getFurigana(), phrase.getDefinition());
     }
 
     /**
@@ -34,7 +34,7 @@ public class JapaneseFlashcard extends Flashcard {
     }    
 
     /**
-     * Gets the kanji of the word.
+     * Gets the kanji of the phrase.
      * @return The kanji.
      */
     public String getKanji() {
@@ -42,7 +42,7 @@ public class JapaneseFlashcard extends Flashcard {
     }
 
     /**
-     * Sets the kanji of the word.
+     * Sets the kanji of the phrase.
      * @param kanji The kanji.
      */
     public void setKanji(String kanji) {
@@ -50,7 +50,7 @@ public class JapaneseFlashcard extends Flashcard {
     }
 
     /**
-     * Gets the furigana of the word.
+     * Gets the furigana of the phrase.
      * @return The furigana.
      */
     public String getFurigana() {
@@ -58,7 +58,7 @@ public class JapaneseFlashcard extends Flashcard {
     }
 
     /**
-     * Sets the furigana of the word.
+     * Sets the furigana of the phrase.
      * @param furigana The furigana.
      */
     public void setFurigana(String furigana) {
@@ -66,7 +66,7 @@ public class JapaneseFlashcard extends Flashcard {
     }
 
     /**
-     * Gets the definition of the word.
+     * Gets the definition of the phrase.
      * @return The defintion.
      */
     public String getDefinition() {
@@ -74,7 +74,7 @@ public class JapaneseFlashcard extends Flashcard {
     }
 
     /**
-     * Sets the defintion of the word.
+     * Sets the defintion of the phrase.
      * @param definition The definition.
      */
     public void setDefinition(String definition) {

@@ -1,9 +1,10 @@
 package com.potrt.flashcards;
 
 /**
- * A {@link JapaneseWord} represents a Japanese word with it's kanji, furigana, and definition.
+ * A {@link JapanesePhrase} represents a Japanese phrase with it's kanji, furigana, and definition.
  */
-public class JapaneseWord {
+public class JapanesePhrase {
+    
     /**
      * @implNote Used for default kanji getter and setter.
      */
@@ -20,12 +21,12 @@ public class JapaneseWord {
     protected String definition;
 
     /**
-     * Creates a new {@link JapaneseWord} with the kanji, the furigana, and the definition.
+     * Creates a new {@link JapanesePhrase} with the kanji, the furigana, and the definition.
      * @param kanji The kanji
      * @param furigana The furigana
      * @param definition The definition
      */
-    public JapaneseWord(String kanji, String furigana, String definition) {
+    public JapanesePhrase(String kanji, String furigana, String definition) {
         this.kanji = kanji;
         this.furigana = furigana;
         this.definition = definition;
@@ -34,10 +35,10 @@ public class JapaneseWord {
     /**
      * Child classes that have conjugation may not use a single string to represent kanji and furigana.
      */
-    protected JapaneseWord() {}
+    protected JapanesePhrase() {}
 
     /**
-     * Gets the kanji of the word.
+     * Gets the kanji of the phrase.
      * @return The kanji.
      */
     public String getKanji() {
@@ -45,7 +46,7 @@ public class JapaneseWord {
     }
 
     /**
-     * Sets the kanji of the word.
+     * Sets the kanji of the phrase.
      * @param kanji The kanji
      */
     public void setKanji(String kanji) {
@@ -53,7 +54,7 @@ public class JapaneseWord {
     }
 
     /**
-     * Gets the furigana of the word.
+     * Gets the furigana of the phrase.
      * @return The furigana.
      */
     public String getFurigana() {
@@ -61,7 +62,7 @@ public class JapaneseWord {
     }
 
     /**
-     * Sets the furigana of the word.
+     * Sets the furigana of the phrase.
      * @param furigana The furigana.
      */
     public void setFurigana(String furigana) {
@@ -69,7 +70,7 @@ public class JapaneseWord {
     }
 
     /**
-     * Gets the defintion of the word.
+     * Gets the defintion of the phrase.
      * @return The defintion.
      */
     public String getDefinition() {
@@ -77,7 +78,7 @@ public class JapaneseWord {
     }
 
     /**
-     * Sets the defintion of the word.
+     * Sets the defintion of the phrase.
      * @param definition The defintion.
      */
     public void setDefinition(String definition) {

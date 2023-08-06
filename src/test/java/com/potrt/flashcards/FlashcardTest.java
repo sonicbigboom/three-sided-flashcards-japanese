@@ -6,6 +6,9 @@ import org.junit.Test;
 
 public class FlashcardTest {
     
+    /**
+     * Checks that a basic two sided flashcard works.
+     */
     @Test
     public void twoSidedFlashcardTest() {
         Flashcard flashcard = new Flashcard("A", "B");
@@ -14,6 +17,9 @@ public class FlashcardTest {
         assertThat(flashcard.getSize()).isEqualTo(2);
     }
 
+    /**
+     * Checks that a three sided flashcard works.
+     */
     @Test
     public void threeSidedFlashcardTest() {
         Flashcard flashcard = new Flashcard("A", "B", "C");
@@ -23,6 +29,9 @@ public class FlashcardTest {
         assertThat(flashcard.getSize()).isEqualTo(3);
     }
 
+    /**
+     * Check that a flashcard with no initial values works.
+     */
     @Test
     public void emptyFlashcardTest() {
         Flashcard flashcard = new Flashcard(2);

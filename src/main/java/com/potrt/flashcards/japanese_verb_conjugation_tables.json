@@ -1,0 +1,38 @@
+[
+    {
+        "form": "PRESENT_INDICATIVE",
+        "plain": true,
+        "positive:": true,
+        "godan": {
+            "う": "う",
+            "つ": "つ",
+            "る": "る",
+            "ぶ": "ぶ",
+            "む": "む",
+            "ぬ": "ぬ",
+            "く": "く",
+            "ぐ": "ぐ",
+            "す": "す"
+        },
+        "ichidan": "る",
+        "irregular": {}
+    },
+    {
+        "form": "PRESENT_INDICATIVE",
+        "plain": false,
+        "positive:": true,
+        "godan": {
+            "う": "います",
+            "つ": "ちます",
+            "る": "ります",
+            "ぶ": "びます",
+            "む": "みます",
+            "ぬ": "にます",
+            "く": "きます",
+            "ぐ": "ぎます",
+            "す": "します"
+        },
+        "ichidan": "ます",
+        "irregular": {}
+    }
+]

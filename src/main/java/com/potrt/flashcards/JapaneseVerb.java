@@ -18,7 +18,7 @@ public class JapaneseVerb extends JapaneseFlashcard {
      * @param kanjiBase The kanji base.
      * @param furiganaBase The furigana base.
      * @param ending The dictionary form ending of the verb.
-     * @param verbType The verb's type: U, RU, or IRREGULAR.
+     * @param verbType The verb's type: godan, ichidan, or irregular.
      * @param definition The definition
      */
     public JapaneseVerb(String kanjiBase, String furiganaBase, JapaneseVerbEnding ending, JapaneseVerbType verbType, String definition) {

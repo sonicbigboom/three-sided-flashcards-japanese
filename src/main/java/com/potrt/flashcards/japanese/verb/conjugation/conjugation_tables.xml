@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="UTF-32"?>  
-<tables>
+<?xml version="1.0" encoding="UTF-8"?>  
+<tables xmlns="http://www.potrt.com/flashcards"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.potrt.com/flashcards conjugation_tables.xsd">
     <table form="PRESENT_INDICATIVE" plain="true" positive="true">
         <godan>
             <う>う</う>
@@ -10,12 +12,10 @@
             <ぬ>ぬ</ぬ>
             <く>く</く>
             <ぐ>ぐ</ぐ>
-            </す>す</す>
+            <す>す</す>
         </godan>
         <ichidan>る</ichidan>
-        <irregular>
-
-        </irregular>
+        <irregular></irregular>
     </table>
     <table form="PRESENT_INDICATIVE" plain="false" positive="true">
         <godan>
@@ -27,11 +27,9 @@
             <ぬ>にます</ぬ>
             <く>きます</く>
             <ぐ>ぎます</ぐ>
-            </す>します</す>
+            <す>します</す>
         </godan>
         <ichidan>る</ichidan>
-        <irregular>
-            
-        </irregular>
+        <irregular></irregular>
     </table>
 </tables>

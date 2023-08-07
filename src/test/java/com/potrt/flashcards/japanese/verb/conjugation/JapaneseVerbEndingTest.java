@@ -1,8 +1,10 @@
-package com.potrt.flashcards;
+package com.potrt.flashcards.japanese.verb.conjugation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
+
+import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
 
 public class JapaneseVerbEndingTest {
     

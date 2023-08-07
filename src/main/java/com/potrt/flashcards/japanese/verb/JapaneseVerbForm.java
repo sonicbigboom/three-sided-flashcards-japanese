@@ -1,4 +1,4 @@
-package com.potrt.flashcards;
+package com.potrt.flashcards.japanese.verb;
 
 /**
  * A {@link JapaneseVerbForm} represents a form/conjugation that a Japanese verb can be.

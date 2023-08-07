@@ -1,4 +1,8 @@
-package com.potrt.flashcards;
+package com.potrt.flashcards.japanese.verb;
+
+import com.potrt.flashcards.japanese.JapaneseFlashcard;
+import com.potrt.flashcards.japanese.JapanesePhrase;
+import com.potrt.flashcards.japanese.verb.conjugation.JapaneseVerbConjugator;
 
 /**
  * A {@link JapaneseVerb} represents a Japanese verb that can be conjugated.

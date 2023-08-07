@@ -1,10 +1,13 @@
-package com.potrt.flashcards;
-
-import com.potrt.flashcards.JapaneseVerbForm.Form;
+package com.potrt.flashcards.japanese.verb.conjugation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
+
+import com.potrt.flashcards.Flashcard;
+import com.potrt.flashcards.TestingConstants;
+import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
+import com.potrt.flashcards.japanese.verb.JapaneseVerbForm.Form;
 
 public class JapaneseVerbFormTest implements TestingConstants {
     

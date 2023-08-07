@@ -1,5 +1,7 @@
 package com.potrt.flashcards;
 
+import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
+
 public interface TestingConstants {
     public static final String wordIKanji = "私";
     public static final String wordIFurigana = "わたし";

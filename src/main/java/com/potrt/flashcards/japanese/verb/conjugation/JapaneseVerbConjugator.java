@@ -1,8 +1,11 @@
-package com.potrt.flashcards;
+package com.potrt.flashcards.japanese.verb.conjugation;
 
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
+import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 
 /**
  * A {@link JapaneseVerbConjugator} provides methods to conjugate Japanese verbs.

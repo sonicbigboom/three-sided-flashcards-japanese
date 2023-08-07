@@ -1,4 +1,4 @@
-package com.potrt.flashcards;
+package com.potrt.flashcards.japanese;
 
 /**
  * A {@link JapanesePhrase} represents a Japanese phrase with it's kanji, furigana, and definition.

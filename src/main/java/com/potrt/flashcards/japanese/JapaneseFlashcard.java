@@ -1,4 +1,8 @@
-package com.potrt.flashcards;
+package com.potrt.flashcards.japanese;
+
+import com.potrt.flashcards.Flashcard;
+import com.potrt.flashcards.japanese.verb.JapaneseVerb;
+import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 
 /**
  * A {@link JapaneseFlashcard} represents a Japanese phrase with three descriptions: the kanji, the furigana, and the definition.

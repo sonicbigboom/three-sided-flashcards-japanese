@@ -1,8 +1,12 @@
-package com.potrt.flashcards;
+package com.potrt.flashcards.japanese.verb;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
+
+import com.potrt.flashcards.TestingConstants;
+import com.potrt.flashcards.japanese.JapaneseFlashcard;
+import com.potrt.flashcards.japanese.JapanesePhrase;
 
 public class JapaneseFlashcardTest implements TestingConstants {
     

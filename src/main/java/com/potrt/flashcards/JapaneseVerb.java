@@ -10,18 +10,18 @@ public class JapaneseVerb extends JapaneseFlashcard {
     /**
      * @implNote The ending is the same for both kanji and furigana.
      */
-    private String ending;
+    private JapaneseVerbEnding ending;
     private JapaneseVerbType verbType;
 
     /**
      * Creates a new {@link JapaneseVerb} with the kanji and furigana bases, the ending, and the definition.
      * @param kanjiBase The kanji base.
      * @param furiganaBase The furigana base.
-     * @param ending The dictionary form ending of the verb. This should be in furigana.
+     * @param ending The dictionary form ending of the verb.
      * @param verbType The verb's type: U, RU, or IRREGULAR.
      * @param definition The definition
      */
-    public JapaneseVerb(String kanjiBase, String furiganaBase, String ending, JapaneseVerbType verbType, String definition) {
+    public JapaneseVerb(String kanjiBase, String furiganaBase, JapaneseVerbEnding ending, JapaneseVerbType verbType, String definition) {
         super(kanjiBase + ending, furiganaBase + ending, definition);
         this.kanjiBase = kanjiBase;
         this.furiganaBase = furiganaBase;
@@ -37,11 +37,11 @@ public class JapaneseVerb extends JapaneseFlashcard {
     public JapanesePhrase conjugate(JapaneseVerbForm form) {
         String conjugatedEnding;
         switch (verbType) {
-            case U:
-                conjugatedEnding = JapaneseVerbConjugator.conjugateUVerb(form, ending);
+            case GODAN:
+                conjugatedEnding = JapaneseVerbConjugator.conjugateGodanVerb(form, ending);
                 break;
-            case RU:
-                conjugatedEnding = JapaneseVerbConjugator.conjugateRuVerb(form);
+            case ICHIDAN:
+                conjugatedEnding = JapaneseVerbConjugator.conjugateIchidanVerb(form);
                 break;
             case IRREGULAR:
             default:
@@ -70,13 +70,16 @@ public class JapaneseVerb extends JapaneseFlashcard {
      * Gets the dictionary form ending of the verb.  This should be in furigana.
      * @return The ending.
      */
-    public String getEnding() {
+    public JapaneseVerbEnding getEnding() {
         return ending;
     } 
 
+    /**
+     * Represents a Japanese verb type.
+     */
     public enum JapaneseVerbType {
-        U,
-        RU,
+        GODAN,
+        ICHIDAN,
         IRREGULAR
     }
 }

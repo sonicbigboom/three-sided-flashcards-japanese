@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 
+ * A {@link JapaneseVerbConjugator} provides methods to conjugate Japanese verbs.
  */
 public class JapaneseVerbConjugator {
 
@@ -14,34 +14,50 @@ public class JapaneseVerbConjugator {
         throw new UnsupportedOperationException();
     }
 
-    public static String conjugateUVerb(JapaneseVerbForm form, String ending) {
-        return translationTables.get(form).conjugateUVerb(ending);
-    }
-
-    public static String conjugateRuVerb(JapaneseVerbForm form) {
-        return translationTables.get(form).conjugateRuVerb();
+    /**
+     * Conjugates a godan verb based on the given form and ending. 
+     * @param form The verb form.
+     * @param ending The ending.
+     * @return The conjugated ending.
+     */
+    public static String conjugateGodanVerb(JapaneseVerbForm form, JapaneseVerbEnding ending) {
+        return translationTables.get(form).conjugateGodanVerb(ending);
     }
 
     /**
-     * A {@link JapaneseVerbConjugator} represents a translation table that converts a verb's dictionary ending to a given verb form's ending. 
+     * Conjugates a ichidan verb based on the given form. 
+     * @param form The verb form.
+     * @return The conjugated ending.
+     */
+    public static String conjugateIchidanVerb(JapaneseVerbForm form) {
+        return translationTables.get(form).conjugateIchidanVerb();
+    }
+
+    /**
+     * A {@link TranslationTable} represents a translation table that converts a verb's dictionary ending to a verb form's ending. 
+     * 
+     * @implNote The verb form is not stored in the {@link TranslationTable} as the {@link JapaneseVerbConjugator} will 
+     * map the {@link JapaneseVerbForm}s with their respective {@link TranslationTable}.
      */
     private class TranslationTable {
-        private Map<String, String> uVerbTranslationTable;
+        private Map<JapaneseVerbEnding, String> uVerbTranslationTable;
         private String ruVerbEnding;
-        
-        public TranslationTable(Map<String, String> uVerbTranslationTable, String ruVerbEnding) {
-            this.uVerbTranslationTable = uVerbTranslationTable;
-            this.ruVerbEnding = ruVerbEnding;
-        }
 
-        public String conjugateUVerb(String ending) {
+        /**
+         * Conjugates a godan verb based on the translation table and given ending. 
+         * @param ending The ending.
+         * @return The conjugated ending.
+         */
+        public String conjugateGodanVerb(JapaneseVerbEnding ending) {
             return uVerbTranslationTable.get(ending);
         }
 
-        public String conjugateRuVerb() {
+        /**
+         * Conjugates a ichidan verb based on the translation table.
+         * @return The conjugated ending.
+         */
+        public String conjugateIchidanVerb() {
             return ruVerbEnding;
         }
     }
-
-
 }

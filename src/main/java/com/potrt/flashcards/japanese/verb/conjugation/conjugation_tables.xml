@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-32"?>  
+<tables>
+    <table form="PRESENT_INDICATIVE" plain="true" positive="true">
+        <godan>
+            <う>う</う>
+            <つ>つ</つ>
+            <る>る</る>
+            <ぶ>ぶ"</ぶ>
+            <む>む</む>
+            <ぬ>ぬ</ぬ>
+            <く>く</く>
+            <ぐ>ぐ</ぐ>
+            </す>す</す>
+        </godan>
+        <ichidan>る</ichidan>
+        <irregular>
+
+        </irregular>
+    </table>
+    <table form="PRESENT_INDICATIVE" plain="false" positive="true">
+        <godan>
+            <う>います</う>
+            <つ>ちます</つ>
+            <る>ります</る>
+            <ぶ>びます</ぶ>
+            <む>みます</む>
+            <ぬ>にます</ぬ>
+            <く>きます</く>
+            <ぐ>ぎます</ぐ>
+            </す>します</す>
+        </godan>
+        <ichidan>る</ichidan>
+        <irregular>
+            
+        </irregular>
+    </table>
+</tables>

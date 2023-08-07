@@ -9,8 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>three-sided-flashcards-japanese</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/sonicbigboom/three-sided-flashcards-japanese</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

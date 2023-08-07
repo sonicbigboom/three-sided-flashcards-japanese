@@ -41,8 +41,8 @@ public class JapaneseVerbConjugator {
      * map the {@link JapaneseVerbForm}s with their respective {@link TranslationTable}.
      */
     private class TranslationTable {
-        private EnumMap<JapaneseVerbEnding, String> uVerbTranslationTable;
-        private String ruVerbEnding;
+        private EnumMap<JapaneseVerbEnding, String> godanVerbTranslationTable;
+        private String ichidanVerbEnding;
 
         /**
          * Conjugates a godan verb based on the translation table and given ending. 
@@ -50,7 +50,7 @@ public class JapaneseVerbConjugator {
          * @return The conjugated ending.
          */
         public String conjugateGodanVerb(JapaneseVerbEnding ending) {
-            return uVerbTranslationTable.get(ending);
+            return godanVerbTranslationTable.get(ending);
         }
 
         /**
@@ -58,7 +58,7 @@ public class JapaneseVerbConjugator {
          * @return The conjugated ending.
          */
         public String conjugateIchidanVerb() {
-            return ruVerbEnding;
+            return ichidanVerbEnding;
         }
     }
 }

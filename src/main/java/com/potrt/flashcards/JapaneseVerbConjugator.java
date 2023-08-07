@@ -1,5 +1,6 @@
 package com.potrt.flashcards;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class JapaneseVerbConjugator {
      * map the {@link JapaneseVerbForm}s with their respective {@link TranslationTable}.
      */
     private class TranslationTable {
-        private Map<JapaneseVerbEnding, String> uVerbTranslationTable;
+        private EnumMap<JapaneseVerbEnding, String> uVerbTranslationTable;
         private String ruVerbEnding;
 
         /**

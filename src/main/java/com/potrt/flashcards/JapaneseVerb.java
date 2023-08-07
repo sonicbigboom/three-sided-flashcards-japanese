@@ -11,19 +11,22 @@ public class JapaneseVerb extends JapaneseFlashcard {
      * @implNote The ending is the same for both kanji and furigana.
      */
     private String ending;
+    private JapaneseVerbType verbType;
 
     /**
      * Creates a new {@link JapaneseVerb} with the kanji and furigana bases, the ending, and the definition.
      * @param kanjiBase The kanji base.
      * @param furiganaBase The furigana base.
      * @param ending The dictionary form ending of the verb. This should be in furigana.
+     * @param verbType The verb's type: U, RU, or IRREGULAR.
      * @param definition The definition
      */
-    public JapaneseVerb(String kanjiBase, String furiganaBase, String ending, String definition) {
+    public JapaneseVerb(String kanjiBase, String furiganaBase, String ending, JapaneseVerbType verbType, String definition) {
         super(kanjiBase + ending, furiganaBase + ending, definition);
         this.kanjiBase = kanjiBase;
         this.furiganaBase = furiganaBase;
         this.ending = ending;
+        this.verbType = verbType;
     }
 
     /**
@@ -32,7 +35,19 @@ public class JapaneseVerb extends JapaneseFlashcard {
      * @return A {@link JapanesePhrase} representing this verb conjugated to the given form.
      */
     public JapanesePhrase conjugate(JapaneseVerbForm form) {
-        throw new UnsupportedOperationException();
+        String conjugatedEnding;
+        switch (verbType) {
+            case U:
+                conjugatedEnding = JapaneseVerbConjugator.conjugateUVerb(form, ending);
+                break;
+            case RU:
+                conjugatedEnding = JapaneseVerbConjugator.conjugateRuVerb(form);
+                break;
+            case IRREGULAR:
+            default:
+                throw new UnsupportedOperationException();
+        }
+        return new JapanesePhrase(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + "(" + form.toString() + ")");
     }
 
     /**
@@ -57,12 +72,11 @@ public class JapaneseVerb extends JapaneseFlashcard {
      */
     public String getEnding() {
         return ending;
-    }
+    } 
 
-    /**
-     * A {@link JapaneseVerbForm} represents a form/conjugation that a Japanese verb can be.
-     */
-    public enum JapaneseVerbForm {
-    
-    }    
+    public enum JapaneseVerbType {
+        U,
+        RU,
+        IRREGULAR
+    }
 }

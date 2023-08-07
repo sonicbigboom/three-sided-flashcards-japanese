@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
+import com.potrt.flashcards.JapaneseVerb.JapaneseVerbType;
+
 public class JapaneseVerbTest implements TestingConstants {
 
     /**
@@ -11,7 +13,8 @@ public class JapaneseVerbTest implements TestingConstants {
      */
     @Test
     public void basicVerbTest() {
-        JapaneseVerb verb = new JapaneseVerb(verbToDrinkKanjiBase, verbToDrinkFuriganaBase, verbToDrinkEnding, verbToDrinkDefinition);
+        
+        JapaneseVerb verb = new JapaneseVerb(verbToDrinkKanjiBase, verbToDrinkFuriganaBase, verbToDrinkEnding, JapaneseVerbType.U, verbToDrinkDefinition);
         assertThat(verb.getKanjiBase()).contains(verbToDrinkKanjiBase);
         assertThat(verb.getFuriganaBase()).contains(verbToDrinkFuriganaBase);
         assertThat(verb.getEnding()).contains(verbToDrinkEnding);

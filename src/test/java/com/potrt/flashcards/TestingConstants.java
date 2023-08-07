@@ -11,4 +11,5 @@ public interface TestingConstants {
     public static String verbToDrinkFuriganaBase = "の";
     public static String verbToDrinkEnding = "む";
     public static String verbToDrinkDefinition = "to drink";
+    public static JapaneseVerbForm verbFormDictionary = new JapaneseVerbForm(true, true, JapaneseVerbForm.Form.PRESENT_INDICATIVE);
 }

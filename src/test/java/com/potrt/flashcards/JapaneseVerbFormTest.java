@@ -1,9 +1,5 @@
 package com.potrt.flashcards;
 
-import static org.junit.Assert.assertThat;
-
-import org.junit.Test;
-
 import com.potrt.flashcards.JapaneseVerbForm.Form;
 
 import static org.assertj.core.api.Assertions.assertThat;

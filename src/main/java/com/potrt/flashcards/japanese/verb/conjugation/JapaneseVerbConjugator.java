@@ -16,7 +16,16 @@ import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
  */
 public final class JapaneseVerbConjugator {
 
-    private static Map<JapaneseVerbForm, TranslationTable> translationTables = new HashMap<>();
+    private static Map<JapaneseVerbForm, TranslationTable> translationTables;
+
+    static {
+        translationTables = new HashMap<>();
+        try {
+            addTranslationTables("src\\main\\java\\com\\potrt\\flashcards\\japanese\\verb\\conjugation\\conjugation_tables.csv");
+        } catch (CsvValidationException | IOException e) {
+            throw new IllegalStateException("The default japanese verb conjugation table could not be processed.");
+        }
+    }
 
     /**
      * Adds verb dictionary ending to conjugated ending translation tables from a given csv file.
@@ -27,21 +36,21 @@ public final class JapaneseVerbConjugator {
      * <p>
      * There must be a header row that notes where each ending/irregular verb is denoted with the right furigana, or Ichidan for ichidan verb.
      * @param csvPath The path to the file.
+     * @throws IOException Thrown when the path is invalid or the file cannot be opened.
+     * @throws CsvValidationException Thrown when the file cannot be validated as a csv file.
      */
-    public static void addTranslationTables(String csvPath) {
+    public static void addTranslationTables(String csvPath) throws IOException, CsvValidationException {
         try(CSVReader reader = new CSVReader(new FileReader(csvPath))) {
             String[] header = reader.readNext();
             for (String[] line : reader) {
-                boolean plain = line[0].equals("TRUE");
-                boolean positive = line[1].equals("TRUE");
-                JapaneseVerbForm verbForm = new JapaneseVerbForm(plain, positive, line[2]);
+                boolean plain = line[1].equals("TRUE");
+                boolean positive = line[2].equals("TRUE");
+                JapaneseVerbForm verbForm = new JapaneseVerbForm(plain, positive, line[0]);
 
                 TranslationTable translationTable = new TranslationTable(header, line);
 
                 translationTables.put(verbForm, translationTable);
             }
-        } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
         }
     }
 
@@ -83,6 +92,8 @@ public final class JapaneseVerbConjugator {
          * @apiNote The first 3 values of each array is assumed to be verb form information.
          */
         public TranslationTable(String[] header, String[] values) {
+            godanTranslationTable = new EnumMap<>(JapaneseVerbEnding.class);
+
             for (int i = 3; i < header.length; i++) {
                 try {
                     JapaneseVerbEnding ending = JapaneseVerbEnding.from(header[i]);

@@ -15,5 +15,13 @@ public interface TestingConstants {
     public static final String verbToDrinkDefinition = "to drink";
     public static final String presentIdicative = "Present Indicative";
     public static final String pastIdicative = "Past Indicative";
+    public static final String nuDictionaryEnding = "ぬ";
+    public static final String guDictionaryEnding = "ぐ";
+    public static final String suDictionaryEnding = "す";
+    public static final String suPresentIndicativePoliteEnding = "します";
+    public static final String tsuDictionaryEnding = "つ";
+    public static final String tsuPresentIndicativeNegativeEnding = "たない";
+    public static final String ichidanDictionaryEnding = "る";
+    public static final String ichidanPastIndicative = "た";
     public static final JapaneseVerbForm verbFormDictionary = new JapaneseVerbForm(true, true, presentIdicative);
 }

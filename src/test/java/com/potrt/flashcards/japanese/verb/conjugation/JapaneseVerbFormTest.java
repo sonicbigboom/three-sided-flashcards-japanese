@@ -22,6 +22,9 @@ public class JapaneseVerbFormTest implements TestingConstants {
         assertThat(dictionaryForm.getForm()).isEqualTo(presentIdicative);
     }
 
+    /**
+     * Ensures that the JapaneseVerbForm throws an error when called with a non-existant form.
+     */
     @Test
     public void failNewTest() {
         try {

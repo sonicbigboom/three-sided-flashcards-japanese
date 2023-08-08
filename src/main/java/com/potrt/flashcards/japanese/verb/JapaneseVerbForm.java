@@ -102,4 +102,12 @@ public final class JapaneseVerbForm implements Comparable<JapaneseVerbForm> {
             return isPositive ? 1 : -1;
         }
     }
+
+    @Override
+    public String toString() {
+        String out = "";
+        if (!isPlain) { out += "Polite "; }
+        if (!isPositive) { out += "Negative "; }
+        return out + form.display();
+    }
 }   

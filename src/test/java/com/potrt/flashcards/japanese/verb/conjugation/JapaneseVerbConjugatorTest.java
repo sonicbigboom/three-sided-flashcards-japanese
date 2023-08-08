@@ -1,7 +1,7 @@
 package com.potrt.flashcards.japanese.verb.conjugation;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.io.IOException;
 
@@ -54,10 +54,6 @@ public class JapaneseVerbConjugatorTest implements TestingConstants {
      */
     @Test
     public void badPath() throws CsvValidationException {
-        try {
-            JapaneseVerbConjugator.addTranslationTables("not/a/real/path/file.csv");
-            fail("The addTranslationTables function did not throw an error when given an invalid path.");
-        } catch (IOException e) { }
-        
+        assertThatExceptionOfType(IOException.class).isThrownBy(() -> JapaneseVerbConjugator.addTranslationTables("not/a/real/path/file.csv"));        
     }
 }

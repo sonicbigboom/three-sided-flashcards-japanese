@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseFlashcard;
 import com.potrt.flashcards.japanese.JapanesePhrase;
+import com.potrt.flashcards.japanese.verb.JapaneseVerb.JapaneseVerbType;
 
 public class JapaneseFlashcardTest implements TestingConstants {
     
@@ -31,5 +32,22 @@ public class JapaneseFlashcardTest implements TestingConstants {
         assertThat(flashcard.getKanji()).contains(phraseOnePersonKanji);
         assertThat(flashcard.getFurigana()).contains(phraseOnePersonFurigana);
         assertThat(flashcard.getDefinition()).contains(phraseOnePersonDefinition);
+    }
+
+    /**
+     * Creates a flashcard from a {@link JapaneseVerb} and a {@link JapaneseVerbFrom}.
+     */
+    @Test
+    public void flashcardFromVerbTest() {
+        JapaneseVerb verb = new JapaneseVerb(godanVerbToPlayKanjiBase, godanVerbToPlayFuriganaBase, JapaneseVerbEnding.from(godanVerbToPlayEnding), JapaneseVerbType.GODAN, godanVerbToPlayDefinition);
+        JapaneseFlashcard flashcardPolite = new JapaneseFlashcard(verb, new JapaneseVerbForm(false, true, presentIdicative));
+        assertThat(flashcardPolite.getKanji()).contains(godanVerbToPlayKanjiBase + godanVerbToPlayPoliteEnding);
+        assertThat(flashcardPolite.getFurigana()).contains(godanVerbToPlayFuriganaBase + godanVerbToPlayPoliteEnding);
+        assertThat(flashcardPolite.getDefinition()).contains(godanVerbToPlayDefinition + "(" + definitionPresentIndicativePolite + ")");
+
+        JapaneseFlashcard flashcardNegative = new JapaneseFlashcard(verb, new JapaneseVerbForm(true, false, presentIdicative));
+        assertThat(flashcardNegative.getKanji()).contains(godanVerbToPlayKanjiBase + godanVerbToPlayNegativeEnding);
+        assertThat(flashcardNegative.getFurigana()).contains(godanVerbToPlayFuriganaBase + godanVerbToPlayNegativeEnding);
+        assertThat(flashcardNegative.getDefinition()).contains(godanVerbToPlayDefinition + "(" + definitionPresentIndicativeNegative + ")");
     }
 }

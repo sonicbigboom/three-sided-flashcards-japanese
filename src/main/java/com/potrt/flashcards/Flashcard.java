@@ -4,8 +4,8 @@ package com.potrt.flashcards;
  * A {@link Flashcard} repesents a flashcard that could have any number of sides.
  */
 public class Flashcard {
-    private int size;
-    private String[] sides;
+    protected int size;
+    protected String[] sides;
 
     /**
      * Creates a {@link Flashcard} with defined sides.

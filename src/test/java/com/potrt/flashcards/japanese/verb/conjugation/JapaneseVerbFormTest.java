@@ -141,4 +141,16 @@ public class JapaneseVerbFormTest implements TestingConstants {
         assertThat(negativeDictionaryForm).isGreaterThan(politePresentForm);
         assertThat(politePresentForm).isLessThan(negativeDictionaryForm); 
     }
+
+    /**
+     * Checks that the toString creates a proper display.
+     */
+    @Test
+    public void toStringTest() {
+        assertThat(new JapaneseVerbForm(true, true, presentIdicative)).hasToString(definitionPresentIndicative);
+        assertThat(new JapaneseVerbForm(true, false, presentIdicative)).hasToString(definitionPresentIndicativeNegative);
+        assertThat(new JapaneseVerbForm(false, true, presentIdicative)).hasToString(definitionPresentIndicativePolite);
+        assertThat(new JapaneseVerbForm(false, false, presentIdicative)).hasToString(definitionPresentIndicativePoliteNegative);
+        assertThat(new JapaneseVerbForm(true, true, pastIdicative)).hasToString(definitionPastIndicative);
+    }
 }

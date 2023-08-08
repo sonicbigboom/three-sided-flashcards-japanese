@@ -1,0 +1,6 @@
+﻿Form,Plain,Positive,,う,つ,る,ぶ,む,ぬ,く,ぐ,す,,Ichidan,,する,くる,いく
+Present Indicative,TRUE,TRUE,,う,つ,る,ぶ,む,ぬ,く,ぐ,す,,る,,する,くる,いく
+Present Indicative,TRUE,FALSE,,わない,たない,らない,ばない,まない,なない,かない,がない,さない,,ない,,しない,こない,いかない
+Present Indicative,FALSE,TRUE,,います,ちます,ります,びます,みます,にます,きます,ぎます,します,,ます,,します,きます,いきます
+Present Indicative,FALSE,FALSE,,いません,ちません,りません,びません,みません,にません,きません,ぎません,しません,,ません,,しません,きません,いきません
+Past Indicative,TRUE,TRUE,,った,った,った,んだ,んだ,んだ,いた,いだ,した,,た,,した,きた,いった

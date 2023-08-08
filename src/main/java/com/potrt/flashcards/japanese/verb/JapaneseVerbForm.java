@@ -1,5 +1,7 @@
 package com.potrt.flashcards.japanese.verb;
 
+import org.apache.commons.text.WordUtils;
+
 /**
  * A {@link JapaneseVerbForm} represents a form/conjugation that a Japanese verb can be.
  */
@@ -14,10 +16,10 @@ public final class JapaneseVerbForm implements Comparable<JapaneseVerbForm> {
      * @param isPositive Is the verb positive or negative.
      * @param form The form.
      */
-    public JapaneseVerbForm(boolean isPlain, boolean isPositive, Form form) {
+    public JapaneseVerbForm(boolean isPlain, boolean isPositive, String form) {
         this.isPlain = isPlain;
         this.isPositive = isPositive;
-        this.form = form;
+        this.form = Form.from(form);
     }
 
     /**
@@ -40,16 +42,35 @@ public final class JapaneseVerbForm implements Comparable<JapaneseVerbForm> {
      * Returns the verb form (without politeness and postive/negative) of the verb form.
      * @return The verb form as a {@link JapaneseVerbForm.Form}.
      */
-    public Form getForm() {
-        return form;
+    public String getForm() {
+        return form.display();
     }
 
     /**
      * A {@link JapaneseVerbForm.Form} represents the specific form of a Japanese verb.
      */
-    public enum Form {
+    private enum Form {
         PRESENT_INDICATIVE,
-        PAST_INDICATIVE
+        PAST_INDICATIVE;
+
+        /**
+         * Converts the enum to a display {@link String}.
+         * @return The text display.
+         */
+        public String display() {
+            return WordUtils.capitalizeFully(this.toString().replace("_", " "));
+        }
+
+        /**
+         * Converts a display {@link String} to an {@link Form}.
+         * @param text The display text.
+         * @return The enum.
+         * @throws IllegalArgumentException If the text cannot be converted to {@link Form} enum.
+         */
+        public static Form from(String text) throws IllegalArgumentException {
+            String enumText = text.replace(" ", "_").toUpperCase();
+            return Form.valueOf(enumText);
+        }
     }
 
     @Override

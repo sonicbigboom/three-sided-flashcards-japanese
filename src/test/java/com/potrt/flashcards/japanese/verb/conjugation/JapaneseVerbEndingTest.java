@@ -1,6 +1,7 @@
 package com.potrt.flashcards.japanese.verb.conjugation;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 import org.junit.Test;
 
@@ -40,6 +41,9 @@ public class JapaneseVerbEndingTest {
      */
     @Test
     public void checkInvalidFrom() {
-        assertThat(JapaneseVerbEnding.from("み")).isNull();
+        try {
+            JapaneseVerbEnding.from("み");
+            fail("Didn't throw exception when getting an invalid value.");
+        } catch (IllegalArgumentException e) { }
     }
 }

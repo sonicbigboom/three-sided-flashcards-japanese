@@ -41,12 +41,14 @@ public enum JapaneseVerbEnding {
     }
 
     /**
-     * Generates a {@link JapaneseVerbEnding} from a {@link String}. Returns {@link null} if there is no such ending.
+     * Generates a {@link JapaneseVerbEnding} from a {@link String}.
      * @param ending The ending as a {@link String}.
      * @return The ending as an {@link JapaneseVerbEnding}.
      */
-    public static JapaneseVerbEnding from(String ending) {
-        return stringToEndings.get(ending);
+    public static JapaneseVerbEnding from(String ending) throws IllegalArgumentException {
+        JapaneseVerbEnding out = stringToEndings.get(ending);
+        if (out == null) { throw new IllegalArgumentException("The text '" + ending + "' is not a valid verb ending."); } 
+        return out;
     }
 
     @Override

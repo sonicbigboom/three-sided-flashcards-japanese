@@ -13,5 +13,7 @@ public interface TestingConstants {
     public static final String verbToDrinkFuriganaBase = "の";
     public static final String verbToDrinkEnding = "む";
     public static final String verbToDrinkDefinition = "to drink";
-    public static final JapaneseVerbForm verbFormDictionary = new JapaneseVerbForm(true, true, JapaneseVerbForm.Form.PRESENT_INDICATIVE);
+    public static final String presentIdicative = "Present Indicative";
+    public static final String pastIdicative = "Past Indicative";
+    public static final JapaneseVerbForm verbFormDictionary = new JapaneseVerbForm(true, true, presentIdicative);
 }

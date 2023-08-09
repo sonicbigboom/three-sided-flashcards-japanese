@@ -12,8 +12,8 @@ public class FlashcardTest implements TestingConstants {
     @Test
     public void twoSidedFlashcardTest() {
         Flashcard flashcard = new Flashcard(wordIFurigana, wordIDefinition);
-        assertThat(flashcard.getSide(0)).contains(wordIFurigana);
-        assertThat(flashcard.getSide(1)).contains(wordIDefinition);
+        assertThat(flashcard.getSide(0)).isEqualTo(wordIFurigana);
+        assertThat(flashcard.getSide(1)).isEqualTo(wordIDefinition);
         assertThat(flashcard.getSize()).isEqualTo(2);
     }
 
@@ -23,9 +23,9 @@ public class FlashcardTest implements TestingConstants {
     @Test
     public void threeSidedFlashcardTest() {
         Flashcard flashcard = new Flashcard(phraseOnePersonKanji, phraseOnePersonFurigana, phraseOnePersonDefinition);
-        assertThat(flashcard.getSide(0)).contains(phraseOnePersonKanji);
-        assertThat(flashcard.getSide(1)).contains(phraseOnePersonFurigana);
-        assertThat(flashcard.getSide(2)).contains(phraseOnePersonDefinition);
+        assertThat(flashcard.getSide(0)).isEqualTo(phraseOnePersonKanji);
+        assertThat(flashcard.getSide(1)).isEqualTo(phraseOnePersonFurigana);
+        assertThat(flashcard.getSide(2)).isEqualTo(phraseOnePersonDefinition);
         assertThat(flashcard.getSize()).isEqualTo(3);
     }
 }

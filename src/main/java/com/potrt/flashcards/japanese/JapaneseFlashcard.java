@@ -33,7 +33,6 @@ public class JapaneseFlashcard extends Flashcard {
      */
     public JapaneseFlashcard(JapaneseVerb verb, JapaneseVerbForm form) {
         this(verb.conjugate(form));
-        sides[2] += " (" + form.toString() + ")";
     }     
 
     /**

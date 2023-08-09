@@ -15,8 +15,8 @@ public class JapanesePhraseTest implements TestingConstants {
     @Test
     public void basicWordTest() {
         JapanesePhrase word = new JapanesePhrase(wordIKanji, wordIFurigana, wordIDefinition);
-        assertThat(word.getKanji()).contains(wordIKanji);
-        assertThat(word.getFurigana()).contains(wordIFurigana);
-        assertThat(word.getDefinition()).contains(wordIDefinition);
+        assertThat(word.getKanji()).isEqualTo(wordIKanji);
+        assertThat(word.getFurigana()).isEqualTo(wordIFurigana);
+        assertThat(word.getDefinition()).isEqualTo(wordIDefinition);
     }
 }

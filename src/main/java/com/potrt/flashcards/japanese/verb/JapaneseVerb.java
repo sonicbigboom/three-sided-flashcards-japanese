@@ -78,9 +78,9 @@ public class JapaneseVerb extends JapaneseFlashcard {
             case IRREGULAR:
             default:
                 String conjugatedKana = JapaneseVerbConjugator.conjugateIrregularVerb(form, getKanji());
-                return new JapanesePhrase(conjugatedKana, conjugatedKana, getDefinition() + "(" + form.toString() + ")");
+                return new JapanesePhrase(conjugatedKana, conjugatedKana, getDefinition() + " (" + form.toString() + ")");
         }
-        return new JapanesePhrase(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + "(" + form.toString() + ")");
+        return new JapanesePhrase(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + " (" + form.toString() + ")");
     }
 
     /**

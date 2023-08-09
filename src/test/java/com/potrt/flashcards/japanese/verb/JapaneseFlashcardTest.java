@@ -17,9 +17,9 @@ public class JapaneseFlashcardTest implements TestingConstants {
     @Test
     public void basicTest() {
         JapaneseFlashcard flashcard = new JapaneseFlashcard(wordIKanji, wordIFurigana, wordIDefinition);
-        assertThat(flashcard.getKanji()).contains(wordIKanji);
-        assertThat(flashcard.getFurigana()).contains(wordIFurigana);
-        assertThat(flashcard.getDefinition()).contains(wordIDefinition);
+        assertThat(flashcard.getKanji()).isEqualTo(wordIKanji);
+        assertThat(flashcard.getFurigana()).isEqualTo(wordIFurigana);
+        assertThat(flashcard.getDefinition()).isEqualTo(wordIDefinition);
     }
 
     /**
@@ -29,9 +29,9 @@ public class JapaneseFlashcardTest implements TestingConstants {
     public void flashcardFromPhraseTest() {
         JapanesePhrase phrase = new JapanesePhrase(phraseOnePersonKanji, phraseOnePersonFurigana, phraseOnePersonDefinition);
         JapaneseFlashcard flashcard = new JapaneseFlashcard(phrase);
-        assertThat(flashcard.getKanji()).contains(phraseOnePersonKanji);
-        assertThat(flashcard.getFurigana()).contains(phraseOnePersonFurigana);
-        assertThat(flashcard.getDefinition()).contains(phraseOnePersonDefinition);
+        assertThat(flashcard.getKanji()).isEqualTo(phraseOnePersonKanji);
+        assertThat(flashcard.getFurigana()).isEqualTo(phraseOnePersonFurigana);
+        assertThat(flashcard.getDefinition()).isEqualTo(phraseOnePersonDefinition);
     }
 
     /**
@@ -41,13 +41,13 @@ public class JapaneseFlashcardTest implements TestingConstants {
     public void flashcardFromVerbTest() {
         JapaneseVerb verb = new JapaneseVerb(godanVerbToPlayKanjiBase, godanVerbToPlayFuriganaBase, JapaneseVerbEnding.from(godanVerbToPlayEnding), godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
         JapaneseFlashcard flashcardPolite = new JapaneseFlashcard(verb, new JapaneseVerbForm(false, true, presentIdicative));
-        assertThat(flashcardPolite.getKanji()).contains(godanVerbToPlayKanjiBase + godanVerbToPlayPoliteEnding);
-        assertThat(flashcardPolite.getFurigana()).contains(godanVerbToPlayFuriganaBase + godanVerbToPlayPoliteEnding);
-        assertThat(flashcardPolite.getDefinition()).contains(godanVerbToPlayDefinition + "(" + definitionPresentIndicativePolite + ")");
+        assertThat(flashcardPolite.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayPoliteEnding);
+        assertThat(flashcardPolite.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayPoliteEnding);
+        assertThat(flashcardPolite.getDefinition()).isEqualTo(godanVerbToPlayDefinition + " (" + definitionPresentIndicativePolite + ")");
 
         JapaneseFlashcard flashcardNegative = new JapaneseFlashcard(verb, new JapaneseVerbForm(true, false, presentIdicative));
-        assertThat(flashcardNegative.getKanji()).contains(godanVerbToPlayKanjiBase + godanVerbToPlayNegativeEnding);
-        assertThat(flashcardNegative.getFurigana()).contains(godanVerbToPlayFuriganaBase + godanVerbToPlayNegativeEnding);
-        assertThat(flashcardNegative.getDefinition()).contains(godanVerbToPlayDefinition + "(" + definitionPresentIndicativeNegative + ")");
+        assertThat(flashcardNegative.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayNegativeEnding);
+        assertThat(flashcardNegative.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayNegativeEnding);
+        assertThat(flashcardNegative.getDefinition()).isEqualTo(godanVerbToPlayDefinition + " (" + definitionPresentIndicativeNegative + ")");
     }
 }

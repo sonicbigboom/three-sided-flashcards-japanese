@@ -1,7 +1,8 @@
 package com.potrt.flashcards.japanese.verb.conjugation;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 
 import org.junit.Test;
 
@@ -27,10 +28,7 @@ public class JapaneseVerbFormTest implements TestingConstants {
      */
     @Test
     public void failNewTest() {
-        try {
-            new JapaneseVerbForm(true, true, "Invalid Form");
-            fail("Creation of a JapaneseVerbForm should have failed with a non-existant form.");
-        } catch (IllegalArgumentException e) { }
+        assertThatThrownBy(() -> new JapaneseVerbForm(true, true, "Invalid Form")).isInstanceOf(IllegalArgumentException.class);
     }
 
     /**

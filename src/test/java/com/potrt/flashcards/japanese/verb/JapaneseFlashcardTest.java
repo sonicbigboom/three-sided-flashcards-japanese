@@ -39,7 +39,7 @@ public class JapaneseFlashcardTest implements TestingConstants {
      */
     @Test
     public void flashcardFromVerbTest() {
-        JapaneseVerb verb = new JapaneseVerb(godanVerbToPlayKanjiBase, godanVerbToPlayFuriganaBase, JapaneseVerbEnding.from(godanVerbToPlayEnding), JapaneseVerbType.GODAN, godanVerbToPlayDefinition);
+        JapaneseVerb verb = new JapaneseVerb(godanVerbToPlayKanjiBase, godanVerbToPlayFuriganaBase, JapaneseVerbEnding.from(godanVerbToPlayEnding), godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
         JapaneseFlashcard flashcardPolite = new JapaneseFlashcard(verb, new JapaneseVerbForm(false, true, presentIdicative));
         assertThat(flashcardPolite.getKanji()).contains(godanVerbToPlayKanjiBase + godanVerbToPlayPoliteEnding);
         assertThat(flashcardPolite.getFurigana()).contains(godanVerbToPlayFuriganaBase + godanVerbToPlayPoliteEnding);

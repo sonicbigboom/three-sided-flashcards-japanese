@@ -18,19 +18,46 @@ public class JapaneseVerb extends JapaneseFlashcard {
     private JapaneseVerbType verbType;
 
     /**
-     * Creates a new {@link JapaneseVerb} with the kanji and furigana bases, the ending, and the definition.
+     * Creates a new {@link JapaneseVerb} with the kanji and furigana bases, the ending, the verb type, and the definition.
      * @param kanjiBase The kanji base.
      * @param furiganaBase The furigana base.
      * @param ending The dictionary form ending of the verb.
+     * @param definition The definition.
      * @param verbType The verb's type: godan, ichidan, or irregular.
-     * @param definition The definition
      */
-    public JapaneseVerb(String kanjiBase, String furiganaBase, JapaneseVerbEnding ending, JapaneseVerbType verbType, String definition) {
+    public JapaneseVerb(String kanjiBase, String furiganaBase, JapaneseVerbEnding ending, String definition, JapaneseVerbType verbType) {
         super(kanjiBase + ending, furiganaBase + ending, definition);
         this.kanjiBase = kanjiBase;
         this.furiganaBase = furiganaBase;
         this.ending = ending;
         this.verbType = verbType;
+    }
+
+    /**
+     * Creates a new {@link JapaneseVerb} with the kanji, furigana, the ending, the verb type, and the definition.
+     * @param kanji The kanji.
+     * @param furigana The furigana.
+     * @param definition The definition.
+     * @param verbType The verb's type: godan, ichidan, or irregular.
+     * @throws IllegalArgumentException Thrown if the kanji and furigana endings do not match, or it is not a valid verb ending.
+     */
+    public JapaneseVerb(String kanji, String furigana, String definition, JapaneseVerbType verbType) {
+        super(kanji, furigana, definition);
+        this.kanjiBase = kanji.substring(0, kanji.length()-1);
+        this.furiganaBase = furigana.substring(0, furigana.length()-1);
+        if (kanji.charAt(kanji.length()-1) != furigana.charAt(furigana.length()-1)) { throw new IllegalArgumentException("Kanji and furigana verb ending must be the same."); }
+        this.ending = JapaneseVerbEnding.from(kanji.substring(kanji.length()-1));
+        this.verbType = verbType;
+    }
+
+    /**
+     * Creates a new {@link JapaneseVerb} with the {@link JapanesePhrase} and the verb type.
+     * @param verb The verb as a {@link JapanesePhrase}.
+     * @param verbType The verb's type: godan, ichidan, or irregular.
+     * @throws IllegalArgumentException Thrown if the kanji and furigana endings do not match, or it is not a valid verb ending.
+     */
+    public JapaneseVerb(JapanesePhrase verb, JapaneseVerbType verbType) {
+        this(verb.getKanji(), verb.getFurigana(), verb.getDefinition(), verbType);
     }
 
     /**

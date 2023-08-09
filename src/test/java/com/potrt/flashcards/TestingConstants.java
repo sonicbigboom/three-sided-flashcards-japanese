@@ -24,6 +24,12 @@ public interface TestingConstants {
     public static final String ichidanVerbToSeeFuriganaBase = "み";
     public static final String ichidanVerbToSeePastEnding = "た";
     public static final String ichidanVerbToSeeDefinition = "to see";
+    public static final String irregularVerbToComeKana = "くる";
+    public static final String irregularVerbToComePoliteNegativeKana = "きません";
+    public static final String irregularVerbToComeDefinition = "to come";
+    public static final String irregularVerbToDoKana = "する";
+    public static final String irregularVerbToDoPolite = "します";
+    public static final String irregularVerbToDoDefinition = "to do";
     public static final String presentIdicative = "Present Indicative";
     public static final String pastIdicative = "Past Indicative";
     public static final String definitionPresentIndicative = presentIdicative;   

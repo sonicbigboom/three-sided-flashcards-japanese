@@ -100,4 +100,17 @@ public class JapaneseVerbTest implements TestingConstants {
         assertThat(conjugatedVerb.getFurigana()).contains(ichidanVerbToSeeFuriganaBase + ichidanVerbToSeePastEnding);
         assertThat(conjugatedVerb.getDefinition()).contains(ichidanVerbToSeeDefinition);
     }
+
+    /**
+     * Test conjugating a irregular verb.
+     */
+    @Test
+    public void conjugateIrregularTest() {
+        JapaneseVerb verb = new JapaneseVerb(irregularVerbToDoKana, irregularVerbToDoKana, irregularVerbToDoDefinition, JapaneseVerbType.IRREGULAR);
+        JapanesePhrase conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, true, presentIdicative));
+
+        assertThat(conjugatedVerb.getKanji()).contains(irregularVerbToDoPolite);
+        assertThat(conjugatedVerb.getFurigana()).contains(irregularVerbToDoPolite);
+        assertThat(conjugatedVerb.getDefinition()).contains(irregularVerbToDoDefinition);
+    }
 }

@@ -33,6 +33,14 @@ public class JapaneseVerbConjugatorTest implements TestingConstants {
     }
 
     /**
+     * Checks a irregular verb dictionary form converts back to itself.
+     */
+    @Test
+    public void dictionaryFormIrregularConjugationTest() {
+        assertThat(JapaneseVerbConjugator.conjugateIrregularVerb(new JapaneseVerbForm(true, true, presentIdicative), irregularVerbToComeKana)).isEqualTo(irregularVerbToComeKana);
+    }
+
+    /**
      * Checks that godan endings convert to other endings.
      */
     @Test
@@ -47,6 +55,14 @@ public class JapaneseVerbConjugatorTest implements TestingConstants {
     @Test
     public void differentIchidanConjugationTest() {
         assertThat(JapaneseVerbConjugator.conjugateIchidanVerb(new JapaneseVerbForm(true, true, pastIdicative))).isEqualTo(ichidanPastIndicative);
+    }
+
+    /**
+     * Checks that the irregular verb converts to other forms.
+     */
+    @Test
+    public void differentIrregularConjugationTest() {
+        assertThat(JapaneseVerbConjugator.conjugateIrregularVerb(new JapaneseVerbForm(false, false, presentIdicative), irregularVerbToComeKana)).isEqualTo(irregularVerbToComePoliteNegativeKana);
     }
 
     /**

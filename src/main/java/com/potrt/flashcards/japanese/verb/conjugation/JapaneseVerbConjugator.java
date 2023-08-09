@@ -74,6 +74,16 @@ public final class JapaneseVerbConjugator {
     }
 
     /**
+     * Conjugates an irregular verb based on the given form and verb.
+     * @param form The given form.
+     * @param kana The dictionary form kana for the verb.
+     * @return The conjugated kana for the verb.
+     */
+    public static String conjugateIrregularVerb(JapaneseVerbForm form, String kana) {
+        return translationTables.get(form).conjugateIrregularVerb(kana);
+    }
+
+    /**
      * A {@link TranslationTable} represents a translation table that converts a verb's dictionary ending to a verb form's ending. 
      * 
      * @implNote The verb form is not stored in the {@link TranslationTable} as the {@link JapaneseVerbConjugator} will 
@@ -82,6 +92,7 @@ public final class JapaneseVerbConjugator {
     private static class TranslationTable {
         private EnumMap<JapaneseVerbEnding, String> godanTranslationTable;
         private String ichidanTranslation;
+        private Map<String, String> irregularTranslationTable;
 
         /**
          * Generates a new {@link TranslationTable} from a header and its respective translation values.
@@ -93,6 +104,7 @@ public final class JapaneseVerbConjugator {
          */
         public TranslationTable(String[] header, String[] values) {
             godanTranslationTable = new EnumMap<>(JapaneseVerbEnding.class);
+            irregularTranslationTable = new HashMap<>();
 
             for (int i = 3; i < header.length; i++) {
                 try {
@@ -101,8 +113,9 @@ public final class JapaneseVerbConjugator {
                 } catch (IllegalArgumentException e) { 
                     if (header[i].equals("Ichidan")) {
                         ichidanTranslation = values[i];
+                    } else if (!header[i].isEmpty()) {
+                        irregularTranslationTable.put(header[i], values[i]);
                     }
-                    // TODO: Add irregular verb handling.
                 }
             }
         }
@@ -117,11 +130,20 @@ public final class JapaneseVerbConjugator {
         }
 
         /**
-         * Conjugates a ichidan verb based on the translation table.
+         * Conjugates an ichidan verb based on the translation table.
          * @return The conjugated ending.
          */
         public String conjugateIchidanVerb() {
             return ichidanTranslation;
+        }
+
+        /**
+         * Conjugates an irregular verb based on the translation table and the given kana.
+         * @param kana The kana.
+         * @return The conjugated verb in kana.
+         */
+        public String conjugateIrregularVerb(String kana) {
+            return irregularTranslationTable.get(kana);
         }
     }
 

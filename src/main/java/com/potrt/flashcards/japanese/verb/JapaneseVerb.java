@@ -24,6 +24,7 @@ public class JapaneseVerb extends JapaneseFlashcard {
      * @param ending The dictionary form ending of the verb.
      * @param definition The definition.
      * @param verbType The verb's type: godan, ichidan, or irregular.
+     * @apiNote Irregular verbs are probably best created with one of the other constructors.
      */
     public JapaneseVerb(String kanjiBase, String furiganaBase, JapaneseVerbEnding ending, String definition, JapaneseVerbType verbType) {
         super(kanjiBase + ending, furiganaBase + ending, definition);
@@ -76,7 +77,8 @@ public class JapaneseVerb extends JapaneseFlashcard {
                 break;
             case IRREGULAR:
             default:
-                throw new UnsupportedOperationException();
+                String conjugatedKana = JapaneseVerbConjugator.conjugateIrregularVerb(form, getKanji());
+                return new JapanesePhrase(conjugatedKana, conjugatedKana, getDefinition() + "(" + form.toString() + ")");
         }
         return new JapanesePhrase(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + "(" + form.toString() + ")");
     }

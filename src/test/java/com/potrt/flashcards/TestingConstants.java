@@ -3,11 +3,18 @@ package com.potrt.flashcards;
 import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 
 public interface TestingConstants {
-    public static final String wordIKanji = "私";
+    public static final String particleTopic = "は";
+    public static final String japanesePeriod = "。";
+    public static final String desu = "です";
+    public static final Character IKanji = '私';
+    public static final String wordIKanji = String.valueOf(IKanji);
     public static final String wordIFurigana = "わたし";
     public static final String wordIDefinition = "I";
     public static final Character personKanji = '人';
     public static final String personMeaning = "person";
+    public static final Character oneKanji = '一';
+    public static final String oneMeaning = "one";
+    public static final String wordOneFurigana = "ひと";
     public static final String personKanjiReadingOnePerson = "り";
     public static final String wordOnePersonKanji = "一人";
     public static final String wordOnePersonFurigana = "ひとり";
@@ -16,10 +23,11 @@ public interface TestingConstants {
     public static final String wordPersonKanji = String.valueOf(personKanji);
     public static final String wordPersonFurigana = personKanjiReadingPerson;
     public static final String wordPersonDefinition = "person";
-    public static final String wordAmPersonKanji = String.valueOf(personKanji) + "です";
-    public static final String wordAmPersonFurigana = personKanjiReadingPerson + "です";
+    public static final String wordAmPersonKanji = String.valueOf(personKanji) + desu;
+    public static final String wordAmPersonFurigana = personKanjiReadingPerson + desu;
     public static final String wordAmPersonDefinition = "am person";
-    public static final String godanVerbToDrinkKanjiBase = "飲";
+    public static final Character toDrinkKanji = '飲';
+    public static final String godanVerbToDrinkKanjiBase = String.valueOf(toDrinkKanji);
     public static final String godanVerbToDrinkFuriganaBase = "の";
     public static final String godanVerbToDrinkEnding = "む";
     public static final String godanVerbToDrinkPoliteNegativeEnding = "みません";

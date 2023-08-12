@@ -135,7 +135,7 @@ public class JapaneseKanji {
          * Updates the {@link JapaneseKanji} with the word it is used in.
          * @param word The word.
          */
-        public void updateWithWord(JapaneseWord word) {
+        public void assignWord(JapaneseWord word) {
             // Gets the reading.
             int i;
             Reading reading;

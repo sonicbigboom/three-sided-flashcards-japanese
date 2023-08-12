@@ -22,10 +22,10 @@ public class FlashcardTest implements TestingConstants {
      */
     @Test
     public void threeSidedFlashcardTest() {
-        Flashcard flashcard = new Flashcard(phraseOnePersonKanji, phraseOnePersonFurigana, phraseOnePersonDefinition);
-        assertThat(flashcard.getSide(0)).isEqualTo(phraseOnePersonKanji);
-        assertThat(flashcard.getSide(1)).isEqualTo(phraseOnePersonFurigana);
-        assertThat(flashcard.getSide(2)).isEqualTo(phraseOnePersonDefinition);
+        Flashcard flashcard = new Flashcard(wordOnePersonKanji, wordOnePersonFurigana, wordOnePersonDefinition);
+        assertThat(flashcard.getSide(0)).isEqualTo(wordOnePersonKanji);
+        assertThat(flashcard.getSide(1)).isEqualTo(wordOnePersonFurigana);
+        assertThat(flashcard.getSide(2)).isEqualTo(wordOnePersonDefinition);
         assertThat(flashcard.getSize()).isEqualTo(3);
     }
 }

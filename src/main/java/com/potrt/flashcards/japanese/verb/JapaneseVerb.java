@@ -1,7 +1,7 @@
 package com.potrt.flashcards.japanese.verb;
 
 import com.potrt.flashcards.japanese.JapaneseFlashcard;
-import com.potrt.flashcards.japanese.JapanesePhrase;
+import com.potrt.flashcards.japanese.JapaneseWord;
 import com.potrt.flashcards.japanese.verb.conjugation.JapaneseVerbConjugator;
 
 /**
@@ -52,21 +52,21 @@ public class JapaneseVerb extends JapaneseFlashcard {
     }
 
     /**
-     * Creates a new {@link JapaneseVerb} with the {@link JapanesePhrase} and the verb type.
-     * @param verb The verb as a {@link JapanesePhrase}.
+     * Creates a new {@link JapaneseVerb} with the {@link JapaneseWord} and the verb type.
+     * @param verb The verb as a {@link JapaneseWord}.
      * @param verbType The verb's type: godan, ichidan, or irregular.
      * @throws IllegalArgumentException Thrown if the kanji and furigana endings do not match, or it is not a valid verb ending.
      */
-    public JapaneseVerb(JapanesePhrase verb, JapaneseVerbType verbType) {
+    public JapaneseVerb(JapaneseWord verb, JapaneseVerbType verbType) {
         this(verb.getKanji(), verb.getFurigana(), verb.getDefinition(), verbType);
     }
 
     /**
-     * Creates a new {@link JapanesePhrase} that is a conjugated version of this verb to the given form.
+     * Creates a new {@link JapaneseWord} that is a conjugated version of this verb to the given form.
      * @param form The {@link JapaneseVerbForm} that the verb is being conjugated to.
-     * @return A {@link JapanesePhrase} representing this verb conjugated to the given form.
+     * @return A {@link JapaneseWord} representing this verb conjugated to the given form.
      */
-    public JapanesePhrase conjugate(JapaneseVerbForm form) {
+    public JapaneseWord conjugate(JapaneseVerbForm form) {
         String conjugatedEnding;
         switch (verbType) {
             case GODAN:
@@ -78,9 +78,9 @@ public class JapaneseVerb extends JapaneseFlashcard {
             case IRREGULAR:
             default:
                 String conjugatedKana = JapaneseVerbConjugator.conjugateIrregularVerb(form, getKanji());
-                return new JapanesePhrase(conjugatedKana, conjugatedKana, getDefinition() + " (" + form.toString() + ")");
+                return new JapaneseWord(conjugatedKana, conjugatedKana, getDefinition() + " (" + form.toString() + ")");
         }
-        return new JapanesePhrase(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + " (" + form.toString() + ")");
+        return new JapaneseWord(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + " (" + form.toString() + ")");
     }
 
     /**

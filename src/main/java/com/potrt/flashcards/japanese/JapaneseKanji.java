@@ -14,7 +14,7 @@ public class JapaneseKanji {
     private Character kanji;
     private List<Reading> readings = new LinkedList<>();
     private Map<String, Reading> readingsMap = new HashMap<>();
-    private List<JapanesePhrase> phrases = new ArrayList<>();
+    private List<JapaneseWord> words = new ArrayList<>();
 
     /**
      * Creates a new {@link JapaneseKanji} with the kanji character.
@@ -33,43 +33,43 @@ public class JapaneseKanji {
     }
 
     /**
-     * Gets the number of phrases using this kanji.
-     * @return The number of phrases.
+     * Gets the number of words using this kanji.
+     * @return The number of words.
      */
-    public int numPhrases() {
-        return phrases.size();
+    public int numWords() {
+        return words.size();
     }
 
     /**
-     * Get the number of phrases using this kanji with a specific reading.
+     * Get the number of words using this kanji with a specific reading.
      * @param reading The kanji's reading.
-     * @return The number of phrases.
+     * @return The number of words.
      */
-    public int numPhrases(String reading) {
+    public int numWords(String reading) {
         if (!readingsMap.containsKey(reading)) {
             return 0;
         }
-        return readingsMap.get(reading).numPhrases();
+        return readingsMap.get(reading).numWords();
     }
 
     /**
-     * Gets the list of phrases that use this kanji.
-     * @return The list of phrases.
+     * Gets the list of words that use this kanji.
+     * @return The list of words.
      */
-    public List<JapanesePhrase> getPhrases() {
-        return phrases;
+    public List<JapaneseWord> getWords() {
+        return words;
     }
 
     /**
-     * Gets the list of phrases that use this kanji with a specfic reading.
+     * Gets the list of words that use this kanji with a specfic reading.
      * @param reading The kanji's reading.
-     * @return The list of phrases.
+     * @return The list of words.
      */
-    public List<JapanesePhrase> getPhrases(String reading) {
+    public List<JapaneseWord> getWords(String reading) {
         if (!readingsMap.containsKey(reading)) {
             return new ArrayList<>();
         }
-        return readingsMap.get(reading).getPhrases();
+        return readingsMap.get(reading).getWords();
     }
 
     /**
@@ -91,7 +91,7 @@ public class JapaneseKanji {
 
     /**
      * A {@link JapaneseKanjiWithReading} represent a specfic reading of a kanji.
-     * @apiNote When creating a new {@link JapanesePhrase}, the function {@code updateWithPhrase()} should be used.
+     * @apiNote When creating a new {@link JapaneseWord}, the function {@code updateWithWord()} should be used.
      */
     public class JapaneseKanjiWithReading {
         private String furigana;
@@ -121,10 +121,10 @@ public class JapaneseKanji {
         }
 
         /**
-         * Updates the {@link JapaneseKanji} with the phrase it is used in.
-         * @param phrase The phrase.
+         * Updates the {@link JapaneseKanji} with the word it is used in.
+         * @param word The word.
          */
-        public void updateWithPhrase(JapanesePhrase phrase) {
+        public void updateWithWord(JapaneseWord word) {
             // Gets the reading.
             int i;
             Reading reading;
@@ -138,12 +138,12 @@ public class JapaneseKanji {
                 i = readings.size();
             }
             
-            // Adds the phrase to the kanji and the reading.
-            phrases.add(phrase);
-            reading.addPhrase(phrase);
+            // Adds the word to the kanji and the reading.
+            words.add(word);
+            reading.addWord(word);
 
             // Resort the readings.
-            while (i != 0 && readings.get(i - 1).numPhrases() < reading.numPhrases()) {
+            while (i != 0 && readings.get(i - 1).numWords() < reading.numWords()) {
                 i--;
             }
             readings.add(i, reading);
@@ -163,7 +163,7 @@ public class JapaneseKanji {
      */
     private class Reading {
         private String furigana;
-        private List<JapanesePhrase> phrases = new ArrayList<>();
+        private List<JapaneseWord> words = new ArrayList<>();
 
         public Reading(String furigana) {
             this.furigana = furigana;
@@ -173,16 +173,16 @@ public class JapaneseKanji {
             return furigana;
         }
 
-        public int numPhrases() {
-            return phrases.size();
+        public int numWords() {
+            return words.size();
         }
 
-        public List<JapanesePhrase> getPhrases() {
-            return phrases;
+        public List<JapaneseWord> getWords() {
+            return words;
         }
 
-        public void addPhrase(JapanesePhrase phrase) {
-            phrases.add(phrase);
+        public void addWord(JapaneseWord word) {
+            words.add(word);
         }
     }
 }

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseFlashcard;
-import com.potrt.flashcards.japanese.JapanesePhrase;
+import com.potrt.flashcards.japanese.JapaneseWord;
 import com.potrt.flashcards.japanese.verb.JapaneseVerb.JapaneseVerbType;
 
 public class JapaneseFlashcardTest implements TestingConstants {
@@ -23,15 +23,15 @@ public class JapaneseFlashcardTest implements TestingConstants {
     }
 
     /**
-     * Creates a flashcard from a {@link JapanesePhrase}.
+     * Creates a flashcard from a {@link JapaneseWord}.
      */
     @Test
-    public void flashcardFromPhraseTest() {
-        JapanesePhrase phrase = new JapanesePhrase(phraseOnePersonKanji, phraseOnePersonFurigana, phraseOnePersonDefinition);
-        JapaneseFlashcard flashcard = new JapaneseFlashcard(phrase);
-        assertThat(flashcard.getKanji()).isEqualTo(phraseOnePersonKanji);
-        assertThat(flashcard.getFurigana()).isEqualTo(phraseOnePersonFurigana);
-        assertThat(flashcard.getDefinition()).isEqualTo(phraseOnePersonDefinition);
+    public void flashcardFromWordTest() {
+        JapaneseWord word = new JapaneseWord(wordOnePersonKanji, wordOnePersonFurigana, wordOnePersonDefinition);
+        JapaneseFlashcard flashcard = new JapaneseFlashcard(word);
+        assertThat(flashcard.getKanji()).isEqualTo(wordOnePersonKanji);
+        assertThat(flashcard.getFurigana()).isEqualTo(wordOnePersonFurigana);
+        assertThat(flashcard.getDefinition()).isEqualTo(wordOnePersonDefinition);
     }
 
     /**

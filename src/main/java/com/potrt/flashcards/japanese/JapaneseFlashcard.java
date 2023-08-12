@@ -5,25 +5,25 @@ import com.potrt.flashcards.japanese.verb.JapaneseVerb;
 import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 
 /**
- * A {@link JapaneseFlashcard} represents a Japanese phrase with three descriptions: the kanji, the furigana, and the definition.
+ * A {@link JapaneseFlashcard} represents a Japanese word with three descriptions: the kanji, the furigana, and the definition.
  */
 public class JapaneseFlashcard extends Flashcard {
     /**
      * Creates a new {@link JapaneseFlashcard} with the kanji, the furigana, and the definition.
-     * @param kanji The kanji for the phrase.
-     * @param furigana The furigana for the phrase.
-     * @param definition The definition for the phrase.
+     * @param kanji The kanji for the word.
+     * @param furigana The furigana for the word.
+     * @param definition The definition for the word.
      */
     public JapaneseFlashcard(String kanji, String furigana, String definition) {
         super(kanji, furigana, definition);
     }
 
     /**
-     * Creates a new {@link JapaneseFlashcard} with a {@link JapanesePhrase}.
-     * @param phrase The phrase.
+     * Creates a new {@link JapaneseFlashcard} with a {@link JapaneseWord}.
+     * @param word The word.
      */
-    public JapaneseFlashcard(JapanesePhrase phrase) {
-        this(phrase.getKanji(), phrase.getFurigana(), phrase.getDefinition());
+    public JapaneseFlashcard(JapaneseWord word) {
+        this(word.getKanji(), word.getFurigana(), word.getDefinition());
     }
 
     /**
@@ -36,7 +36,7 @@ public class JapaneseFlashcard extends Flashcard {
     }     
 
     /**
-     * Gets the kanji of the phrase.
+     * Gets the kanji of the word.
      * @return The kanji.
      */
     public String getKanji() {
@@ -44,7 +44,7 @@ public class JapaneseFlashcard extends Flashcard {
     }
 
     /**
-     * Gets the furigana of the phrase.
+     * Gets the furigana of the word.
      * @return The furigana.
      */
     public String getFurigana() {
@@ -52,7 +52,7 @@ public class JapaneseFlashcard extends Flashcard {
     }
 
     /**
-     * Gets the definition of the phrase.
+     * Gets the definition of the word.
      * @return The defintion.
      */
     public String getDefinition() {

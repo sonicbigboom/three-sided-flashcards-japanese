@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
-import com.potrt.flashcards.japanese.JapanesePhrase;
+import com.potrt.flashcards.japanese.JapaneseWord;
 import com.potrt.flashcards.japanese.verb.JapaneseVerb;
 import com.potrt.flashcards.japanese.verb.JapaneseVerb.JapaneseVerbType;
 import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
@@ -60,11 +60,11 @@ public class JapaneseVerbTest implements TestingConstants {
     }
 
     /**
-     * Creates a verb from a {@link JapanesePhrase}.
+     * Creates a verb from a {@link JapaneseWord}.
      */
     @Test
     public void fromWordTest() {
-        JapanesePhrase word = new JapanesePhrase(ichidanVerbToSeeKanjiBase + ichidanDictionaryEnding, ichidanVerbToSeeFuriganaBase + ichidanDictionaryEnding, ichidanVerbToSeeDefinition);
+        JapaneseWord word = new JapaneseWord(ichidanVerbToSeeKanjiBase + ichidanDictionaryEnding, ichidanVerbToSeeFuriganaBase + ichidanDictionaryEnding, ichidanVerbToSeeDefinition);
         JapaneseVerb verb = new JapaneseVerb(word, JapaneseVerbType.ICHIDAN);
         assertThat(verb.getKanjiBase()).isEqualTo(ichidanVerbToSeeKanjiBase);
         assertThat(verb.getFuriganaBase()).isEqualTo(ichidanVerbToSeeFuriganaBase);
@@ -81,7 +81,7 @@ public class JapaneseVerbTest implements TestingConstants {
     @Test
     public void conjugateGodanTest() {
         JapaneseVerb verb = new JapaneseVerb(godanVerbToDrinkKanjiBase, godanVerbToDrinkFuriganaBase, JapaneseVerbEnding.from(godanVerbToDrinkEnding), godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
-        JapanesePhrase conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, false, presentIdicative));
+        JapaneseWord conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, false, presentIdicative));
 
         assertThat(conjugatedVerb.getKanji()).isEqualTo(godanVerbToDrinkKanjiBase + godanVerbToDrinkPoliteNegativeEnding);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(godanVerbToDrinkFuriganaBase + godanVerbToDrinkPoliteNegativeEnding);
@@ -94,7 +94,7 @@ public class JapaneseVerbTest implements TestingConstants {
     @Test
     public void conjugateIchidanTest() {
         JapaneseVerb verb = new JapaneseVerb(ichidanVerbToSeeKanjiBase, ichidanVerbToSeeFuriganaBase, JapaneseVerbEnding.RU, ichidanVerbToSeeDefinition, JapaneseVerbType.ICHIDAN);
-        JapanesePhrase conjugatedVerb = verb.conjugate(new JapaneseVerbForm(true, true, pastIdicative));
+        JapaneseWord conjugatedVerb = verb.conjugate(new JapaneseVerbForm(true, true, pastIdicative));
 
         assertThat(conjugatedVerb.getKanji()).isEqualTo(ichidanVerbToSeeKanjiBase + ichidanVerbToSeePastEnding);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(ichidanVerbToSeeFuriganaBase + ichidanVerbToSeePastEnding);
@@ -107,7 +107,7 @@ public class JapaneseVerbTest implements TestingConstants {
     @Test
     public void conjugateIrregularTest() {
         JapaneseVerb verb = new JapaneseVerb(irregularVerbToDoKana, irregularVerbToDoKana, irregularVerbToDoDefinition, JapaneseVerbType.IRREGULAR);
-        JapanesePhrase conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, true, presentIdicative));
+        JapaneseWord conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, true, presentIdicative));
 
         assertThat(conjugatedVerb.getKanji()).isEqualTo(irregularVerbToDoPolite);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(irregularVerbToDoPolite);

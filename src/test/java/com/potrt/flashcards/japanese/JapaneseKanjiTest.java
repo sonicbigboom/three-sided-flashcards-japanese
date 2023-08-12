@@ -14,7 +14,7 @@ public class JapaneseKanjiTest implements TestingConstants {
 
     @Before
     public void setup() {
-        kanji = new JapaneseKanji(personKanji);
+        kanji = new JapaneseKanji(personKanji, personMeaning);
     }
 
     /**
@@ -23,6 +23,7 @@ public class JapaneseKanjiTest implements TestingConstants {
     @Test
     public void createKanjiTest() {
         assertThat(kanji.getKanji()).isEqualTo(personKanji);
+        assertThat(kanji.getMeaning()).isEqualTo(personMeaning);
     }
 
     /**

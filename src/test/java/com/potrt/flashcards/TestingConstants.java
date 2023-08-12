@@ -7,6 +7,7 @@ public interface TestingConstants {
     public static final String wordIFurigana = "わたし";
     public static final String wordIDefinition = "I";
     public static final Character personKanji = '人';
+    public static final String personMeaning = "person";
     public static final String personKanjiReadingOnePerson = "り";
     public static final String wordOnePersonKanji = "一人";
     public static final String wordOnePersonFurigana = "ひとり";

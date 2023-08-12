@@ -12,16 +12,19 @@ import java.util.stream.Collectors;
  */
 public class JapaneseKanji {
     private Character kanji;
+    private String meaning;
     private List<Reading> readings = new LinkedList<>();
     private Map<String, Reading> readingsMap = new HashMap<>();
     private List<JapaneseWord> words = new ArrayList<>();
 
     /**
-     * Creates a new {@link JapaneseKanji} with the kanji character.
+     * Creates a new {@link JapaneseKanji} with the kanji character and its meaning.
      * @param kanji The kanji.
+     * @param meaing The meaning of the kanji, though it's definition may change depending on the context and {@link JapaneseWord}.
      */
-    public JapaneseKanji (Character kanji) {
+    public JapaneseKanji (Character kanji, String meaning) {
         this.kanji = kanji;
+        this.meaning = meaning;
     }
 
     /**
@@ -30,6 +33,14 @@ public class JapaneseKanji {
      */
     public Character getKanji() {
         return kanji;
+    }
+
+    /**
+     * Gets the meaning of the kanji, though it's definition may change depending on the context and {@link JapaneseWord}.
+     * @return The meaning of the kanji.
+     */
+    public String getMeaning() {
+        return meaning;
     }
 
     /**
@@ -165,22 +176,42 @@ public class JapaneseKanji {
         private String furigana;
         private List<JapaneseWord> words = new ArrayList<>();
 
-        public Reading(String furigana) {
-            this.furigana = furigana;
+        /**
+         * Creates a new reading from the furigana reading.
+         * @param reading The furigana reading.
+         */
+        public Reading(String reading) {
+            this.furigana = reading;
         }
 
+        /**
+         * Gets the furigana reading.
+         * @return The furigana reading.
+         */
         public String getFurigana() {
             return furigana;
         }
 
+        /**
+         * Gets the number of words that use this reading.
+         * @return The number of words.
+         */
         public int numWords() {
             return words.size();
         }
 
+        /**
+         * Gets the words that use this reading.
+         * @return The list of words.
+         */
         public List<JapaneseWord> getWords() {
             return words;
         }
 
+        /**
+         * Adds a new word for this reading.
+         * @param word The new word.
+         */
         public void addWord(JapaneseWord word) {
             words.add(word);
         }

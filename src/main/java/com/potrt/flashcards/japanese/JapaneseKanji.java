@@ -76,7 +76,7 @@ public class JapaneseKanji {
      * Gets a list of readings, ordered by usage.
      * @return The list of furigana readings.
      */
-    public List<String> getReadingsMap() {
+    public List<String> getReadings() {
         return readings.stream().map(Reading::getFurigana).collect(Collectors.toList());
     }
 
@@ -85,15 +85,16 @@ public class JapaneseKanji {
      * @param reading The furigana reading.
      * @return The {@link JapaneseKanjiWithReading}.
      */
-    public JapaneseKanjiWithReading getKanjiWithReading(String reading) {
+    public JapaneseKanjiWithReading withReading(String reading) {
         return new JapaneseKanjiWithReading(reading);
     }
 
     /**
      * A {@link JapaneseKanjiWithReading} represent a specfic reading of a kanji.
+     * @apiNote When creating a new {@link JapanesePhrase}, the function {@code updateWithPhrase()} should be used.
      */
     public class JapaneseKanjiWithReading {
-        String furigana;
+        private String furigana;
 
         /**
          * Creates a new {@link JapaneseKanjiWithReading} from the reading.
@@ -142,7 +143,7 @@ public class JapaneseKanji {
             reading.addPhrase(phrase);
 
             // Resort the readings.
-            while (i != 0 && readings.get(i).numPhrases() < reading.numPhrases()) {
+            while (i != 0 && readings.get(i - 1).numPhrases() < reading.numPhrases()) {
                 i--;
             }
             readings.add(i, reading);

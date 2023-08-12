@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
-import com.potrt.flashcards.japanese.JapaneseWord;
 
 public class JapaneseWordTest implements TestingConstants {
     

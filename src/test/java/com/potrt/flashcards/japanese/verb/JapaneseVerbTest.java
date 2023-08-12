@@ -7,10 +7,7 @@ import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseWord;
-import com.potrt.flashcards.japanese.verb.JapaneseVerb;
 import com.potrt.flashcards.japanese.verb.JapaneseVerb.JapaneseVerbType;
-import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
-import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 
 public class JapaneseVerbTest implements TestingConstants {
 
@@ -23,7 +20,7 @@ public class JapaneseVerbTest implements TestingConstants {
         JapaneseVerb verb = new JapaneseVerb(godanVerbToDrinkKanjiBase, godanVerbToDrinkFuriganaBase, JapaneseVerbEnding.from(godanVerbToDrinkEnding), godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
         assertThat(verb.getKanjiBase()).isEqualTo(godanVerbToDrinkKanjiBase);
         assertThat(verb.getFuriganaBase()).isEqualTo(godanVerbToDrinkFuriganaBase);
-        assertThat(verb.getEnding().toString()).isEqualTo(godanVerbToDrinkEnding);
+        assertThat(verb.getEnding()).hasToString(godanVerbToDrinkEnding);
 
         assertThat(verb.getKanji()).isEqualTo(godanVerbToDrinkKanjiBase + godanVerbToDrinkEnding);
         assertThat(verb.getFurigana()).isEqualTo(godanVerbToDrinkFuriganaBase + godanVerbToDrinkEnding);
@@ -38,7 +35,7 @@ public class JapaneseVerbTest implements TestingConstants {
         JapaneseVerb verb = new JapaneseVerb(godanVerbToPlayKanjiBase + godanVerbToPlayEnding, godanVerbToPlayFuriganaBase + godanVerbToPlayEnding, godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
         assertThat(verb.getKanjiBase()).isEqualTo(godanVerbToPlayKanjiBase);
         assertThat(verb.getFuriganaBase()).isEqualTo(godanVerbToPlayFuriganaBase);
-        assertThat(verb.getEnding().toString()).isEqualTo(godanVerbToPlayEnding);
+        assertThat(verb.getEnding()).hasToString(godanVerbToPlayEnding);
 
         assertThat(verb.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayEnding);
         assertThat(verb.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayEnding);
@@ -68,7 +65,7 @@ public class JapaneseVerbTest implements TestingConstants {
         JapaneseVerb verb = new JapaneseVerb(word, JapaneseVerbType.ICHIDAN);
         assertThat(verb.getKanjiBase()).isEqualTo(ichidanVerbToSeeKanjiBase);
         assertThat(verb.getFuriganaBase()).isEqualTo(ichidanVerbToSeeFuriganaBase);
-        assertThat(verb.getEnding().toString()).isEqualTo(ichidanDictionaryEnding);
+        assertThat(verb.getEnding()).hasToString(ichidanDictionaryEnding);
 
         assertThat(verb.getKanji()).isEqualTo(ichidanVerbToSeeKanjiBase + ichidanDictionaryEnding);
         assertThat(verb.getFurigana()).isEqualTo(ichidanVerbToSeeFuriganaBase + ichidanDictionaryEnding);

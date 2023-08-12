@@ -5,8 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.junit.Test;
 
-import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
-
 public class JapaneseVerbEndingTest {
     
     /**

@@ -5,8 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
-import com.potrt.flashcards.japanese.JapaneseFlashcard;
-import com.potrt.flashcards.japanese.JapaneseWord;
 import com.potrt.flashcards.japanese.verb.JapaneseVerb;
 import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
 import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;

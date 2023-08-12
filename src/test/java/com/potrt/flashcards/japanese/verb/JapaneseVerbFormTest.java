@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import com.potrt.flashcards.Flashcard;
 import com.potrt.flashcards.TestingConstants;
-import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 
 public class JapaneseVerbFormTest implements TestingConstants {
     

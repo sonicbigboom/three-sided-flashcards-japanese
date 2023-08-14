@@ -155,7 +155,6 @@ public class JapaneseKanji {
             return furigana;
         }
 
-        // TODO: Get {@link Reading} pointer at creation. Replace all reading getters with using that pointer.
         /**
          * Updates the {@link JapaneseKanji} with the word it is used in.
          * @param word The word.
@@ -188,6 +187,8 @@ public class JapaneseKanji {
         /**
          * Gets the {@link Score} for the reading.
          * @return The reading's {@link Score}.
+         * @apiNote If no word has been assigned to this reading, an empty {@link Score} will be returned. 
+         * But it will NOT be connected to this {@link JapaneseKanjiWithReading}.
          */
         public Score getScore() {
             return JapaneseKanji.this.getScore(furigana);
@@ -196,9 +197,12 @@ public class JapaneseKanji {
         /**
          * Adds a new successful or failed attempt.
          * @param succeeded If the attempt was successful.
+         * @apiNote If no word has been assigned to this reading, an {@link IllegalStateException} will be thrown.
          */
         public void attempt(boolean succeeded) {
-            readingsMap.get(furigana).attempt(succeeded);
+            Reading reading = readingsMap.get(furigana);
+            if (reading == null) { throw new IllegalStateException("This reading has no words associated with it, so it cannot be attempted."); }
+            reading.attempt(succeeded);
         }
 
         /**

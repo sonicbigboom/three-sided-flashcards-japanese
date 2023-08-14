@@ -1,6 +1,7 @@
 package com.potrt.flashcards.japanese;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -195,5 +196,14 @@ public class JapaneseKanjiTest implements TestingConstants {
     @Test
     public void nonExistantScore() {
         assertThat(kanji.getScore(personKanjiReadingOnePerson).getAttempts()).isZero();
+    }
+
+    /**
+     * Test attempting a reading without a associated word.
+     */
+    @Test
+    public void noWordAttemptTest() {
+        JapaneseKanjiWithReading kanjiWithReadingPerson = kanji.withReading(personKanjiReadingPerson);
+        assertThatThrownBy(() -> kanjiWithReadingPerson.attempt(true)).isInstanceOf(IllegalStateException.class);
     }
 }

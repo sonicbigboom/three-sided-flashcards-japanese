@@ -2,6 +2,10 @@ package com.potrt.flashcards;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 public class ScoreTest {
@@ -92,6 +96,26 @@ public class ScoreTest {
         Score scoreB = new Score(9, 10);
         Score scoreC = new Score(6, 10);
         Score score = new Score(scoreA, scoreB, scoreC);
+
+        assertThat(score.getAttempts()).isEqualTo(30);
+        assertThat(score.getSuccesses()).isEqualTo(18);
+        assertThat(score.getFailures()).isEqualTo(12);
+        assertThat(score.getSuccessRate()).isEqualTo(0.6);
+    }
+
+    /**
+     * Test score aggregation with a list.
+     */
+    @Test
+    public void scoreAggregationWithListTest() {
+        Score scoreA = new Score(3, 10);
+        Score scoreB = new Score(9, 10);
+        Score scoreC = new Score(6, 10);
+        List<Score> scores = new ArrayList<>();
+        scores.add(scoreA); 
+        scores.add(scoreB);
+        scores.add(scoreC);
+        Score score = new Score(scores);
 
         assertThat(score.getAttempts()).isEqualTo(30);
         assertThat(score.getSuccesses()).isEqualTo(18);

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.potrt.flashcards.Score;
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseKanji.JapaneseKanjiWithReading;
 
@@ -127,5 +128,72 @@ public class JapaneseKanjiTest implements TestingConstants {
         assertThat(kanji.getWords(personKanjiReadingOnePerson)).contains(wordOnePerson);
         assertThat(kanji.numWords(personKanjiReadingPerson)).isEqualTo(2);
         assertThat(kanji.getWords(personKanjiReadingPerson)).contains(wordPerson).contains(wordAmPerson);
+    }
+
+    /**
+     * Test different scores and aggregation.
+     */
+    @Test
+    public void scoresTest() {
+        // First insert.
+        JapaneseKanjiWithReading kanjiWithReadingOnePerson = kanji.withReading(personKanjiReadingOnePerson);
+        JapaneseWord wordOnePerson = new JapaneseWord(wordOnePersonKanji, wordOnePersonFurigana, wordOnePersonDefinition);
+        kanjiWithReadingOnePerson.assignWord(wordOnePerson);
+
+        kanjiWithReadingOnePerson.attempt(false);
+        kanjiWithReadingOnePerson.attempt(false);
+        kanjiWithReadingOnePerson.attempt(true);
+        kanjiWithReadingOnePerson.attempt(true);
+        kanjiWithReadingOnePerson.attempt(true);
+
+        Score onePersonScore = kanjiWithReadingOnePerson.getScore();
+        assertThat(onePersonScore.getSuccessRate()).isEqualTo(0.6);
+        assertThat(kanji.getScore(personKanjiReadingOnePerson)).isEqualTo(onePersonScore);
+        assertThat(kanji.getScore().getSuccessRate()).isEqualTo(0.6);
+
+        // Second insert
+        JapaneseKanjiWithReading kanjiWithReadingPerson = kanji.withReading(personKanjiReadingPerson);
+        JapaneseWord wordPerson = new JapaneseWord(wordPersonKanji, wordPersonFurigana, wordPersonDefinition);
+        kanjiWithReadingPerson.assignWord(wordPerson);
+
+        kanjiWithReadingPerson.attempt(true);
+        kanjiWithReadingPerson.attempt(true);
+        kanjiWithReadingPerson.attempt(true);
+        kanjiWithReadingPerson.attempt(true);
+        kanjiWithReadingPerson.attempt(true);
+
+        Score personScore = kanjiWithReadingPerson.getScore();
+        assertThat(personScore.getSuccessRate()).isEqualTo(1);
+        assertThat(kanji.getScore(personKanjiReadingPerson)).isEqualTo(personScore);
+        assertThat(kanji.getScore().getSuccessRate()).isEqualTo(0.8);
+
+        // Third insert
+        JapaneseKanjiWithReading kanjiWithReadingAmPerson = kanji.withReading(personKanjiReadingPerson);
+        JapaneseWord wordAmPerson = new JapaneseWord(wordAmPersonKanji, wordAmPersonFurigana, wordAmPersonDefinition);
+        kanjiWithReadingAmPerson.assignWord(wordAmPerson);
+
+        kanjiWithReadingAmPerson.attempt(false);
+        kanjiWithReadingAmPerson.attempt(false);
+        kanjiWithReadingAmPerson.attempt(false);
+        kanjiWithReadingAmPerson.attempt(false);
+        kanjiWithReadingAmPerson.attempt(false);
+        kanjiWithReadingAmPerson.attempt(false);
+        kanjiWithReadingAmPerson.attempt(false);
+        kanjiWithReadingAmPerson.attempt(false);
+        kanjiWithReadingAmPerson.attempt(true);
+        kanjiWithReadingAmPerson.attempt(true);
+
+        Score amPersonScore = kanjiWithReadingAmPerson.getScore();
+        assertThat(amPersonScore.getDisplaySuccessRate()).isEqualTo("46.67%");
+        assertThat(amPersonScore).isEqualTo(personScore);
+        assertThat(kanji.getScore().getSuccessRate()).isEqualTo(0.5);
+    }
+
+    /**
+     * Test non-existant score.
+     */
+    @Test
+    public void nonExistantScore() {
+        assertThat(kanji.getScore(personKanjiReadingOnePerson).getAttempts()).isZero();
     }
 }

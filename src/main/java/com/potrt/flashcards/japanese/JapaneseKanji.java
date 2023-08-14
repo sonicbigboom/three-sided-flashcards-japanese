@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.potrt.flashcards.Score;
+
 /**
  * A {@link JapaneseKanji} holds information about a kanji and it's readings.
  */
@@ -101,6 +103,28 @@ public class JapaneseKanji {
     }
 
     /**
+     * Gets the aggregated {@link Score} for the kanji.
+     * @return The aggregated {@link Score}.
+     * @apiNote This {@link Score} should only be used for getting information.  Any edits will not impact this kanji's score.
+     */
+    public Score getScore() {
+        return new Score(readings.stream().map(Reading::getScore).collect(Collectors.toList()));
+    }
+
+    /**
+     * Gets the {@link Score} for a reading of this kanji.
+     * @param reading The furigana reading.
+     * @return The {@link Score} for this reading.
+     * @apiNote If the score does not exist, an empty {@link Score} will be returned, but it will NOT be connected to this {@link JapaneseKanji}.
+     */
+    public Score getScore(String reading) {
+        if (!readingsMap.containsKey(reading)) {
+            return new Score();
+        }
+        return readingsMap.get(reading).getScore();
+    }
+
+    /**
      * A {@link JapaneseKanjiWithReading} represent a specfic reading of a kanji.
      * @apiNote When creating a new {@link JapaneseWord}, the function {@code updateWithWord()} should be used.
      */
@@ -131,6 +155,7 @@ public class JapaneseKanji {
             return furigana;
         }
 
+        // TODO: Get {@link Reading} pointer at creation. Replace all reading getters with using that pointer.
         /**
          * Updates the {@link JapaneseKanji} with the word it is used in.
          * @param word The word.
@@ -161,6 +186,22 @@ public class JapaneseKanji {
         }
 
         /**
+         * Gets the {@link Score} for the reading.
+         * @return The reading's {@link Score}.
+         */
+        public Score getScore() {
+            return JapaneseKanji.this.getScore(furigana);
+        }
+
+        /**
+         * Adds a new successful or failed attempt.
+         * @param succeeded If the attempt was successful.
+         */
+        public void attempt(boolean succeeded) {
+            readingsMap.get(furigana).attempt(succeeded);
+        }
+
+        /**
          * Gets the {@link JapaneseKanji}.
          * @return The {@link JapaneseKanji}.
          */
@@ -175,6 +216,7 @@ public class JapaneseKanji {
     private class Reading {
         private String furigana;
         private List<JapaneseWord> words = new ArrayList<>();
+        private Score score = new Score();
 
         /**
          * Creates a new reading from the furigana reading.
@@ -214,6 +256,22 @@ public class JapaneseKanji {
          */
         public void addWord(JapaneseWord word) {
             words.add(word);
+        }
+
+        /**
+         * Adds a new successful or failed attempt.
+         * @param succeeded If the attempt was successful.
+         */
+        public void attempt(boolean succeeded) {
+            score.attempt(succeeded);
+        }
+
+        /**
+         * Gets the {@link Score} for the reading.
+         * @return The score.
+         */
+        public Score getScore() {
+            return score;
         }
     }
 }

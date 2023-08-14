@@ -1,5 +1,7 @@
 package com.potrt.flashcards;
 
+import java.util.List;
+
 /**
  * A {@link Score) tracks scoring/success information about matterial.
  * @param succeeded
@@ -38,6 +40,14 @@ public class Score {
             successes += score.getSuccesses();
             attempts += score.getAttempts();
         }
+    }
+
+    /**
+     * Creates a new score from multiple scores.  (To be used for aggregating scores.)
+     * @param scores The scores.
+     */
+    public Score(List<Score> scores) {
+        this(scores.toArray(new Score[scores.size()]));
     }
 
     /**

@@ -70,6 +70,16 @@ public class JapaneseString {
     }
 
     /**
+     * Adds a new successful or failed attempt for each kanji.
+     * @param succeeded If the attempt was successful.
+     */
+    public void attempt(boolean succeeded) {
+        for (JapaneseKanjiWithReading kanji : kanjiList) {
+            kanji.attempt(succeeded);
+        }
+    }
+
+    /**
      * Assigns a {@link JapaneseWord} for each {@link Kanji}.
      * @param word The word.
      * @apiNote This should only be called once, and the {@link JapaneseString} should not be changed afterwards.

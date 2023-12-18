@@ -11,8 +11,7 @@ import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseKanji.JapaneseKanjiWithReading;
 
 public class JapaneseKanjiTest implements TestingConstants {
-    
-    JapaneseKanji kanji;
+    private JapaneseKanji kanji;
 
     @Before
     public void setup() {
@@ -26,6 +25,17 @@ public class JapaneseKanjiTest implements TestingConstants {
     public void createKanjiTest() {
         assertThat(kanji.getKanji()).isEqualTo(personKanji);
         assertThat(kanji.getMeaning()).isEqualTo(personMeaning);
+    }
+
+    /**
+     * Checks that changing the kanji meaning works.
+     */
+    @Test
+    public void changeMeaningTest() {
+        assertThat(kanji.getMeaning()).isEqualTo(personMeaning);
+
+        kanji.setMeaning(personMeaningAlternate);
+        assertThat(kanji.getMeaning()).isEqualTo(personMeaningAlternate);
     }
 
     /**

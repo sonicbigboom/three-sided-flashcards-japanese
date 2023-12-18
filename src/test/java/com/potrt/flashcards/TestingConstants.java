@@ -7,11 +7,13 @@ public interface TestingConstants {
     public static final String japanesePeriod = "。";
     public static final String desu = "です";
     public static final Character IKanji = '私';
+    public static final String IMeaning = "I";
     public static final String wordIKanji = String.valueOf(IKanji);
     public static final String wordIFurigana = "わたし";
     public static final String wordIDefinition = "I";
     public static final Character personKanji = '人';
     public static final String personMeaning = "person";
+    public static final String personMeaningAlternate = "human";
     public static final Character oneKanji = '一';
     public static final String oneMeaning = "one";
     public static final String wordOneFurigana = "ひと";

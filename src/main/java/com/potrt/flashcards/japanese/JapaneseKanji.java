@@ -5,14 +5,17 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.potrt.flashcards.Score;
 
 /**
- * A {@link JapaneseKanji} holds information about a kanji and it's readings.
+ * A {@link JapaneseKanji} holds information about a kanji and its readings.
  */
 public class JapaneseKanji {
+    private static Logger logger = Logger.getLogger(JapaneseKanji.class.getName());
     private Character kanji;
     private String meaning;
     private List<Reading> readings = new LinkedList<>();
@@ -43,6 +46,18 @@ public class JapaneseKanji {
      */
     public String getMeaning() {
         return meaning;
+    }
+
+    /**
+     * Updates the meaning of the kanji.
+     * @param meaning The updated meaning of the kanji.
+     * @apiNote In theory the meaning of a kanji should not be changed.  If this method is called, a warning will be sent.
+     */
+    public void setMeaning(String meaning) {
+        if (logger.isLoggable(Level.WARNING)) {
+            logger.warning(String.format("Updated meaning of kanji '%c' from '%s' to '%s'.", kanji, this.meaning, meaning));
+        }
+        this.meaning = meaning;
     }
 
     /**

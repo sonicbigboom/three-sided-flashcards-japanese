@@ -8,18 +8,18 @@ import org.junit.Test;
 import com.potrt.flashcards.TestingConstants;
 
 public class JapaneseStringTest implements TestingConstants {
-    JapaneseKanji oneJapaneseKanji;
-    JapaneseKanji personJapaneseKanji;
-    JapaneseKanji toDrinkJapaneseKanji;
-    JapaneseKanji IJapaneseKanji;
-    JapaneseString kana;
+    private JapaneseKanji oneJapaneseKanji;
+    private JapaneseKanji personJapaneseKanji;
+    private JapaneseKanji toDrinkJapaneseKanji;
+    private JapaneseKanji IJapaneseKanji;
+    private JapaneseString kana;
 
     @Before
     public void setup() {
         oneJapaneseKanji = new JapaneseKanji(oneKanji, oneMeaning);
         personJapaneseKanji = new JapaneseKanji(personKanji, personMeaning);
         toDrinkJapaneseKanji = new JapaneseKanji(toDrinkKanji, godanVerbToDrinkDefinition);
-        IJapaneseKanji = new JapaneseKanji(IKanji, wordIDefinition);
+        IJapaneseKanji = new JapaneseKanji(IKanji, IMeaning);
         kana = new JapaneseString();
     }
 

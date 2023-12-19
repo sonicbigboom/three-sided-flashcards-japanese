@@ -37,8 +37,16 @@ public class JapaneseKanjiDictionary  {
      * Returns the {@link JapaneseKanji} for the given kanji character.
      * @param kanji The kanji.
      * @return The associated {@link JapaneseKanji}.
+     * @apiNote If the reading doesn't exist, a new kanji with a meaning of '?' is created and a warning is sent.
      */
     public JapaneseKanji getJapaneseKanji(Character kanji) {
+        if (!kanjiMap.containsKey(kanji)) {
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.warning(String.format("Kanji '%c' does not yet exist, so its default meaning is set to '?'.", kanji));
+            }
+            addKanji(kanji, "?");
+        }
+
         return kanjiMap.get(kanji);
     }
 }

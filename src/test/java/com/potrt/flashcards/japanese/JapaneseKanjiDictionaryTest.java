@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
+import com.potrt.flashcards.japanese.JapaneseKanji.JapaneseKanjiWithReading;
 
 public class JapaneseKanjiDictionaryTest implements TestingConstants {
     private JapaneseKanjiDictionary kanjiDicitonary;
@@ -25,7 +26,6 @@ public class JapaneseKanjiDictionaryTest implements TestingConstants {
         assertThat(kanji.getKanji()).isEqualTo(personKanji);
         assertThat(kanji.getMeaning()).isEqualTo(personMeaning);
     }
-
 
     /**
      * Create multiple kanji for the dictionary.
@@ -61,4 +61,13 @@ public class JapaneseKanjiDictionaryTest implements TestingConstants {
     }
 
 
+    /**
+     * Gets a kanji that doesn't have a definition. Should work with no meaning.  Also should throw a warning, but not easily testable.
+     */
+    @Test
+    public void emptyTest() {
+        JapaneseKanji kanji = kanjiDicitonary.getJapaneseKanji(personKanji);
+        assertThat(kanji.getKanji()).isEqualTo(personKanji);
+        assertThat(kanji.getMeaning()).isEqualTo("?");
+    }
 }

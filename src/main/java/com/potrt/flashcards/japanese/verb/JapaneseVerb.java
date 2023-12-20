@@ -1,13 +1,12 @@
 package com.potrt.flashcards.japanese.verb;
 
-import com.potrt.flashcards.japanese.JapaneseFlashcard;
 import com.potrt.flashcards.japanese.JapaneseWord;
 import com.potrt.flashcards.japanese.verb.conjugation.JapaneseVerbConjugator;
 
 /**
  * A {@link JapaneseVerb} represents a Japanese verb that can be conjugated.
  */
-public class JapaneseVerb extends JapaneseFlashcard {
+public class JapaneseVerb extends JapaneseWord {
     private String kanjiBase;
     private String furiganaBase;
 

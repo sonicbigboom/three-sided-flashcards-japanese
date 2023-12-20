@@ -16,7 +16,7 @@ public class JapaneseKanjiDictionary  {
      * @param kanji The kanji.
      * @param meaning The meaning.
      * @apiNote If this kanji is already in the dictionary, it's meaning will be replaced.
-     *          In theory this should not happen, so a warning willbe sent as well.
+     *          In theory this should not happen, so a warning will be sent as well.
      */
     public void addKanji(Character kanji, String meaning) {
         if (kanjiMap.containsKey(kanji)) {

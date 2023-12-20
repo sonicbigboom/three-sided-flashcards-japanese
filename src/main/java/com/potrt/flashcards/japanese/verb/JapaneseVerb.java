@@ -61,11 +61,11 @@ public class JapaneseVerb extends JapaneseWord {
     }
 
     /**
-     * Creates a new {@link JapaneseWord} that is a conjugated version of this verb to the given form.
+     * Creates a {@link JapaneseWord.Representation} of the {@link JapaneseVerb} that is the relevant conjugated version.
      * @param form The {@link JapaneseVerbForm} that the verb is being conjugated to.
      * @return A {@link JapaneseWord} representing this verb conjugated to the given form.
      */
-    public JapaneseWord conjugate(JapaneseVerbForm form) {
+    public JapaneseWord.Representation conjugate(JapaneseVerbForm form) {
         String conjugatedEnding;
         switch (verbType) {
             case GODAN:
@@ -77,9 +77,9 @@ public class JapaneseVerb extends JapaneseWord {
             case IRREGULAR:
             default:
                 String conjugatedKana = JapaneseVerbConjugator.conjugateIrregularVerb(form, getKanji());
-                return new JapaneseWord(conjugatedKana, conjugatedKana, getDefinition() + " (" + form.toString() + ")");
+                return new Representation(conjugatedKana, conjugatedKana, getDefinition() + " (" + form.toString() + ")");
         }
-        return new JapaneseWord(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + " (" + form.toString() + ")");
+        return new Representation(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + " (" + form.toString() + ")");
     }
 
     /**

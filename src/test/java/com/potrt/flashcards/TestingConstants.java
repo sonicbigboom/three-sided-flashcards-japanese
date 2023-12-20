@@ -65,5 +65,6 @@ public interface TestingConstants {
     public static final String tsuPresentIndicativeNegativeEnding = "たない";
     public static final String ichidanDictionaryEnding = "る";
     public static final String ichidanPastIndicative = "た";
+    public static final String sentenceIAmAHuman = "I am a human.";
     public static final JapaneseVerbForm verbFormDictionary = new JapaneseVerbForm(true, true, presentIdicative);
 }

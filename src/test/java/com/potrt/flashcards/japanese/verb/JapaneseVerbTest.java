@@ -78,7 +78,7 @@ public class JapaneseVerbTest implements TestingConstants {
     @Test
     public void conjugateGodanTest() {
         JapaneseVerb verb = new JapaneseVerb(godanVerbToDrinkKanjiBase, godanVerbToDrinkFuriganaBase, JapaneseVerbEnding.from(godanVerbToDrinkEnding), godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
-        JapaneseWord conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, false, presentIdicative));
+        JapaneseWord.Representation conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, false, presentIdicative));
 
         assertThat(conjugatedVerb.getKanji()).isEqualTo(godanVerbToDrinkKanjiBase + godanVerbToDrinkPoliteNegativeEnding);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(godanVerbToDrinkFuriganaBase + godanVerbToDrinkPoliteNegativeEnding);
@@ -91,7 +91,7 @@ public class JapaneseVerbTest implements TestingConstants {
     @Test
     public void conjugateIchidanTest() {
         JapaneseVerb verb = new JapaneseVerb(ichidanVerbToSeeKanjiBase, ichidanVerbToSeeFuriganaBase, JapaneseVerbEnding.RU, ichidanVerbToSeeDefinition, JapaneseVerbType.ICHIDAN);
-        JapaneseWord conjugatedVerb = verb.conjugate(new JapaneseVerbForm(true, true, pastIdicative));
+        JapaneseWord.Representation conjugatedVerb = verb.conjugate(new JapaneseVerbForm(true, true, pastIdicative));
 
         assertThat(conjugatedVerb.getKanji()).isEqualTo(ichidanVerbToSeeKanjiBase + ichidanVerbToSeePastEnding);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(ichidanVerbToSeeFuriganaBase + ichidanVerbToSeePastEnding);
@@ -104,7 +104,7 @@ public class JapaneseVerbTest implements TestingConstants {
     @Test
     public void conjugateIrregularTest() {
         JapaneseVerb verb = new JapaneseVerb(irregularVerbToDoKana, irregularVerbToDoKana, irregularVerbToDoDefinition, JapaneseVerbType.IRREGULAR);
-        JapaneseWord conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, true, presentIdicative));
+        JapaneseWord.Representation conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, true, presentIdicative));
 
         assertThat(conjugatedVerb.getKanji()).isEqualTo(irregularVerbToDoPolite);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(irregularVerbToDoPolite);

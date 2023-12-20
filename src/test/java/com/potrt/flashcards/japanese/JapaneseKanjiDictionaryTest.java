@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
-import com.potrt.flashcards.japanese.JapaneseKanji.JapaneseKanjiWithReading;
 
 public class JapaneseKanjiDictionaryTest implements TestingConstants {
     private JapaneseKanjiDictionary kanjiDicitonary;

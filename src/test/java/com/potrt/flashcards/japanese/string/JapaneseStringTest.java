@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseKanji;
-import com.potrt.flashcards.japanese.JapaneseWord;
-import com.potrt.flashcards.japanese.string.JapaneseString;
 
 public class JapaneseStringTest implements TestingConstants {
     private JapaneseKanji oneJapaneseKanji;

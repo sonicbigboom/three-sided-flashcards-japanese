@@ -7,12 +7,12 @@ public class JapaneseWord {
     /**
      * @implNote Used for default kanji getter and setter.
      */
-    private String kanji;
+    protected String kanji;
 
     /**
      * @implNote Used for default furigana getter and setter.
      */
-    private String furigana;
+    protected String furigana;
 
     /**
      * @implNote Used for default defintion getter and setter.
@@ -102,6 +102,14 @@ public class JapaneseWord {
          */
         public String getDefinition() {
             return definition;
+        }
+
+        /**
+         * Returns the {@link JapaneseWord} that this representation is based on.
+         * @return The containing {@link JapaneseWord}.
+         */
+        public JapaneseWord getWord() {
+            return JapaneseWord.this;
         }
     }
 }

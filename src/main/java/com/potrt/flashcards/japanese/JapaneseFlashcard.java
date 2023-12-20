@@ -12,9 +12,9 @@ public class JapaneseFlashcard extends Flashcard {
      * Creates a new {@link JapaneseFlashcard} with a {@link JapaneseWord} and a {@link JapaneseWord.Representation} of that word.
      * @param word The word.
      */
-    public JapaneseFlashcard(JapaneseWord word, JapaneseWord.Representation representation) {
+    public JapaneseFlashcard(JapaneseWord.Representation representation) {
         super(representation.getKanji(), representation.getFurigana(), representation.getDefinition());
-        
+        this.word = representation.getWord();
     }
 
     /**
@@ -22,8 +22,7 @@ public class JapaneseFlashcard extends Flashcard {
      * @param word The word.
      */
     public JapaneseFlashcard(JapaneseWord word) {
-        this(word, word.getRepresentation());
-        this.word = word;
+        this(word.getRepresentation());
     }
 
     /**

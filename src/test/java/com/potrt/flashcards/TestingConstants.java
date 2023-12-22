@@ -16,7 +16,9 @@ public interface TestingConstants {
     public static final String personMeaningAlternate = "human";
     public static final Character oneKanji = '一';
     public static final String oneMeaning = "one";
-    public static final String wordOneFurigana = "ひと";
+    public static final String wordOneKanji = "一つ";
+    public static final String wordOneFurigana = "ひとつ";
+    public static final String wordOneDefinition = "one";
     public static final String personKanjiReadingOnePerson = "り";
     public static final String wordOnePersonKanji = "一人";
     public static final String wordOnePersonFurigana = "ひとり";

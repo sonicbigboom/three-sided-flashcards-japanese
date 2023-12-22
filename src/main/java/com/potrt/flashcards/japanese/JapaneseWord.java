@@ -1,5 +1,7 @@
 package com.potrt.flashcards.japanese;
 
+import java.util.Objects;
+
 /**
  * A {@link JapaneseWord} represents a Japanese word with it's kanji, furigana, and definition.
  */
@@ -61,6 +63,21 @@ public class JapaneseWord {
      */
     public Representation getRepresentation() {
         return new Representation(kanji, furigana, definition);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getKanji());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof JapaneseWord)) {
+            return false;
+        }   
+        JapaneseWord other = (JapaneseWord) obj;
+
+        return this.getKanji().equals(other.getKanji());
     }
 
     public class Representation {

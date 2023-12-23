@@ -21,7 +21,7 @@ public class JapaneseStringTest implements TestingConstants {
     public void setup() {
         oneJapaneseKanji = new JapaneseKanji(oneKanji, oneMeaning);
         personJapaneseKanji = new JapaneseKanji(personKanji, personMeaning);
-        toDrinkJapaneseKanji = new JapaneseKanji(toDrinkKanji, godanVerbToDrinkDefinition);
+        toDrinkJapaneseKanji = new JapaneseKanji(drinkKanji, drinkMeaning);
         IJapaneseKanji = new JapaneseKanji(IKanji, IMeaning);
         builder = new JapaneseStringBuilder();
     }

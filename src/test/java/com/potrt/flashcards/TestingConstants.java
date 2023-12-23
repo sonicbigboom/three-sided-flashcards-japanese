@@ -1,6 +1,6 @@
 package com.potrt.flashcards;
 
-import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
+import com.potrt.flashcards.japanese.string.verb.JapaneseVerbForm;
 
 public interface TestingConstants {
     public static final String particleTopic = "は";
@@ -24,6 +24,8 @@ public interface TestingConstants {
     public static final String wordOnePersonKanji = "一人";
     public static final String wordOnePersonFurigana = "ひとり";
     public static final String wordOnePersonDefinition = "one person";
+    public static final Character playKanji = '遊';
+    public static final String playMeaning = "play";
     public static final String personKanjiReadingPerson = "ひと";
     public static final String wordPersonKanji = String.valueOf(personKanji);
     public static final String wordPersonFurigana = personKanjiReadingPerson;
@@ -31,8 +33,9 @@ public interface TestingConstants {
     public static final String wordAmPersonKanji = String.valueOf(personKanji) + desu;
     public static final String wordAmPersonFurigana = personKanjiReadingPerson + desu;
     public static final String wordAmPersonDefinition = "am person";
-    public static final Character toDrinkKanji = '飲';
-    public static final String godanVerbToDrinkKanjiBase = String.valueOf(toDrinkKanji);
+    public static final Character drinkKanji = '飲';
+    public static final String drinkMeaning = "drink";
+    public static final String godanVerbToDrinkKanjiBase = String.valueOf(drinkKanji);
     public static final String godanVerbToDrinkFuriganaBase = "の";
     public static final String godanVerbToDrinkEnding = "む";
     public static final String godanVerbToDrinkPoliteNegativeEnding = "みません";
@@ -43,7 +46,9 @@ public interface TestingConstants {
     public static final String godanVerbToPlayPoliteEnding = "びます";
     public static final String godanVerbToPlayNegativeEnding = "ばない";
     public static final String godanVerbToPlayDefinition = "to play";
-    public static final String ichidanVerbToSeeKanjiBase = "見";
+    public static final Character seeKanji = '見';
+    public static final String seeMeaning = "see";
+    public static final String ichidanVerbToSeeKanjiBase = String.valueOf(seeKanji);
     public static final String ichidanVerbToSeeFuriganaBase = "み";
     public static final String ichidanVerbToSeePastEnding = "た";
     public static final String ichidanVerbToSeeDefinition = "to see";

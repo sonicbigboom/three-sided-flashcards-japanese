@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.verb;
+package com.potrt.flashcards.japanese.string.verb;
 
 import java.util.HashMap;
 import java.util.Map;

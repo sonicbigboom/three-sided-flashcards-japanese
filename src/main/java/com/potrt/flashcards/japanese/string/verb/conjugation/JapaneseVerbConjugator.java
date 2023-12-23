@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.verb.conjugation;
+package com.potrt.flashcards.japanese.string.verb.conjugation;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,8 +8,8 @@ import java.util.Map;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
-import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
+import com.potrt.flashcards.japanese.string.verb.JapaneseVerbEnding;
+import com.potrt.flashcards.japanese.string.verb.JapaneseVerbForm;
 
 /**
  * A {@link JapaneseVerbConjugator} provides methods to conjugate Japanese verbs.
@@ -21,7 +21,7 @@ public final class JapaneseVerbConjugator {
     static {
         translationTables = new HashMap<>();
         try {
-            addTranslationTables("src\\main\\java\\com\\potrt\\flashcards\\japanese\\verb\\conjugation\\conjugation_tables.csv");
+            addTranslationTables("src\\main\\java\\com\\potrt\\flashcards\\japanese\\string\\verb\\conjugation\\conjugation_tables.csv");
         } catch (CsvValidationException | IOException e) {
             throw new IllegalStateException("The default japanese verb conjugation table could not be processed.");
         }

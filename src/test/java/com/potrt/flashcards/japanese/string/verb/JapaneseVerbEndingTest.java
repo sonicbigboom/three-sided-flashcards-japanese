@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.verb;
+package com.potrt.flashcards.japanese.string.verb;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;

@@ -1,12 +1,14 @@
-package com.potrt.flashcards.japanese.verb;
+package com.potrt.flashcards.japanese.string.verb;
 
 import com.potrt.flashcards.japanese.JapaneseWord;
-import com.potrt.flashcards.japanese.verb.conjugation.JapaneseVerbConjugator;
+import com.potrt.flashcards.japanese.string.JapaneseString;
+import com.potrt.flashcards.japanese.string.JapaneseStringBuilder;
+import com.potrt.flashcards.japanese.string.verb.conjugation.JapaneseVerbConjugator;
 
 /**
  * A {@link JapaneseVerb} represents a Japanese verb that can be conjugated.
  */
-public class JapaneseVerb extends JapaneseWord {
+public class JapaneseVerb extends JapaneseString {
     private String kanjiBase;
     private String furiganaBase;
 
@@ -17,35 +19,15 @@ public class JapaneseVerb extends JapaneseWord {
     private JapaneseVerbType verbType;
 
     /**
-     * Creates a new {@link JapaneseVerb} with the kanji and furigana bases, the ending, the verb type, and the definition.
-     * @param kanjiBase The kanji base.
-     * @param furiganaBase The furigana base.
-     * @param ending The dictionary form ending of the verb.
-     * @param definition The definition.
-     * @param verbType The verb's type: godan, ichidan, or irregular.
-     * @apiNote Irregular verbs are probably best created with one of the other constructors.
-     */
-    public JapaneseVerb(String kanjiBase, String furiganaBase, JapaneseVerbEnding ending, String definition, JapaneseVerbType verbType) {
-        super(kanjiBase + ending, furiganaBase + ending, definition);
-        this.kanjiBase = kanjiBase;
-        this.furiganaBase = furiganaBase;
-        this.ending = ending;
-        this.verbType = verbType;
-    }
-
-    /**
      * Creates a new {@link JapaneseVerb} with the kanji, furigana, the ending, the verb type, and the definition.
-     * @param kanji The kanji.
-     * @param furigana The furigana.
-     * @param definition The definition.
+     * @param builder The {@link JapaneseStringBuilder} that is ready to create the verb.
+     * @param definition The meaning of the string.
      * @param verbType The verb's type: godan, ichidan, or irregular.
-     * @throws IllegalArgumentException Thrown if the kanji and furigana endings do not match, or it is not a valid verb ending.
      */
-    public JapaneseVerb(String kanji, String furigana, String definition, JapaneseVerbType verbType) {
-        super(kanji, furigana, definition);
+    public JapaneseVerb(JapaneseStringBuilder builder, String definition, JapaneseVerbType verbType) {
+        super(builder, definition);
         this.kanjiBase = kanji.substring(0, kanji.length()-1);
         this.furiganaBase = furigana.substring(0, furigana.length()-1);
-        if (kanji.charAt(kanji.length()-1) != furigana.charAt(furigana.length()-1)) { throw new IllegalArgumentException("Kanji and furigana verb ending must be the same."); }
         this.ending = JapaneseVerbEnding.from(kanji.substring(kanji.length()-1));
         this.verbType = verbType;
     }

@@ -11,10 +11,15 @@ import com.potrt.flashcards.japanese.JapaneseKanji.JapaneseKanjiWithReading;
  */
 public class JapaneseString extends JapaneseWord {
     /**
+     * The list of kana.
+     * @implNote Each object in this list is either a {@link JapaneseKanjiWithReading} or a {@link String}.
+     */
+    protected List<Object> kanaList = new ArrayList<>();
+    /**
      * A list of all kanji.
      * @implNote This is just used as a shortcut for certain methods and it does not need to be in order.
      */
-    private List<JapaneseKanjiWithReading> kanjiList = new ArrayList<>();
+    protected List<JapaneseKanjiWithReading> kanjiList = new ArrayList<>();
     
 
     /**
@@ -23,8 +28,9 @@ public class JapaneseString extends JapaneseWord {
      * @param definition The meaning of the string.
      * @apiNote This method should only be called from within {@link JapaneseStringBuilder}.
      */
-    JapaneseString(JapaneseStringBuilder builder, String definition) {
+    protected JapaneseString(JapaneseStringBuilder builder, String definition) {
         super(builder.getKanji(), builder.getFurigana(), definition);
+        this.kanaList = builder.kanaList;
         this.kanjiList = builder.kanjiList;
     } 
 

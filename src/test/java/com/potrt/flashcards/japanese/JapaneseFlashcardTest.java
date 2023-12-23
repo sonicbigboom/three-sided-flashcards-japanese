@@ -5,10 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
-import com.potrt.flashcards.japanese.verb.JapaneseVerb;
-import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
-import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
-import com.potrt.flashcards.japanese.verb.JapaneseVerb.JapaneseVerbType;
+import com.potrt.flashcards.japanese.string.verb.JapaneseVerb;
+import com.potrt.flashcards.japanese.string.verb.JapaneseVerbBuilder;
+import com.potrt.flashcards.japanese.string.verb.JapaneseVerbEnding;
+import com.potrt.flashcards.japanese.string.verb.JapaneseVerbForm;
+import com.potrt.flashcards.japanese.string.verb.JapaneseVerb.JapaneseVerbType;
 
 public class JapaneseFlashcardTest implements TestingConstants {
     /**
@@ -29,7 +30,12 @@ public class JapaneseFlashcardTest implements TestingConstants {
      */
     @Test
     public void flashcardFromVerbTest() {
-        JapaneseVerb verb = new JapaneseVerb(godanVerbToPlayKanjiBase, godanVerbToPlayFuriganaBase, JapaneseVerbEnding.from(godanVerbToPlayEnding), godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
+        JapaneseVerbBuilder builder = new JapaneseVerbBuilder();
+        JapaneseKanji kanji = new JapaneseKanji(playKanji, playMeaning);
+        builder.add(kanji.withReading(godanVerbToPlayFuriganaBase));
+        builder.add(godanVerbToPlayEnding);
+        JapaneseVerb verb = builder.getJapaneseVerb(godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
+
         JapaneseFlashcard flashcardPolite = new JapaneseFlashcard(verb.conjugate(new JapaneseVerbForm(false, true, presentIdicative)));
         assertThat(flashcardPolite.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayPoliteEnding);
         assertThat(flashcardPolite.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayPoliteEnding);

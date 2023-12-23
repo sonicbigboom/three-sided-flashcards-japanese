@@ -4,6 +4,7 @@ import java.util.Objects;
 
 /**
  * A {@link JapaneseWord} represents a Japanese word with it's kanji, furigana, and definition.
+ * This is an abstract class and implementations will usually be created with {@link JapaneseStringBuilder}.
  */
 public abstract class JapaneseWord {
     /**

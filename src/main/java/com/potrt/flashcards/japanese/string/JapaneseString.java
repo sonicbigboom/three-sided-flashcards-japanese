@@ -7,7 +7,7 @@ import com.potrt.flashcards.japanese.JapaneseWord;
 import com.potrt.flashcards.japanese.JapaneseKanji.JapaneseKanjiWithReading;
 
 /**
- * Represents a string of Japanese characters.
+ * Represents a string of Japanese characters making up a Japanese word.  Should not ever be a sentence.
  */
 public class JapaneseString extends JapaneseWord {
     /**
@@ -36,5 +36,15 @@ public class JapaneseString extends JapaneseWord {
         for (JapaneseKanjiWithReading kanji : kanjiList) {
             kanji.attempt(succeeded);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return super.equals(other);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

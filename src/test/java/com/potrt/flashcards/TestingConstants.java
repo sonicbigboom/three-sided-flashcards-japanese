@@ -5,6 +5,7 @@ import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 public interface TestingConstants {
     public static final String particleTopic = "は";
     public static final String japanesePeriod = "。";
+    public static final String japaneseQuestionMark = "？";
     public static final String desu = "です";
     public static final Character IKanji = '私';
     public static final String IMeaning = "I";

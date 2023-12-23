@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseKanji;
+import com.potrt.flashcards.japanese.JapaneseWord;
 
 public class JapaneseStringTest implements TestingConstants {
     private JapaneseKanji oneJapaneseKanji;
@@ -63,6 +64,7 @@ public class JapaneseStringTest implements TestingConstants {
 
     /**
      * Tests a Japanese sentence.
+     * Note that this should not ever be done, but is useful for testing.
      */
     @Test
     public void sentenceTest() {
@@ -92,5 +94,41 @@ public class JapaneseStringTest implements TestingConstants {
         string.attempt(true);
         assertThat(oneJapaneseKanji.getScore().getSuccessRate()).isEqualTo(0.6);
         assertThat(personJapaneseKanji.getScore().getSuccessRate()).isEqualTo(0.6);
+    }
+
+    /**
+     * Check that hash equality works.
+     */
+    @Test
+    public void equalityTest() {
+        builder.add(IJapaneseKanji.withReading(wordIFurigana));
+        builder.add(particleTopic);
+        builder.add(personJapaneseKanji.withReading(personKanjiReadingPerson));
+        builder.add(desu);
+        builder.add(japanesePeriod);
+        JapaneseWord builtSentence = builder.getJapaneseString(sentenceIAmAHuman);
+        JapaneseWord directSentence = new JapaneseWord(wordIKanji + particleTopic + personKanji + desu + japanesePeriod, 
+                                                       wordIFurigana + particleTopic + personKanjiReadingPerson + desu + japanesePeriod, 
+                                                       sentenceIAmAHuman);
+        assertThat(builtSentence).hasSameHashCodeAs(directSentence).isEqualTo(directSentence);
+        assertThat(directSentence).hasSameHashCodeAs(builtSentence).isEqualTo(builtSentence);
+    }
+
+    /**
+     * Check that inequality equality works.
+     */
+    @Test
+    public void inequalityTest() {
+        builder.add(IJapaneseKanji.withReading(wordIFurigana));
+        builder.add(particleTopic);
+        builder.add(personJapaneseKanji.withReading(personKanjiReadingPerson));
+        builder.add(desu);
+        builder.add(japanesePeriod);
+        JapaneseWord builtSentence = builder.getJapaneseString(sentenceIAmAHuman);
+        JapaneseWord directSentence = new JapaneseWord(wordIKanji + particleTopic + personKanji + desu + japaneseQuestionMark, 
+                                                       wordIFurigana + particleTopic + personKanjiReadingPerson + desu + japaneseQuestionMark, 
+                                                       sentenceIAmAHuman);
+        assertThat(builtSentence).doesNotHaveSameHashCodeAs(directSentence).isNotEqualTo(directSentence);
+        assertThat(directSentence).doesNotHaveSameHashCodeAs(builtSentence).isNotEqualTo(builtSentence);
     }
 }

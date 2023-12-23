@@ -110,4 +110,30 @@ public class JapaneseVerbTest implements TestingConstants {
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(irregularVerbToDoPolite);
         assertThat(conjugatedVerb.getDefinition()).isEqualTo(irregularVerbToDoDefinition + " (" + definitionPresentIndicativePolite + ")");
     }
+
+    /**
+     * Check that hash equality works.
+     */
+    @Test
+    public void equalityTest() {
+        JapaneseVerb verb = new JapaneseVerb(godanVerbToDrinkKanjiBase, godanVerbToDrinkFuriganaBase, JapaneseVerbEnding.from(godanVerbToDrinkEnding), godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
+        JapaneseWord word = new JapaneseWord(godanVerbToDrinkKanjiBase + godanVerbToDrinkEnding, 
+                                             godanVerbToDrinkFuriganaBase + godanVerbToDrinkEnding, 
+                                             godanVerbToDrinkDefinition);
+        assertThat(verb).hasSameHashCodeAs(word).isEqualTo(word);
+        assertThat(word).hasSameHashCodeAs(verb).isEqualTo(verb);
+    }
+
+    /**
+     * Check that hash inequality works.
+     */
+    @Test
+    public void inequalityTest() {
+        JapaneseVerb verb = new JapaneseVerb(godanVerbToDrinkKanjiBase, godanVerbToDrinkFuriganaBase, JapaneseVerbEnding.from(godanVerbToDrinkEnding), godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
+        JapaneseWord word = new JapaneseWord(godanVerbToPlayKanjiBase + godanVerbToPlayEnding, 
+                                             godanVerbToPlayKanjiBase + godanVerbToPlayEnding, 
+                                             godanVerbToPlayDefinition);
+        assertThat(verb).doesNotHaveSameHashCodeAs(word).isNotEqualTo(word);
+        assertThat(word).doesNotHaveSameHashCodeAs(verb).isNotEqualTo(verb);
+    }
 }

@@ -106,6 +106,16 @@ public class JapaneseVerb extends JapaneseWord {
         return ending;
     } 
 
+    @Override
+    public boolean equals(Object other) {
+        return super.equals(other);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
     /**
      * Represents a Japanese verb type.
      */

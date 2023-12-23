@@ -16,7 +16,7 @@ public class JapaneseFlashcardTest implements TestingConstants {
      */
     @Test
     public void flashcardFromWordTest() {
-        JapaneseWord word = new JapaneseWord(wordOnePersonKanji, wordOnePersonFurigana, wordOnePersonDefinition);
+        JapaneseWord word = new JapaneseWordTestImplementation(wordOnePersonKanji, wordOnePersonFurigana, wordOnePersonDefinition);
         JapaneseFlashcard flashcard = new JapaneseFlashcard(word);
         assertThat(flashcard.getKanji()).isEqualTo(wordOnePersonKanji);
         assertThat(flashcard.getFurigana()).isEqualTo(wordOnePersonFurigana);

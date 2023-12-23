@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * A {@link JapaneseWord} represents a Japanese word with it's kanji, furigana, and definition.
  */
-public class JapaneseWord {
+public abstract class JapaneseWord {
     /**
      * @implNote Used for default kanji getter and setter.
      */
@@ -27,7 +27,7 @@ public class JapaneseWord {
      * @param furigana The furigana.
      * @param definition The definition.
      */
-    public JapaneseWord(String kanji, String furigana, String definition) {
+    protected JapaneseWord(String kanji, String furigana, String definition) {
         this.kanji = kanji;
         this.furigana = furigana;
          this.definition = definition;

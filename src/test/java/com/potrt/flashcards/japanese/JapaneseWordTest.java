@@ -13,7 +13,7 @@ public class JapaneseWordTest implements TestingConstants {
      */
     @Test
     public void basicWordTest() {
-        JapaneseWord word = new JapaneseWord(wordIKanji, wordIFurigana, wordIDefinition);
+        JapaneseWord word = new JapaneseWordTestImplementation(wordIKanji, wordIFurigana, wordIDefinition);
         assertThat(word.getKanji()).isEqualTo(wordIKanji);
         assertThat(word.getFurigana()).isEqualTo(wordIFurigana);
         assertThat(word.getDefinition()).isEqualTo(wordIDefinition);
@@ -24,7 +24,7 @@ public class JapaneseWordTest implements TestingConstants {
      */
     @Test
     public void representationTest() {
-        JapaneseWord word = new JapaneseWord(wordIKanji, wordIFurigana, wordIDefinition);
+        JapaneseWord word = new JapaneseWordTestImplementation(wordIKanji, wordIFurigana, wordIDefinition);
         JapaneseWord.Representation rep = word.getRepresentation();
         assertThat(rep.getKanji()).isEqualTo(wordIKanji);
         assertThat(rep.getFurigana()).isEqualTo(wordIFurigana);
@@ -37,8 +37,8 @@ public class JapaneseWordTest implements TestingConstants {
      */
     @Test
     public void equalityTest() {
-        JapaneseWord word = new JapaneseWord(wordIKanji, wordIFurigana, wordIDefinition);
-        JapaneseWord word2 = new JapaneseWord(wordIKanji, wordIFurigana, wordIDefinition);
+        JapaneseWord word = new JapaneseWordTestImplementation(wordIKanji, wordIFurigana, wordIDefinition);
+        JapaneseWord word2 = new JapaneseWordTestImplementation(wordIKanji, wordIFurigana, wordIDefinition);
         assertThat(word).hasSameHashCodeAs(word2).isEqualTo(word2);
     }
 
@@ -47,8 +47,8 @@ public class JapaneseWordTest implements TestingConstants {
      */
     @Test
     public void inequalityTest() {
-        JapaneseWord word = new JapaneseWord(wordIKanji, wordIFurigana, wordIDefinition);
-        JapaneseWord word2 = new JapaneseWord(wordOneKanji, wordOneFurigana, wordOneDefinition);
+        JapaneseWord word = new JapaneseWordTestImplementation(wordIKanji, wordIFurigana, wordIDefinition);
+        JapaneseWord word2 = new JapaneseWordTestImplementation(wordOneKanji, wordOneFurigana, wordOneDefinition);
         assertThat(word).doesNotHaveSameHashCodeAs(word2).isNotEqualTo(word2);
     }
 }

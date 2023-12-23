@@ -51,16 +51,6 @@ public class JapaneseVerb extends JapaneseWord {
     }
 
     /**
-     * Creates a new {@link JapaneseVerb} with the {@link JapaneseWord} and the verb type.
-     * @param verb The verb as a {@link JapaneseWord}.
-     * @param verbType The verb's type: godan, ichidan, or irregular.
-     * @throws IllegalArgumentException Thrown if the kanji and furigana endings do not match, or it is not a valid verb ending.
-     */
-    public JapaneseVerb(JapaneseWord verb, JapaneseVerbType verbType) {
-        this(verb.getKanji(), verb.getFurigana(), verb.getDefinition(), verbType);
-    }
-
-    /**
      * Creates a {@link JapaneseWord.Representation} of the {@link JapaneseVerb} that is the relevant conjugated version.
      * @param form The {@link JapaneseVerbForm} that the verb is being conjugated to.
      * @return A {@link JapaneseWord} representing this verb conjugated to the given form.

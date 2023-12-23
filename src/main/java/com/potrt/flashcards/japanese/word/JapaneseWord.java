@@ -1,38 +1,56 @@
-package com.potrt.flashcards.japanese;
+package com.potrt.flashcards.japanese.word;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.potrt.flashcards.japanese.JapaneseKanji.JapaneseKanjiWithReading;
 
 /**
  * A {@link JapaneseWord} represents a Japanese word with it's kanji, furigana, and definition.
- * This is an abstract class and implementations will usually be created with {@link JapaneseStringBuilder}.
+ * This is an abstract class and implementations will usually be created with {@link JapaneseWordBuilder}.
  */
-public abstract class JapaneseWord {
+public class JapaneseWord {
     /**
-     * @implNote Used for default kanji getter and setter.
+     * @implNote Used for default kanji getter.
      */
     protected String kanji;
 
     /**
-     * @implNote Used for default furigana getter and setter.
+     * @implNote Used for default furigana getter.
      */
     protected String furigana;
 
     /**
-     * @implNote Used for default defintion getter and setter.
+     * @implNote Used for default defintion getter.
      */
     protected String definition;
 
     /**
-     * Creates a new {@link JapaneseWord} with the kanji, the furigana, and the definition.
-     * @param kanji The kanji.
-     * @param furigana The furigana.
-     * @param definition The definition.
+     * The list of kana.
+     * @implNote Each object in this list is either a {@link JapaneseKanjiWithReading} or a {@link String}.
      */
-    protected JapaneseWord(String kanji, String furigana, String definition) {
-        this.kanji = kanji;
-        this.furigana = furigana;
-         this.definition = definition;
-    }
+    protected List<Object> kanaList = new ArrayList<>();
+
+    /**
+     * A list of all kanji.
+     * @implNote This is just used as a shortcut for certain methods and it does not need to be in order.
+     */
+    protected List<JapaneseKanjiWithReading> kanjiList = new ArrayList<>();
+
+    /**
+     * Creates a {@link JapaneseString} from a list of kana and a list of kanji.
+     * @param builder The {@link JapaneseWordBuilder} that is ready to create the string.
+     * @param definition The meaning of the string.
+     * @apiNote This method should only be called from within {@link JapaneseWordBuilder}.
+     */
+    protected JapaneseWord(JapaneseWordBuilder builder, String definition) {
+        this.kanji = builder.getKanji();
+        this.furigana = builder.getFurigana();
+        this.definition = definition;
+        this.kanaList = builder.kanaList;
+        this.kanjiList = builder.kanjiList;
+    } 
 
     /**
      * Gets the kanji of the word.
@@ -64,6 +82,16 @@ public abstract class JapaneseWord {
      */
     public Representation getRepresentation() {
         return new Representation(kanji, furigana, definition);
+    }
+
+    /**
+     * Adds a new successful or failed attempt for each kanji.
+     * @param succeeded If the attempt was successful.
+     */
+    public void attempt(boolean succeeded) {
+        for (JapaneseKanjiWithReading k : kanjiList) {
+            k.attempt(succeeded);
+        }
     }
 
     @Override

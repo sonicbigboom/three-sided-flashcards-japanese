@@ -1,9 +1,9 @@
-package com.potrt.flashcards.japanese.string.verb;
+package com.potrt.flashcards.japanese.word.verb;
 
-import com.potrt.flashcards.japanese.string.JapaneseStringBuilder;
-import com.potrt.flashcards.japanese.string.verb.JapaneseVerb.JapaneseVerbType;
+import com.potrt.flashcards.japanese.word.JapaneseWordBuilder;
+import com.potrt.flashcards.japanese.word.verb.JapaneseVerb.JapaneseVerbType;
 
-public class JapaneseVerbBuilder extends JapaneseStringBuilder {
+public class JapaneseVerbBuilder extends JapaneseWordBuilder {
     /**
      * Generates the {@link JapaneseVerb} with a definition, from the verb type.
      * @param definition The meaning of the string.

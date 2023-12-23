@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.potrt.flashcards.Score;
+import com.potrt.flashcards.japanese.word.JapaneseWord;
 
 /**
  * A {@link JapaneseKanji} holds information about a kanji and its readings.

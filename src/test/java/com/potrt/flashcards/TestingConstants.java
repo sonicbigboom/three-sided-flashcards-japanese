@@ -1,6 +1,6 @@
 package com.potrt.flashcards;
 
-import com.potrt.flashcards.japanese.string.verb.JapaneseVerbForm;
+import com.potrt.flashcards.japanese.word.verb.JapaneseVerbForm;
 
 public interface TestingConstants {
     public static final String particleTopic = "は";
@@ -20,7 +20,8 @@ public interface TestingConstants {
     public static final String wordOneKanji = "一つ";
     public static final String wordOneFurigana = "ひとつ";
     public static final String wordOneDefinition = "one";
-    public static final String personKanjiReadingOnePerson = "り";
+    public static final String wordOnePersonOneFurigana = "ひと";
+    public static final String wordOnePersonPersonFurigana = "り";
     public static final String wordOnePersonKanji = "一人";
     public static final String wordOnePersonFurigana = "ひとり";
     public static final String wordOnePersonDefinition = "one person";

@@ -5,11 +5,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
-import com.potrt.flashcards.japanese.string.verb.JapaneseVerb;
-import com.potrt.flashcards.japanese.string.verb.JapaneseVerbBuilder;
-import com.potrt.flashcards.japanese.string.verb.JapaneseVerbEnding;
-import com.potrt.flashcards.japanese.string.verb.JapaneseVerbForm;
-import com.potrt.flashcards.japanese.string.verb.JapaneseVerb.JapaneseVerbType;
+import com.potrt.flashcards.japanese.word.JapaneseWord;
+import com.potrt.flashcards.japanese.word.JapaneseWordBuilder;
+import com.potrt.flashcards.japanese.word.verb.JapaneseVerb;
+import com.potrt.flashcards.japanese.word.verb.JapaneseVerbBuilder;
+import com.potrt.flashcards.japanese.word.verb.JapaneseVerbForm;
+import com.potrt.flashcards.japanese.word.verb.JapaneseVerb.JapaneseVerbType;
 
 public class JapaneseFlashcardTest implements TestingConstants {
     /**
@@ -17,7 +18,13 @@ public class JapaneseFlashcardTest implements TestingConstants {
      */
     @Test
     public void flashcardFromWordTest() {
-        JapaneseWord word = new JapaneseWordTestImplementation(wordOnePersonKanji, wordOnePersonFurigana, wordOnePersonDefinition);
+        JapaneseKanji oneJapaneseKanji = new JapaneseKanji(oneKanji, oneMeaning);
+        JapaneseKanji personJapaneseKanji = new JapaneseKanji(personKanji, personMeaning);
+        JapaneseWordBuilder builder = new JapaneseWordBuilder();
+        builder.add(oneJapaneseKanji.withReading(wordOnePersonOneFurigana));
+        builder.add(personJapaneseKanji.withReading(wordOnePersonPersonFurigana));
+
+        JapaneseWord word = builder.getJapaneseWord(wordOnePersonDefinition);
         JapaneseFlashcard flashcard = new JapaneseFlashcard(word);
         assertThat(flashcard.getKanji()).isEqualTo(wordOnePersonKanji);
         assertThat(flashcard.getFurigana()).isEqualTo(wordOnePersonFurigana);

@@ -1,14 +1,13 @@
-package com.potrt.flashcards.japanese.string.verb;
+package com.potrt.flashcards.japanese.word.verb;
 
-import com.potrt.flashcards.japanese.JapaneseWord;
-import com.potrt.flashcards.japanese.string.JapaneseString;
-import com.potrt.flashcards.japanese.string.JapaneseStringBuilder;
-import com.potrt.flashcards.japanese.string.verb.conjugation.JapaneseVerbConjugator;
+import com.potrt.flashcards.japanese.word.JapaneseWord;
+import com.potrt.flashcards.japanese.word.JapaneseWordBuilder;
+import com.potrt.flashcards.japanese.word.verb.conjugation.JapaneseVerbConjugator;
 
 /**
  * A {@link JapaneseVerb} represents a Japanese verb that can be conjugated.
  */
-public class JapaneseVerb extends JapaneseString {
+public class JapaneseVerb extends JapaneseWord {
     private String kanjiBase;
     private String furiganaBase;
 
@@ -20,11 +19,11 @@ public class JapaneseVerb extends JapaneseString {
 
     /**
      * Creates a new {@link JapaneseVerb} with the kanji, furigana, the ending, the verb type, and the definition.
-     * @param builder The {@link JapaneseStringBuilder} that is ready to create the verb.
+     * @param builder The {@link JapaneseWordBuilder} that is ready to create the verb.
      * @param definition The meaning of the string.
      * @param verbType The verb's type: godan, ichidan, or irregular.
      */
-    public JapaneseVerb(JapaneseStringBuilder builder, String definition, JapaneseVerbType verbType) {
+    public JapaneseVerb(JapaneseWordBuilder builder, String definition, JapaneseVerbType verbType) {
         super(builder, definition);
         this.kanjiBase = kanji.substring(0, kanji.length()-1);
         this.furiganaBase = furigana.substring(0, furigana.length()-1);

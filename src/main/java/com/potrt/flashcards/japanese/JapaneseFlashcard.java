@@ -1,6 +1,7 @@
 package com.potrt.flashcards.japanese;
 
 import com.potrt.flashcards.Flashcard;
+import com.potrt.flashcards.japanese.word.JapaneseWord;
 
 /**
  * A {@link JapaneseFlashcard} represents a Japanese word with three descriptions: the kanji, the furigana, and the definition.

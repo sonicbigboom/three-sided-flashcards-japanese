@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.string;
+package com.potrt.flashcards.japanese.word;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,15 +7,13 @@ import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseKanji;
-import com.potrt.flashcards.japanese.JapaneseWord;
-import com.potrt.flashcards.japanese.JapaneseWordTestImplementation;
 
-public class JapaneseStringTest implements TestingConstants {
+public class JapaneseWordTest implements TestingConstants {
     private JapaneseKanji oneJapaneseKanji;
     private JapaneseKanji personJapaneseKanji;
     private JapaneseKanji toDrinkJapaneseKanji;
     private JapaneseKanji IJapaneseKanji;
-    private JapaneseStringBuilder builder;
+    private JapaneseWordBuilder builder;
 
     @Before
     public void setup() {
@@ -23,7 +21,7 @@ public class JapaneseStringTest implements TestingConstants {
         personJapaneseKanji = new JapaneseKanji(personKanji, personMeaning);
         toDrinkJapaneseKanji = new JapaneseKanji(drinkKanji, drinkMeaning);
         IJapaneseKanji = new JapaneseKanji(IKanji, IMeaning);
-        builder = new JapaneseStringBuilder();
+        builder = new JapaneseWordBuilder();
     }
 
     /**
@@ -32,7 +30,7 @@ public class JapaneseStringTest implements TestingConstants {
     @Test
     public void singleKanjiTest() {
         builder.add(personJapaneseKanji.withReading(personKanjiReadingPerson));
-        JapaneseString string = builder.getJapaneseString(personMeaning);
+        JapaneseWord string = builder.getJapaneseWord(personMeaning);
         assertThat(string.getKanji()).isEqualTo(String.valueOf(personKanji));
         assertThat(string.getFurigana()).isEqualTo(personKanjiReadingPerson);
         assertThat(string.getDefinition()).isEqualTo(personMeaning);
@@ -44,7 +42,7 @@ public class JapaneseStringTest implements TestingConstants {
     @Test
     public void singleFurigana() {
         builder.add(irregularVerbToComeKana);
-        JapaneseString string = builder.getJapaneseString(irregularVerbToComeDefinition);
+        JapaneseWord string = builder.getJapaneseWord(irregularVerbToComeDefinition);
         assertThat(string.getKanji()).isEqualTo(irregularVerbToComeKana);
         assertThat(string.getFurigana()).isEqualTo(irregularVerbToComeKana);
         assertThat(string.getDefinition()).isEqualTo(irregularVerbToComeDefinition);
@@ -57,7 +55,7 @@ public class JapaneseStringTest implements TestingConstants {
     public void mixedKanaTest() {
         builder.add(toDrinkJapaneseKanji.withReading(godanVerbToDrinkFuriganaBase));
         builder.add(godanVerbToDrinkEnding);
-        JapaneseString string = builder.getJapaneseString(godanVerbToDrinkDefinition);
+        JapaneseWord string = builder.getJapaneseWord(godanVerbToDrinkDefinition);
         assertThat(string.getKanji()).isEqualTo(godanVerbToDrinkKanjiBase + godanVerbToDrinkEnding);
         assertThat(string.getFurigana()).isEqualTo(godanVerbToDrinkFuriganaBase + godanVerbToDrinkEnding);
         assertThat(string.getDefinition()).isEqualTo(godanVerbToDrinkDefinition);
@@ -74,10 +72,24 @@ public class JapaneseStringTest implements TestingConstants {
         builder.add(personJapaneseKanji.withReading(personKanjiReadingPerson));
         builder.add(desu);
         builder.add(japanesePeriod);
-        JapaneseString string = builder.getJapaneseString(sentenceIAmAHuman);
+        JapaneseWord string = builder.getJapaneseWord(sentenceIAmAHuman);
         assertThat(string.getKanji()).isEqualTo(wordIKanji + particleTopic + wordPersonKanji + desu + japanesePeriod);
         assertThat(string.getFurigana()).isEqualTo(wordIFurigana + particleTopic + wordPersonFurigana + desu + japanesePeriod);
         assertThat(string.getDefinition()).isEqualTo(sentenceIAmAHuman);
+    }
+
+    /**
+     * Checks that a basic representation word works.
+     */
+    @Test
+    public void representationTest() {
+        builder.add(IJapaneseKanji.withReading(wordIFurigana));
+        JapaneseWord word = builder.getJapaneseWord(wordIDefinition);
+        JapaneseWord.Representation rep = word.getRepresentation();
+        assertThat(rep.getKanji()).isEqualTo(wordIKanji);
+        assertThat(rep.getFurigana()).isEqualTo(wordIFurigana);
+        assertThat(rep.getDefinition()).isEqualTo(wordIDefinition);
+        assertThat(rep.getWord()).isEqualTo(word);
     }
 
     /**
@@ -86,8 +98,8 @@ public class JapaneseStringTest implements TestingConstants {
     @Test
     public void attemptTest() {
         builder.add(oneJapaneseKanji.withReading(wordOneFurigana));
-        builder.add(personJapaneseKanji.withReading(personKanjiReadingOnePerson));
-        JapaneseString string = builder.getJapaneseString(wordOnePersonDefinition);
+        builder.add(personJapaneseKanji.withReading(wordOnePersonPersonFurigana));
+        JapaneseWord string = builder.getJapaneseWord(wordOnePersonDefinition);
         string.attempt(true);
         string.attempt(false);
         string.attempt(false);
@@ -107,12 +119,18 @@ public class JapaneseStringTest implements TestingConstants {
         builder.add(personJapaneseKanji.withReading(personKanjiReadingPerson));
         builder.add(desu);
         builder.add(japanesePeriod);
-        JapaneseWord builtSentence = builder.getJapaneseString(sentenceIAmAHuman);
-        JapaneseWord directSentence = new JapaneseWordTestImplementation(wordIKanji + particleTopic + personKanji + desu + japanesePeriod, 
-                                                                         wordIFurigana + particleTopic + personKanjiReadingPerson + desu + japanesePeriod, 
-                                                                         sentenceIAmAHuman);
-        assertThat(builtSentence).hasSameHashCodeAs(directSentence).isEqualTo(directSentence);
-        assertThat(directSentence).hasSameHashCodeAs(builtSentence).isEqualTo(builtSentence);
+        JapaneseWord builtSentence = builder.getJapaneseWord(sentenceIAmAHuman);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(IJapaneseKanji.withReading(wordIFurigana));
+        builder.add(particleTopic);
+        builder.add(personJapaneseKanji.withReading(personKanjiReadingPerson));
+        builder.add(desu);
+        builder.add(japanesePeriod);
+        JapaneseWord duplicateSentence = builder.getJapaneseWord(sentenceIAmAHuman);
+        
+        assertThat(builtSentence).hasSameHashCodeAs(duplicateSentence).isEqualTo(duplicateSentence);
+        assertThat(duplicateSentence).hasSameHashCodeAs(builtSentence).isEqualTo(builtSentence);
     }
 
     /**
@@ -125,11 +143,17 @@ public class JapaneseStringTest implements TestingConstants {
         builder.add(personJapaneseKanji.withReading(personKanjiReadingPerson));
         builder.add(desu);
         builder.add(japanesePeriod);
-        JapaneseWord builtSentence = builder.getJapaneseString(sentenceIAmAHuman);
-        JapaneseWord directSentence = new JapaneseWordTestImplementation(wordIKanji + particleTopic + personKanji + desu + japaneseQuestionMark, 
-                                                                         wordIFurigana + particleTopic + personKanjiReadingPerson + desu + japaneseQuestionMark, 
-                                                                         sentenceIAmAHuman);
-        assertThat(builtSentence).doesNotHaveSameHashCodeAs(directSentence).isNotEqualTo(directSentence);
-        assertThat(directSentence).doesNotHaveSameHashCodeAs(builtSentence).isNotEqualTo(builtSentence);
+        JapaneseWord builtSentence = builder.getJapaneseWord(sentenceIAmAHuman);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(IJapaneseKanji.withReading(wordIFurigana));
+        builder.add(particleTopic);
+        builder.add(personJapaneseKanji.withReading(personKanjiReadingPerson));
+        builder.add(desu);
+        builder.add(japaneseQuestionMark);
+        JapaneseWord changedSentence = builder.getJapaneseWord(sentenceIAmAHuman);
+
+        assertThat(builtSentence).doesNotHaveSameHashCodeAs(changedSentence).isNotEqualTo(changedSentence);
+        assertThat(changedSentence).doesNotHaveSameHashCodeAs(builtSentence).isNotEqualTo(builtSentence);
     }
 }

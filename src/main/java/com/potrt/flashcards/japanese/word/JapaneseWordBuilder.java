@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.string;
+package com.potrt.flashcards.japanese.word;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import com.potrt.flashcards.japanese.JapaneseKanji.JapaneseKanjiWithReading;
 
 /**
- * A {@link JapaneseStringBuilder} is used to create a {@link JapaneseString}.
+ * A {@link JapaneseWordBuilder} is used to create a {@link JapaneseWord}.
  */
-public class JapaneseStringBuilder {
+public class JapaneseWordBuilder {
     /**
      * The list of kana.
      * @implNote Each object in this list is either a {@link JapaneseKanjiWithReading} or a {@link String}.
@@ -38,12 +38,12 @@ public class JapaneseStringBuilder {
     }
 
     /**
-     * Generates the {@link JapaneseString} with a definition.
+     * Generates the {@link JapaneseWord} with a definition.
      * @param definition The meaning of the string.
-     * @return The {@link JapaneseString}.
+     * @return The {@link JapaneseWord}.
      */
-    public JapaneseString getJapaneseString(String definition) {
-        return new JapaneseString(this, definition);
+    public JapaneseWord getJapaneseWord(String definition) {
+        return new JapaneseWord(this, definition);
     }
 
     /**

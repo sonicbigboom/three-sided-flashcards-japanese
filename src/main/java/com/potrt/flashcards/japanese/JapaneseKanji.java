@@ -1,10 +1,12 @@
 package com.potrt.flashcards.japanese;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -21,7 +23,7 @@ public class JapaneseKanji {
     private String meaning;
     private List<Reading> readings = new LinkedList<>();
     private Map<String, Reading> readingsMap = new HashMap<>();
-    private List<JapaneseWord> words = new ArrayList<>();
+    private Set<JapaneseWord> words = new HashSet<>();
 
     /**
      * Creates a new {@link JapaneseKanji} with the kanji character and its meaning.
@@ -82,21 +84,21 @@ public class JapaneseKanji {
     }
 
     /**
-     * Gets the list of words that use this kanji.
-     * @return The list of words.
+     * Gets the set of {@link JapaneseWord}s that use this kanji.
+     * @return The set of {@link JapaneseWord}s.
      */
-    public List<JapaneseWord> getWords() {
+    public Set<JapaneseWord> getWords() {
         return words;
     }
 
     /**
-     * Gets the list of words that use this kanji with a specfic reading.
+     * Gets the set of {@link JapaneseWord}s that use this kanji with a specfic reading.
      * @param reading The kanji's reading.
-     * @return The list of words.
+     * @return The set of {@link JapaneseWord}s.
      */
-    public List<JapaneseWord> getWords(String reading) {
+    public Set<JapaneseWord> getWords(String reading) {
         if (!readingsMap.containsKey(reading)) {
-            return new ArrayList<>();
+            return new HashSet<>();
         }
         return readingsMap.get(reading).getWords();
     }
@@ -106,7 +108,7 @@ public class JapaneseKanji {
      * @return The list of furigana readings.
      */
     public List<String> getReadings() {
-        return readings.stream().map(Reading::getFurigana).collect(Collectors.toList());
+        return readings.stream().sorted(Comparator.comparingInt(Reading::numWords).reversed()).map(Reading::getFurigana).collect(Collectors.toList());
     }
 
     /**
@@ -235,7 +237,7 @@ public class JapaneseKanji {
      */
     private class Reading {
         private String furigana;
-        private List<JapaneseWord> words = new ArrayList<>();
+        private Set<JapaneseWord> words = new HashSet<>();
         private Score score = new Score();
 
         /**
@@ -264,9 +266,9 @@ public class JapaneseKanji {
 
         /**
          * Gets the words that use this reading.
-         * @return The list of words.
+         * @return The set of {@link JapaneseWord}s.
          */
-        public List<JapaneseWord> getWords() {
+        public Set<JapaneseWord> getWords() {
             return words;
         }
 

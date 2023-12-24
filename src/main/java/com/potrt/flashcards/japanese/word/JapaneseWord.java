@@ -39,7 +39,7 @@ public class JapaneseWord {
     protected List<JapaneseKanjiWithReading> kanjiList = new ArrayList<>();
 
     /**
-     * Creates a {@link JapaneseString} from a list of kana and a list of kanji.
+     * Creates a {@link JapaneseWord} from a list of kana and a list of kanji.
      * @param builder The {@link JapaneseWordBuilder} that is ready to create the string.
      * @param definition The meaning of the string.
      * @apiNote This method should only be called from within {@link JapaneseWordBuilder}.
@@ -50,6 +50,10 @@ public class JapaneseWord {
         this.definition = definition;
         this.kanaList = builder.kanaList;
         this.kanjiList = builder.kanjiList;
+
+        for (JapaneseKanjiWithReading reading : kanjiList) {
+            reading.assignWord(this);
+        }
     } 
 
     /**
@@ -96,7 +100,7 @@ public class JapaneseWord {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getKanji());
+        return Objects.hash(this.getKanji(), this.getFurigana());
     }
 
     @Override
@@ -106,7 +110,7 @@ public class JapaneseWord {
         }   
         JapaneseWord other = (JapaneseWord) obj;
 
-        return this.getKanji().equals(other.getKanji());
+        return this.getKanji().equals(other.getKanji()) && this.getFurigana().equals(other.getFurigana());
     }
 
     public class Representation {

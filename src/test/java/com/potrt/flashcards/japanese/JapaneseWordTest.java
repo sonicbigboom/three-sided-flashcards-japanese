@@ -1,6 +1,7 @@
 package com.potrt.flashcards.japanese;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -154,5 +155,19 @@ public class JapaneseWordTest implements TestingConstants {
 
         assertThat(builtSentence).doesNotHaveSameHashCodeAs(changedSentence).isNotEqualTo(changedSentence);
         assertThat(changedSentence).doesNotHaveSameHashCodeAs(builtSentence).isNotEqualTo(builtSentence);
+    }
+
+    /**
+     * Check that comparing 2 words that have the same kanji but different furigana returns an error.
+     */
+    @Test
+    public void invalidEqualityTest() {
+        builder.add(oneJapaneseKanji.withReading(wordOneFurigana));
+        builder.getJapaneseWord(wordOneDefinition);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(oneJapaneseKanji.withReading(wordOnePersonOneFurigana));
+
+        assertThatThrownBy(() -> builder.getJapaneseWord(wordOnePersonDefinition)).isInstanceOf(IllegalStateException.class);
     }
 }

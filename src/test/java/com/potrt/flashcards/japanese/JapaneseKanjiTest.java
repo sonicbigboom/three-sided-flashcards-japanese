@@ -1,7 +1,6 @@
 package com.potrt.flashcards.japanese;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -95,8 +94,11 @@ public class JapaneseKanjiTest implements TestingConstants {
     @Test
     public void addMultipleReadingsTest() {
         // First insert.
-        JapaneseKanjiWithReading kanjiWithReadingOnePerson = kanji.withReading(wordOnePersonPersonFurigana);
-        builder.add(kanjiWithReadingOnePerson);
+        JapaneseKanji kanjiOne = new JapaneseKanji(oneKanji, oneMeaning);
+        JapaneseKanjiWithReading kanjiOneWithReadingOnePerson = kanjiOne.withReading(wordOnePersonOneFurigana);
+        JapaneseKanjiWithReading kanjiPersonWithReadingOnePerson = kanji.withReading(wordOnePersonPersonFurigana);
+        builder.add(kanjiOneWithReadingOnePerson);
+        builder.add(kanjiPersonWithReadingOnePerson);
         JapaneseWord wordOnePerson = builder.getJapaneseWord(wordOnePersonDefinition);
 
         assertThat(kanji.getReadings()).hasSize(1);
@@ -152,17 +154,20 @@ public class JapaneseKanjiTest implements TestingConstants {
     @Test
     public void scoresTest() {
         // First insert.
-        JapaneseKanjiWithReading kanjiWithReadingOnePerson = kanji.withReading(wordOnePersonPersonFurigana);
-        builder.add(kanjiWithReadingOnePerson);
+        JapaneseKanji kanjiOne = new JapaneseKanji(oneKanji, oneMeaning);
+        JapaneseKanjiWithReading kanjiOneWithReadingOnePerson = kanjiOne.withReading(wordOnePersonOneFurigana);
+        JapaneseKanjiWithReading kanjiPersonWithReadingOnePerson = kanji.withReading(wordOnePersonPersonFurigana);
+        builder.add(kanjiOneWithReadingOnePerson);
+        builder.add(kanjiPersonWithReadingOnePerson);
         builder.getJapaneseWord(wordOnePersonDefinition);
 
-        kanjiWithReadingOnePerson.attempt(false);
-        kanjiWithReadingOnePerson.attempt(false);
-        kanjiWithReadingOnePerson.attempt(true);
-        kanjiWithReadingOnePerson.attempt(true);
-        kanjiWithReadingOnePerson.attempt(true);
+        kanjiPersonWithReadingOnePerson.attempt(false);
+        kanjiPersonWithReadingOnePerson.attempt(false);
+        kanjiPersonWithReadingOnePerson.attempt(true);
+        kanjiPersonWithReadingOnePerson.attempt(true);
+        kanjiPersonWithReadingOnePerson.attempt(true);
 
-        Score onePersonScore = kanjiWithReadingOnePerson.getScore();
+        Score onePersonScore = kanjiPersonWithReadingOnePerson.getScore();
         assertThat(onePersonScore.getSuccessRate()).isEqualTo(0.6);
         assertThat(kanji.getScore(wordOnePersonPersonFurigana)).isEqualTo(onePersonScore);
         assertThat(kanji.getScore().getSuccessRate()).isEqualTo(0.6);

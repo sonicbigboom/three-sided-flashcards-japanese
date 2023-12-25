@@ -100,7 +100,7 @@ public class JapaneseWord {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getKanji(), this.getFurigana());
+        return Objects.hash(this.getKanji());
     }
 
     @Override
@@ -110,7 +110,15 @@ public class JapaneseWord {
         }   
         JapaneseWord other = (JapaneseWord) obj;
 
-        return this.getKanji().equals(other.getKanji()) && this.getFurigana().equals(other.getFurigana());
+        if (!this.getKanji().equals(other.getKanji())) {
+            return false;
+        }
+
+        if (!this.getFurigana().equals(other.getFurigana())) {
+            throw new IllegalStateException("There should never be 2 JapaneseWords with the same Kanji, but different furigana.");
+        }
+
+        return true;
     }
 
     public class Representation {

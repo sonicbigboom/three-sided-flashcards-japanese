@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.word.verb.conjugation;
+package com.potrt.flashcards.japanese.verb.conjugation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import com.opencsv.exceptions.CsvValidationException;
 import com.potrt.flashcards.TestingConstants;
-import com.potrt.flashcards.japanese.word.verb.JapaneseVerbEnding;
-import com.potrt.flashcards.japanese.word.verb.JapaneseVerbForm;
+import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
+import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 
 
 public class JapaneseVerbConjugatorTest implements TestingConstants {

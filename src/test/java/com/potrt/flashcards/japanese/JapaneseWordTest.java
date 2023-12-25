@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.word;
+package com.potrt.flashcards.japanese;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
-import com.potrt.flashcards.japanese.JapaneseKanji;
 
 public class JapaneseWordTest implements TestingConstants {
     private JapaneseKanji oneJapaneseKanji;

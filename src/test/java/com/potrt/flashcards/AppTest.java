@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.potrt.flashcards.japanese.word.verb.JapaneseVerbEnding;
-import com.potrt.flashcards.japanese.word.verb.JapaneseVerbForm;
-import com.potrt.flashcards.japanese.word.verb.conjugation.JapaneseVerbConjugator;
+import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
+import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
+import com.potrt.flashcards.japanese.verb.conjugation.JapaneseVerbConjugator;
 
 public class AppTest implements TestingConstants {
 

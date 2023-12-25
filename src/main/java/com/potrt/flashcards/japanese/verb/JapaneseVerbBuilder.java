@@ -1,7 +1,7 @@
-package com.potrt.flashcards.japanese.word.verb;
+package com.potrt.flashcards.japanese.verb;
 
-import com.potrt.flashcards.japanese.word.JapaneseWordBuilder;
-import com.potrt.flashcards.japanese.word.verb.JapaneseVerb.JapaneseVerbType;
+import com.potrt.flashcards.japanese.JapaneseWordBuilder;
+import com.potrt.flashcards.japanese.verb.JapaneseVerb.JapaneseVerbType;
 
 public class JapaneseVerbBuilder extends JapaneseWordBuilder {
     /**

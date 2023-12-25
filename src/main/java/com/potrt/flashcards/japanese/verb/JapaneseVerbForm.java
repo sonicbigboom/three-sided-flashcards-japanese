@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.word.verb;
+package com.potrt.flashcards.japanese.verb;
 
 import org.apache.commons.text.WordUtils;
 

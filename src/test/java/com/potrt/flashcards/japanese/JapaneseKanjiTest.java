@@ -9,8 +9,6 @@ import org.junit.Test;
 import com.potrt.flashcards.Score;
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseKanji.JapaneseKanjiWithReading;
-import com.potrt.flashcards.japanese.word.JapaneseWord;
-import com.potrt.flashcards.japanese.word.JapaneseWordBuilder;
 
 public class JapaneseKanjiTest implements TestingConstants {
     private JapaneseKanji kanji;
@@ -156,7 +154,7 @@ public class JapaneseKanjiTest implements TestingConstants {
         // First insert.
         JapaneseKanjiWithReading kanjiWithReadingOnePerson = kanji.withReading(wordOnePersonPersonFurigana);
         builder.add(kanjiWithReadingOnePerson);
-        JapaneseWord wordOnePerson = builder.getJapaneseWord(wordOnePersonDefinition);
+        builder.getJapaneseWord(wordOnePersonDefinition);
 
         kanjiWithReadingOnePerson.attempt(false);
         kanjiWithReadingOnePerson.attempt(false);
@@ -173,7 +171,7 @@ public class JapaneseKanjiTest implements TestingConstants {
         JapaneseKanjiWithReading kanjiWithReadingPerson = kanji.withReading(personKanjiReadingPerson);
         builder = new JapaneseWordBuilder();
         builder.add(kanjiWithReadingPerson);
-        JapaneseWord wordPerson = builder.getJapaneseWord(wordPersonDefinition);
+        builder.getJapaneseWord(wordPersonDefinition);
 
         kanjiWithReadingPerson.attempt(true);
         kanjiWithReadingPerson.attempt(true);
@@ -190,7 +188,7 @@ public class JapaneseKanjiTest implements TestingConstants {
         JapaneseKanjiWithReading kanjiWithReadingAmPerson = kanji.withReading(personKanjiReadingPerson);
         builder = new JapaneseWordBuilder();
         builder.add(kanjiWithReadingAmPerson);
-        JapaneseWord wordAmPerson = builder.getJapaneseWord(wordAmPersonDefinition);
+        builder.getJapaneseWord(wordAmPersonDefinition);
 
         kanjiWithReadingAmPerson.attempt(false);
         kanjiWithReadingAmPerson.attempt(false);
@@ -223,6 +221,7 @@ public class JapaneseKanjiTest implements TestingConstants {
     @Test
     public void noWordAttemptTest() {
         JapaneseKanjiWithReading kanjiWithReadingPerson = kanji.withReading(personKanjiReadingPerson);
-        assertThatThrownBy(() -> kanjiWithReadingPerson.attempt(true)).isInstanceOf(IllegalStateException.class);
+        kanjiWithReadingPerson.attempt(true);
+        assertThat(kanjiWithReadingPerson.getScore().getAttempts()).isZero();
     }
 }

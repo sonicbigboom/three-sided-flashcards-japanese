@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.word.verb;
+package com.potrt.flashcards.japanese.verb;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.JapaneseKanji;
-import com.potrt.flashcards.japanese.word.JapaneseWord;
-import com.potrt.flashcards.japanese.word.JapaneseWordBuilder;
-import com.potrt.flashcards.japanese.word.verb.JapaneseVerb.JapaneseVerbType;
+import com.potrt.flashcards.japanese.JapaneseWord;
+import com.potrt.flashcards.japanese.JapaneseWordBuilder;
+import com.potrt.flashcards.japanese.verb.JapaneseVerb.JapaneseVerbType;
 
 public class JapaneseVerbTest implements TestingConstants {
     private JapaneseVerbBuilder builder;

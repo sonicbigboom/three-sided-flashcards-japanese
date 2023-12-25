@@ -1,4 +1,4 @@
-package com.potrt.flashcards.japanese.word;
+package com.potrt.flashcards.japanese;
 
 import java.util.ArrayList;
 import java.util.List;

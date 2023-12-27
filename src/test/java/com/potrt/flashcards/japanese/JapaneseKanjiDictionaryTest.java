@@ -20,8 +20,8 @@ public class JapaneseKanjiDictionaryTest implements TestingConstants {
      */
     @Test
     public void basicTest() {
-        kanjiDicitonary.put(personKanji, personMeaning);
-        JapaneseKanji kanji = kanjiDicitonary.get(personKanji);
+        JapaneseKanji kanji = kanjiDicitonary.create(personKanji, personMeaning);
+        assertThat(kanji).isSameAs(kanjiDicitonary.get(personKanji));
         assertThat(kanji.getKanji()).isEqualTo(personKanji);
         assertThat(kanji.getMeaning()).isEqualTo(personMeaning);
     }
@@ -31,8 +31,8 @@ public class JapaneseKanjiDictionaryTest implements TestingConstants {
      */
     @Test
     public void multiTest() {
-        kanjiDicitonary.put(personKanji, personMeaning);
-        kanjiDicitonary.put(IKanji, IMeaning);
+        kanjiDicitonary.create(personKanji, personMeaning);
+        kanjiDicitonary.create(IKanji, IMeaning);
 
         JapaneseKanji kanji = kanjiDicitonary.get(personKanji);
         assertThat(kanji.getKanji()).isEqualTo(personKanji);
@@ -48,12 +48,12 @@ public class JapaneseKanjiDictionaryTest implements TestingConstants {
      */
     @Test
     public void replaceMeaning() {
-        kanjiDicitonary.put(personKanji, personMeaning);
+        kanjiDicitonary.create(personKanji, personMeaning);
         JapaneseKanji kanji = kanjiDicitonary.get(personKanji);
         assertThat(kanji.getKanji()).isEqualTo(personKanji);
         assertThat(kanji.getMeaning()).isEqualTo(personMeaning);
 
-        kanjiDicitonary.put(personKanji, personMeaningAlternate);
+        kanjiDicitonary.create(personKanji, personMeaningAlternate);
         assertThat(kanji).isEqualTo(kanjiDicitonary.get(personKanji));
         assertThat(kanji.getKanji()).isEqualTo(personKanji);
         assertThat(kanji.getMeaning()).isEqualTo(personMeaningAlternate);

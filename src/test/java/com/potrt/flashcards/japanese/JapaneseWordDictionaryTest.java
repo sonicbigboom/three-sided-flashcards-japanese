@@ -10,6 +10,7 @@ import com.potrt.flashcards.TestingConstants;
 
 public class JapaneseWordDictionaryTest implements TestingConstants {
     private JapaneseWordDictionary wordDicitonary;
+    private JapaneseKanjiDictionary kanjiDictionary;
     private JapaneseWordBuilder builder;
     private JapaneseKanji kanjiOne;
     private JapaneseKanji kanjiPerson;
@@ -19,10 +20,11 @@ public class JapaneseWordDictionaryTest implements TestingConstants {
 
     @Before
     public void setup() {
-        wordDicitonary = new JapaneseWordDictionary();
+        kanjiDictionary = new JapaneseKanjiDictionary();
+        wordDicitonary = new JapaneseWordDictionary(kanjiDictionary);
 
-        kanjiOne = new JapaneseKanji(oneKanji, oneMeaning);
-        kanjiPerson = new JapaneseKanji(personKanji, personMeaning);
+        kanjiOne = kanjiDictionary.create(oneKanji, oneMeaning);
+        kanjiPerson = kanjiDictionary.create(personKanji, personMeaning);
 
         builder = new JapaneseWordBuilder();
         builder.add(kanjiOne.withReading(wordOneFurigana));
@@ -74,5 +76,17 @@ public class JapaneseWordDictionaryTest implements TestingConstants {
         assertThat(wordDicitonary.get(wordOne.getKanji())).isEqualTo(wordOne);
         assertThat(wordDicitonary.get(wordOnePerson.getKanji())).isEqualTo(wordOnePerson);
         assertThat(wordDicitonary.get(wordAmPerson.getKanji())).isEqualTo(wordAmPerson);
+    }
+
+    /**
+     * Test inputing word built with wrong kanji.
+     */
+    @Test
+    public void wrongKanjiTest() {
+        JapaneseKanji nonassociatedOneKanji = new JapaneseKanji(oneKanji, oneMeaning);
+        builder = new JapaneseWordBuilder();
+        builder.add(nonassociatedOneKanji.withReading(wordOneFurigana));
+        JapaneseWord nonassociatedWordOne = new JapaneseWord(builder, wordOneDefinition);
+        assertThatThrownBy(() -> wordDicitonary.put(nonassociatedWordOne)).isInstanceOf(IllegalArgumentException.class);
     }
 }

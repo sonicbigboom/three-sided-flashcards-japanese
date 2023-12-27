@@ -21,7 +21,7 @@ public final class JapaneseVerbConjugator {
     static {
         translationTables = new HashMap<>();
         try {
-            addTranslationTables("src\\main\\java\\com\\potrt\\flashcards\\japanese\\verb\\conjugation\\conjugation_tables.csv");
+            addTranslationTables("src/main/java/com/potrt/flashcards/japanese/verb/conjugation/conjugation_tables.csv");
         } catch (CsvValidationException | IOException e) {
             throw new IllegalStateException("The default japanese verb conjugation table could not be processed.");
         }

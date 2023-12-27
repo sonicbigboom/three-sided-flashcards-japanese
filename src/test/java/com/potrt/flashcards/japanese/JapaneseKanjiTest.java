@@ -77,7 +77,7 @@ public class JapaneseKanjiTest implements TestingConstants {
     public void addReadingTest() {
         JapaneseKanjiWithReading kanjiWithReading = kanji.withReading(wordOnePersonPersonFurigana);
         builder.add(kanjiWithReading);
-        JapaneseWord word = builder.getJapaneseWord(wordOnePersonDefinition);
+        JapaneseWord word = new JapaneseWord(builder, wordOnePersonDefinition);
         assertThat(kanji.getReadings()).hasSize(1);
         assertThat(kanji.getReadings().get(0)).isEqualTo(wordOnePersonPersonFurigana);
 
@@ -99,7 +99,7 @@ public class JapaneseKanjiTest implements TestingConstants {
         JapaneseKanjiWithReading kanjiPersonWithReadingOnePerson = kanji.withReading(wordOnePersonPersonFurigana);
         builder.add(kanjiOneWithReadingOnePerson);
         builder.add(kanjiPersonWithReadingOnePerson);
-        JapaneseWord wordOnePerson = builder.getJapaneseWord(wordOnePersonDefinition);
+        JapaneseWord wordOnePerson = new JapaneseWord(builder, wordOnePersonDefinition);
 
         assertThat(kanji.getReadings()).hasSize(1);
         assertThat(kanji.getReadings().get(0)).isEqualTo(wordOnePersonPersonFurigana);
@@ -115,7 +115,7 @@ public class JapaneseKanjiTest implements TestingConstants {
         JapaneseKanjiWithReading kanjiWithReadingPerson = kanji.withReading(personKanjiReadingPerson);
         builder = new JapaneseWordBuilder();
         builder.add(kanjiWithReadingPerson);
-        JapaneseWord wordPerson = builder.getJapaneseWord(wordPersonDefinition);
+        JapaneseWord wordPerson = new JapaneseWord(builder, wordPersonDefinition);
 
         assertThat(kanji.getReadings()).hasSize(2);
         assertThat(kanji.getReadings()).contains(wordOnePersonPersonFurigana).contains(personKanjiReadingPerson);
@@ -133,7 +133,7 @@ public class JapaneseKanjiTest implements TestingConstants {
         builder = new JapaneseWordBuilder();
         builder.add(kanjiWithReadingAmPerson);
         builder.add(desu);
-        JapaneseWord wordAmPerson = builder.getJapaneseWord(wordAmPersonDefinition);
+        JapaneseWord wordAmPerson = new JapaneseWord(builder, wordAmPersonDefinition);
 
         assertThat(kanji.getReadings()).hasSize(2);
         assertThat(kanji.getReadings().get(0)).isEqualTo(personKanjiReadingPerson);
@@ -159,7 +159,7 @@ public class JapaneseKanjiTest implements TestingConstants {
         JapaneseKanjiWithReading kanjiPersonWithReadingOnePerson = kanji.withReading(wordOnePersonPersonFurigana);
         builder.add(kanjiOneWithReadingOnePerson);
         builder.add(kanjiPersonWithReadingOnePerson);
-        builder.getJapaneseWord(wordOnePersonDefinition);
+        new JapaneseWord(builder, wordOnePersonDefinition);
 
         kanjiPersonWithReadingOnePerson.attempt(false);
         kanjiPersonWithReadingOnePerson.attempt(false);
@@ -176,7 +176,7 @@ public class JapaneseKanjiTest implements TestingConstants {
         JapaneseKanjiWithReading kanjiWithReadingPerson = kanji.withReading(personKanjiReadingPerson);
         builder = new JapaneseWordBuilder();
         builder.add(kanjiWithReadingPerson);
-        builder.getJapaneseWord(wordPersonDefinition);
+        new JapaneseWord(builder, wordPersonDefinition);
 
         kanjiWithReadingPerson.attempt(true);
         kanjiWithReadingPerson.attempt(true);
@@ -193,7 +193,7 @@ public class JapaneseKanjiTest implements TestingConstants {
         JapaneseKanjiWithReading kanjiWithReadingAmPerson = kanji.withReading(personKanjiReadingPerson);
         builder = new JapaneseWordBuilder();
         builder.add(kanjiWithReadingAmPerson);
-        builder.getJapaneseWord(wordAmPersonDefinition);
+        new JapaneseWord(builder, wordAmPersonDefinition);
 
         kanjiWithReadingAmPerson.attempt(false);
         kanjiWithReadingAmPerson.attempt(false);

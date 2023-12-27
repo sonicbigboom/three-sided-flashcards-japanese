@@ -38,17 +38,6 @@ public class JapaneseWordBuilder {
     }
 
     /**
-     * Generates the {@link JapaneseWord} with a definition.
-     * @param definition The meaning of the string.
-     * @return The {@link JapaneseWord}.
-     * @apiNote When creating a new word, the kanji should be unique.  
-     *          If another word with the same kanji but different furigana exists, the new word will not be linked to the JapaneseKanji.
-     */
-    public JapaneseWord getJapaneseWord(String definition) {
-        return new JapaneseWord(this, definition);
-    }
-
-    /**
      * Gets the string of kana made up of kanji and furigana.
      * @return A string of Japanese characters using both kanji and furigana.
      */

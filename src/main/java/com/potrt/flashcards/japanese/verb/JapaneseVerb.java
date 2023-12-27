@@ -1,5 +1,7 @@
 package com.potrt.flashcards.japanese.verb;
 
+import java.util.Objects;
+
 import com.potrt.flashcards.japanese.JapaneseWord;
 import com.potrt.flashcards.japanese.JapaneseWordBuilder;
 import com.potrt.flashcards.japanese.verb.conjugation.JapaneseVerbConjugator;
@@ -18,8 +20,8 @@ public class JapaneseVerb extends JapaneseWord {
     private JapaneseVerbType verbType;
 
     /**
-     * Creates a new {@link JapaneseVerb} with the kanji, furigana, the ending, the verb type, and the definition.
-     * @param builder The {@link JapaneseWordBuilder} that is ready to create the verb.
+     * Creates a new {@link JapaneseVerb} from a built Japanese dictionary-form verb and its definition and verb type.
+     * @param builder The {@link JapaneseWordBuilder} that has all the components of the dictionary-form verb.
      * @param definition The meaning of the string.
      * @param verbType The verb's type: godan, ichidan, or irregular.
      */
@@ -78,13 +80,21 @@ public class JapaneseVerb extends JapaneseWord {
     } 
 
     @Override
-    public boolean equals(Object other) {
-        return super.equals(other);
+    public int hashCode() {
+        return Objects.hash(getKanji(), getFurigana(), getDefinition(), verbType);
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object obj) {
+        if (!(obj instanceof JapaneseVerb)) {
+            return false;
+        }   
+        JapaneseVerb other = (JapaneseVerb) obj;
+
+        return getKanji().equals(other.getKanji()) 
+            && getFurigana().equals(other.getFurigana()) 
+            && getDefinition().equals(other.getDefinition())
+            && verbType.equals(other.verbType);
     }
 
     /**

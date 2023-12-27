@@ -26,17 +26,17 @@ public class JapaneseWordDictionaryTest implements TestingConstants {
 
         builder = new JapaneseWordBuilder();
         builder.add(kanjiOne.withReading(wordOneFurigana));
-        wordOne = builder.getJapaneseWord(wordOneDefinition);
+        wordOne = new JapaneseWord(builder, wordOneDefinition);
 
         builder = new JapaneseWordBuilder();
         builder.add(kanjiPerson.withReading(wordAmPersonFurigana));
         builder.add(desu);
-        wordAmPerson = builder.getJapaneseWord(wordAmPersonDefinition);
+        wordAmPerson = new JapaneseWord(builder, wordAmPersonDefinition);
 
         builder = new JapaneseWordBuilder();
         builder.add(kanjiOne.withReading(wordOnePersonOneFurigana));
         builder.add(kanjiPerson.withReading(wordOnePersonPersonFurigana));
-        wordOnePerson = builder.getJapaneseWord(wordOnePersonDefinition);
+        wordOnePerson = new JapaneseWord(builder, wordOnePersonDefinition);
     }
 
     /**

@@ -19,8 +19,11 @@ public class JapaneseKanji {
     private static Logger logger = Logger.getLogger(JapaneseKanji.class.getName());
     private Character kanji;
     private String meaning;
+    /**
+     * A map pairing furigana to {@link Reading}.
+     */
     private Map<String, Reading> readingsMap = new HashMap<>();
-    private HashMap<String, JapaneseWord> words = new HashMap<>();
+    private Map<String, JapaneseWord> words = new HashMap<>();
 
     /**
      * Creates a new {@link JapaneseKanji} with the kanji character and its meaning.
@@ -198,6 +201,15 @@ public class JapaneseKanji {
         public JapaneseKanji getJapaneseKanji() {
             return JapaneseKanji.this;
         }
+
+        /**
+         * Attached a {@link JapaneseWord} to the kanji and reading.
+         * @param japaneseWord
+         */
+        void attachWord(JapaneseWord word) {
+            Reading reading = readingsMap.computeIfAbsent(furigana, Reading::new);
+            reading.attachWord(word);
+        }
     }
 
     /**
@@ -241,19 +253,11 @@ public class JapaneseKanji {
         }
 
         /**
-         * Adds a new word for this reading.
+         * Attaches a word to this reading.
          * @param word The new word.
          */
-        void addWord(JapaneseWord word) {
+        void attachWord(JapaneseWord word) {
             words.put(word.getKanji(), word);
-        }
-
-        /**
-         * Removes a word from this reading.
-         * @param kanji The kanji for the word to remove.
-         */
-        void removeWord(String kanji) {
-            words.remove(kanji);
         }
 
         /**

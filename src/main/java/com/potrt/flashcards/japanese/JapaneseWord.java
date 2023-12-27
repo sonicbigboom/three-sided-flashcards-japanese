@@ -84,6 +84,15 @@ public class JapaneseWord {
     }
 
     /**
+     * Attaches the {@link JapaneseWord} to all of the {@link JapaneseKanji} it is made of.
+     */
+    void attachToKanji() {
+        for (JapaneseKanjiWithReading reading : kanjiList) {
+            reading.attachWord(this);
+        }
+    }
+
+    /**
      * Adds a new successful or failed attempt for each kanji.
      * @param succeeded If the attempt was successful.
      */

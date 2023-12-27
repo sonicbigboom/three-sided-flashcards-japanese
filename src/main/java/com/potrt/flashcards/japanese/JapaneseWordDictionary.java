@@ -41,6 +41,8 @@ public class JapaneseWordDictionary {
                 String.format("Tried to add word '%s' when a word with this kanji already exists in the dictionary.", 
                     word.getKanji()));
         }
+
+        word.attachToKanji();
         wordMap.put(word.getKanji(), word);
     }
 

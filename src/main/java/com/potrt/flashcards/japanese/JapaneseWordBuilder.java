@@ -45,15 +45,6 @@ public class JapaneseWordBuilder {
      *          If another word with the same kanji but different furigana exists, the new word will not be linked to the JapaneseKanji.
      */
     public JapaneseWord getJapaneseWord(String definition) {
-        // TODO: May need to replace definition.
-        String kanji = this.getKanji();
-        String furigana = this.getFurigana();
-        for (JapaneseKanjiWithReading reading : kanjiList) {
-            JapaneseWord word = reading.get(kanji);
-            if (word != null && word.getFurigana().equals(furigana)) {
-                return word;
-            }
-        }
         return new JapaneseWord(this, definition);
     }
 

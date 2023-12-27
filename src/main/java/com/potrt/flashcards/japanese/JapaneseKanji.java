@@ -140,15 +140,6 @@ public class JapaneseKanji {
     }
 
     /**
-     * Removes a {@link JapaneseWord} from this reading.
-     * @param word The kanji for the word to remove from this reading.
-     */
-    void disassociate(String kanji) {
-        readingsMap.get(words.get(kanji).getFurigana()).removeWord(kanji);
-        words.remove(kanji);
-    }
-
-    /**
      * A {@link JapaneseKanjiWithReading} represent a specfic reading of a kanji.
      * @apiNote When creating a new {@link JapaneseWord}, the function {@code updateWithWord()} should be used.
      */
@@ -206,55 +197,6 @@ public class JapaneseKanji {
          */
         public JapaneseKanji getJapaneseKanji() {
             return JapaneseKanji.this;
-        }
-
-        /**
-         * Updates the {@link JapaneseKanji} with the word it is used in.
-         * @param word The word.
-         */
-        void associate(JapaneseWord word) {
-            // Gets the reading.
-            Reading reading;
-            if (readingsMap.containsKey(furigana)) {
-                reading = readingsMap.get(furigana);
-            } else {
-                reading = new Reading(furigana);
-                readingsMap.put(furigana, reading);
-            }
-
-            if (words.containsKey(word.getKanji())) {
-                if (logger.isLoggable(Level.WARNING)) {
-                    if (word.getFurigana().equals(words.get(word.getKanji()).getFurigana())) {
-                        logger.warning(String.format("For kanji '%s', a word '%s' with furigana '%s' is already associated, duplicate instance will not replace association.",
-                                                    kanji, word.getKanji(), word.getFurigana()));
-                    } else {
-                        logger.warning(String.format("For kanji '%s', a word '%s' with furigana '%s' is associated, duplicate instance with furigana '%s' will replace association.", 
-                                                    kanji, word.getKanji(), words.get(word.getKanji()).getFurigana(), word.getFurigana()));
-                    }
-                }
-                return;
-            }
-            
-            // Adds the word to the kanji and the reading.
-            words.put(word.getKanji(), word);
-            reading.addWord(word);
-        }
-
-        /**
-         * Removes a {@link JapaneseWord} from this reading.
-         * @param word The kanji for the word to remove from this reading.
-         */
-        void disassociate(String kanji) {
-            JapaneseKanji.this.disassociate(kanji);
-        }
-
-        /**
-         * Gets the associated {@link JapaneseWord}.
-         * @param kanji The kanji for the word.
-         * @return The kanji, or null if nothing exists.
-         */
-        JapaneseWord get(String kanji) {
-            return words.get(kanji);
         }
     }
 

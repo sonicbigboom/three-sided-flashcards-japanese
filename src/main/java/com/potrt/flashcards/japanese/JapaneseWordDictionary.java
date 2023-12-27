@@ -31,9 +31,15 @@ public class JapaneseWordDictionary {
             if (!kanjiDictionary.contains(reading.getJapaneseKanji())) {
                 throw new IllegalArgumentException(
                     String.format("Tried to add word '%s' with kanji '%c' that is not found in the associated KanjiDictionary.", 
-                    word.getKanji(), 
-                    reading.getKanji()));
+                        word.getKanji(), 
+                        reading.getKanji()));
             }
+        }
+
+        if (wordMap.containsKey(word.getKanji())) {
+            throw new IllegalStateException(
+                String.format("Tried to add word '%s' when a word with this kanji already exists in the dictionary.", 
+                    word.getKanji()));
         }
         wordMap.put(word.getKanji(), word);
     }
@@ -45,5 +51,14 @@ public class JapaneseWordDictionary {
      */
     public JapaneseWord get(String kanji) {
         return wordMap.get(kanji);
+    }
+
+    /**
+     * Checks whether the dictionary contains a word with the given kanji.
+     * @param kanji The kanji to check.
+     * @return Whether the dictionary has a word with this kanji.
+     */
+    public boolean contains(String kanji) {
+        return wordMap.containsKey(kanji);
     }
 }

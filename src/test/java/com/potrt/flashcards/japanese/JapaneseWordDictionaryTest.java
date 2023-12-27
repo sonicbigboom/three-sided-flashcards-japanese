@@ -65,17 +65,19 @@ public class JapaneseWordDictionaryTest implements TestingConstants {
 
 
     /**
-     * Tests adding and getting items from the dicitonary.
+     * Test attempting to put the wrong word into a dictionary.
      */
     @Test
-    public void basicReplaceTest() {
+    public void basicInvalidPutTest() {
         wordDicitonary.put(wordOne);
         wordDicitonary.put(wordOnePerson);
         wordDicitonary.put(wordAmPerson);
 
-        assertThat(wordDicitonary.get(wordOne.getKanji())).isEqualTo(wordOne);
-        assertThat(wordDicitonary.get(wordOnePerson.getKanji())).isEqualTo(wordOnePerson);
-        assertThat(wordDicitonary.get(wordAmPerson.getKanji())).isEqualTo(wordAmPerson);
+        builder = new JapaneseWordBuilder();
+        builder.add(kanjiOne.withReading(wordOneAlternateFurigana));
+        JapaneseWord invalidDuplicateWordOne = new JapaneseWord(builder, wordOneDefinition);
+
+        assertThatThrownBy(() -> wordDicitonary.put(invalidDuplicateWordOne)).isInstanceOf(IllegalStateException.class);
     }
 
     /**

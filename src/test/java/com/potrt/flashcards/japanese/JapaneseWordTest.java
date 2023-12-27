@@ -1,7 +1,6 @@
 package com.potrt.flashcards.japanese;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -158,16 +157,69 @@ public class JapaneseWordTest implements TestingConstants {
     }
 
     /**
-     * Check that comparing 2 words that have the same kanji but different furigana returns an error.
+     * Check that creating a duplicate returns the same instance
      */
     @Test
-    public void invalidEqualityTest() {
+    public void validDuplicateTest() {
         builder.add(oneJapaneseKanji.withReading(wordOneFurigana));
-        builder.getJapaneseWord(wordOneDefinition);
+        JapaneseWord original = builder.getJapaneseWord(wordOneDefinition);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(oneJapaneseKanji.withReading(wordOneFurigana));
+
+        JapaneseWord duplicate = builder.getJapaneseWord(wordOneDefinition);
+
+        assertThat(original).isSameAs(duplicate);
+    }
+
+    /**
+     * Check that creating a second word with the same kanji but different furigana does not replace.
+     */
+    @Test
+    public void invalidReplacementTest() {
+        builder.add(oneJapaneseKanji.withReading(wordOneFurigana));
+        JapaneseWord original = builder.getJapaneseWord(wordOneDefinition);
 
         builder = new JapaneseWordBuilder();
         builder.add(oneJapaneseKanji.withReading(wordOnePersonOneFurigana));
 
-        assertThatThrownBy(() -> builder.getJapaneseWord(wordOnePersonDefinition)).isInstanceOf(IllegalStateException.class);
+        JapaneseWord replacement = builder.getJapaneseWord(wordOnePersonDefinition);
+
+        for (JapaneseWord word : oneJapaneseKanji.getWords()) {
+            assertThat(word).isSameAs(original).isNotSameAs(replacement);
+        }
+    }
+
+    /**
+     * Check that destroying the original before creating a second word with the same kanji replaces.
+     */
+    @Test
+    public void validReplacementTest() {
+        builder.add(oneJapaneseKanji.withReading(wordOneFurigana));
+        JapaneseWord original = builder.getJapaneseWord(wordOneDefinition);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(oneJapaneseKanji.withReading(wordOnePersonOneFurigana));
+
+        JapaneseWord replacement = builder.getJapaneseWord(wordOnePersonDefinition);
+
+        for (JapaneseWord word : oneJapaneseKanji.getWords()) {
+            assertThat(word).isSameAs(original).isNotSameAs(replacement);
+        }
+
+        oneJapaneseKanji.withReading(replacement.getFurigana()).disassociate(replacement.getKanji());
+        replacement = builder.getJapaneseWord(wordOnePersonDefinition);
+
+        for (JapaneseWord word : oneJapaneseKanji.getWords()) {
+            assertThat(word).isSameAs(replacement).isNotSameAs(original);
+        }
+
+        for (JapaneseWord word : oneJapaneseKanji.getWords(wordOneFurigana)) {
+            assertThat(word).isSameAs(replacement).isNotSameAs(original);
+        }
+
+        for (JapaneseWord word : oneJapaneseKanji.getWords(wordOnePersonOneFurigana)) {
+            assertThat(word).isSameAs(replacement).isNotSameAs(original);
+        }
     }
 }

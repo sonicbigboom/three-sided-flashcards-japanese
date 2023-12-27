@@ -3,7 +3,6 @@ package com.potrt.flashcards.japanese;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,9 +19,8 @@ public class JapaneseKanji {
     private static Logger logger = Logger.getLogger(JapaneseKanji.class.getName());
     private Character kanji;
     private String meaning;
-    private List<Reading> readings = new LinkedList<>();
     private Map<String, Reading> readingsMap = new HashMap<>();
-    private Set<JapaneseWord> words = new HashSet<>();
+    private HashMap<String, JapaneseWord> words = new HashMap<>();
 
     /**
      * Creates a new {@link JapaneseKanji} with the kanji character and its meaning.
@@ -87,7 +85,7 @@ public class JapaneseKanji {
      * @return The set of {@link JapaneseWord}s.
      */
     public Set<JapaneseWord> getWords() {
-        return words;
+        return new HashSet<>(words.values());
     }
 
     /**
@@ -107,7 +105,7 @@ public class JapaneseKanji {
      * @return The list of furigana readings.
      */
     public List<String> getReadings() {
-        return readings.stream().sorted(Comparator.comparingInt(Reading::numWords).reversed()).map(Reading::getFurigana).collect(Collectors.toList());
+        return readingsMap.values().stream().sorted(Comparator.comparingInt(Reading::numWords).reversed()).map(Reading::getFurigana).collect(Collectors.toList());
     }
 
     /**
@@ -125,7 +123,7 @@ public class JapaneseKanji {
      * @apiNote This {@link Score} should only be used for getting information.  Any edits will not impact this kanji's score.
      */
     public Score getScore() {
-        return new Score(readings.stream().map(Reading::getScore).collect(Collectors.toList()));
+        return new Score(readingsMap.values().stream().map(Reading::getScore).collect(Collectors.toList()));
     }
 
     /**
@@ -139,6 +137,15 @@ public class JapaneseKanji {
             return new Score();
         }
         return readingsMap.get(reading).getScore();
+    }
+
+    /**
+     * Removes a {@link JapaneseWord} from this reading.
+     * @param word The kanji for the word to remove from this reading.
+     */
+    void disassociate(String kanji) {
+        readingsMap.get(words.get(kanji).getFurigana()).removeWord(kanji);
+        words.remove(kanji);
     }
 
     /**
@@ -205,29 +212,49 @@ public class JapaneseKanji {
          * Updates the {@link JapaneseKanji} with the word it is used in.
          * @param word The word.
          */
-        void assignWord(JapaneseWord word) {
+        void associate(JapaneseWord word) {
             // Gets the reading.
-            int i;
             Reading reading;
             if (readingsMap.containsKey(furigana)) {
                 reading = readingsMap.get(furigana);
-                i = readings.indexOf(reading);
-                readings.remove(reading);
             } else {
                 reading = new Reading(furigana);
                 readingsMap.put(furigana, reading);
-                i = readings.size();
+            }
+
+            if (words.containsKey(word.getKanji())) {
+                if (logger.isLoggable(Level.WARNING)) {
+                    if (word.getFurigana().equals(words.get(word.getKanji()).getFurigana())) {
+                        logger.warning(String.format("For kanji '%s', a word '%s' with furigana '%s' is already associated, duplicate instance will not replace association.",
+                                                    kanji, word.getKanji(), word.getFurigana()));
+                    } else {
+                        logger.warning(String.format("For kanji '%s', a word '%s' with furigana '%s' is associated, duplicate instance with furigana '%s' will replace association.", 
+                                                    kanji, word.getKanji(), words.get(word.getKanji()).getFurigana(), word.getFurigana()));
+                    }
+                }
+                return;
             }
             
             // Adds the word to the kanji and the reading.
-            words.add(word);
+            words.put(word.getKanji(), word);
             reading.addWord(word);
+        }
 
-            // Resort the readings.
-            while (i != 0 && readings.get(i - 1).numWords() < reading.numWords()) {
-                i--;
-            }
-            readings.add(i, reading);
+        /**
+         * Removes a {@link JapaneseWord} from this reading.
+         * @param word The kanji for the word to remove from this reading.
+         */
+        void disassociate(String kanji) {
+            JapaneseKanji.this.disassociate(kanji);
+        }
+
+        /**
+         * Gets the associated {@link JapaneseWord}.
+         * @param kanji The kanji for the word.
+         * @return The kanji, or null if nothing exists.
+         */
+        JapaneseWord get(String kanji) {
+            return words.get(kanji);
         }
     }
 
@@ -236,14 +263,14 @@ public class JapaneseKanji {
      */
     private class Reading {
         private String furigana;
-        private Set<JapaneseWord> words = new HashSet<>();
+        private Map<String, JapaneseWord> words = new HashMap<>();
         private Score score = new Score();
 
         /**
          * Creates a new reading from the furigana reading.
          * @param reading The furigana reading.
          */
-        public Reading(String reading) {
+        Reading(String reading) {
             this.furigana = reading;
         }
 
@@ -251,7 +278,7 @@ public class JapaneseKanji {
          * Gets the furigana reading.
          * @return The furigana reading.
          */
-        public String getFurigana() {
+        String getFurigana() {
             return furigana;
         }
 
@@ -259,7 +286,7 @@ public class JapaneseKanji {
          * Gets the number of words that use this reading.
          * @return The number of words.
          */
-        public int numWords() {
+        int numWords() {
             return words.size();
         }
 
@@ -267,23 +294,31 @@ public class JapaneseKanji {
          * Gets the words that use this reading.
          * @return The set of {@link JapaneseWord}s.
          */
-        public Set<JapaneseWord> getWords() {
-            return words;
+        Set<JapaneseWord> getWords() {
+            return new HashSet<>(words.values());
         }
 
         /**
          * Adds a new word for this reading.
          * @param word The new word.
          */
-        public void addWord(JapaneseWord word) {
-            words.add(word);
+        void addWord(JapaneseWord word) {
+            words.put(word.getKanji(), word);
+        }
+
+        /**
+         * Removes a word from this reading.
+         * @param kanji The kanji for the word to remove.
+         */
+        void removeWord(String kanji) {
+            words.remove(kanji);
         }
 
         /**
          * Adds a new successful or failed attempt.
          * @param succeeded If the attempt was successful.
          */
-        public void attempt(boolean succeeded) {
+        void attempt(boolean succeeded) {
             score.attempt(succeeded);
         }
 
@@ -291,7 +326,7 @@ public class JapaneseKanji {
          * Gets the {@link Score} for the reading.
          * @return The score.
          */
-        public Score getScore() {
+        Score getScore() {
             return score;
         }
     }

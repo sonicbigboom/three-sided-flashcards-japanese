@@ -52,7 +52,7 @@ public class JapaneseWord {
         this.kanjiList = builder.kanjiList;
 
         for (JapaneseKanjiWithReading reading : kanjiList) {
-            reading.assignWord(this);
+            reading.associate(this);
         }
     } 
 
@@ -98,6 +98,18 @@ public class JapaneseWord {
         }
     }
 
+    /**
+     * Removes the words associations to {@link JapaneseKanji}.
+     * @apiNote An instance that called this method should no longer be used.
+     */
+    public void destroy() {
+        for (JapaneseKanjiWithReading k : kanjiList) {
+            k.disassociate(this.getKanji());
+        }
+        kanaList = null;
+        kanjiList = null;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(this.getKanji());
@@ -110,15 +122,7 @@ public class JapaneseWord {
         }   
         JapaneseWord other = (JapaneseWord) obj;
 
-        if (!this.getKanji().equals(other.getKanji())) {
-            return false;
-        }
-
-        if (!this.getFurigana().equals(other.getFurigana())) {
-            throw new IllegalStateException("There should never be 2 JapaneseWords with the same Kanji, but different furigana.");
-        }
-
-        return true;
+        return this.getKanji().equals(other.getKanji());
     }
 
     public class Representation {

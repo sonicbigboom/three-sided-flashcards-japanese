@@ -19,6 +19,8 @@ public interface TestingConstants {
     public static final String oneMeaning = "one";
     public static final String wordOneKanji = "一つ";
     public static final String wordOneFurigana = "ひとつ";
+    public static final String wordOneAlternateKanji = "一";
+    public static final String wordOneAlternateFurigana = "いち";
     public static final String wordOneDefinition = "one";
     public static final String wordOnePersonOneFurigana = "ひと";
     public static final String wordOnePersonPersonFurigana = "り";

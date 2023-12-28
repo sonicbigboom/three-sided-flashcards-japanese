@@ -257,6 +257,7 @@ public class JapaneseKanji {
          * @param word The new word.
          */
         void attachWord(JapaneseWord word) {
+            JapaneseKanji.this.words.put(word.getKanji(), word);
             words.put(word.getKanji(), word);
         }
 

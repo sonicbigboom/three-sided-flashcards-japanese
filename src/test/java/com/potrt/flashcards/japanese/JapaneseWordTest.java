@@ -98,12 +98,15 @@ public class JapaneseWordTest implements TestingConstants {
     public void attemptTest() {
         builder.add(oneJapaneseKanji.withReading(wordOneFurigana));
         builder.add(personJapaneseKanji.withReading(wordOnePersonPersonFurigana));
-        JapaneseWord string = new JapaneseWord(builder, wordOnePersonDefinition);
-        string.attempt(true);
-        string.attempt(false);
-        string.attempt(false);
-        string.attempt(true);
-        string.attempt(true);
+        JapaneseWord word = new JapaneseWord(builder, wordOnePersonDefinition);
+        word.attachToKanji();
+
+        word.attempt(true);
+        word.attempt(false);
+        word.attempt(false);
+        word.attempt(true);
+        word.attempt(true);
+
         assertThat(oneJapaneseKanji.getScore().getSuccessRate()).isEqualTo(0.6);
         assertThat(personJapaneseKanji.getScore().getSuccessRate()).isEqualTo(0.6);
     }

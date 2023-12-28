@@ -24,9 +24,10 @@ public class JapaneseWordDictionary {
     /**
      * Adds a new {@link JapaneseWord} to the dictionary, with its kanji as a key.
      * @param word The new {@link JapaneseWord}.
+     * @returns The {@link JapaneseWord} that is added.
      * @throws IllegalArgumentException Thrown if a word has kanji not found in the associated kanji dictionary.
      */
-    public void put(JapaneseWord word) {
+    public JapaneseWord put(JapaneseWord word) {
         for (JapaneseKanjiWithReading reading : word.kanjiList) {
             if (!kanjiDictionary.contains(reading.getJapaneseKanji())) {
                 throw new IllegalArgumentException(
@@ -36,14 +37,14 @@ public class JapaneseWordDictionary {
             }
         }
 
-        if (wordMap.containsKey(word.getKanji())) {
+        if (contains(word.getKanji())) {
             throw new IllegalStateException(
                 String.format("Tried to add word '%s' when a word with this kanji already exists in the dictionary.", 
                     word.getKanji()));
         }
 
         word.attachToKanji();
-        wordMap.put(word.getKanji(), word);
+        return wordMap.put(word.getKanji(), word);
     }
 
     /**
@@ -62,5 +63,22 @@ public class JapaneseWordDictionary {
      */
     public boolean contains(String kanji) {
         return wordMap.containsKey(kanji);
+    }
+
+    /**
+     * Replaces the current values of a word with the value of the given word.  Does not change original reference.
+     * If the dictionary does not already have this word, adds the given word as a new word.
+     * @param word The {@link JapaneseWord} to replace the old word with.
+     * @return The {@link JapaneseWord} that is inside the dictionary.
+     */
+    public JapaneseWord replace(JapaneseWord word) {
+        if (!contains(word.getKanji())) {
+            return put(word);
+        }
+
+        JapaneseWord current = get(word.getKanji());
+        current.replace(word);
+        current.attachToKanji();
+        return current;
     }
 }

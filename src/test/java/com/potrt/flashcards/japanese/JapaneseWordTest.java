@@ -157,5 +157,7 @@ public class JapaneseWordTest implements TestingConstants {
 
         assertThat(builtSentence).doesNotHaveSameHashCodeAs(changedSentence).isNotEqualTo(changedSentence);
         assertThat(changedSentence).doesNotHaveSameHashCodeAs(builtSentence).isNotEqualTo(builtSentence);
+        
+        assertThat(builtSentence).isNotEqualTo(sentenceIAmAHuman);
     }
 }

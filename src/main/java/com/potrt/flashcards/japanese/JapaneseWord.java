@@ -84,15 +84,6 @@ public class JapaneseWord {
     }
 
     /**
-     * Attaches the {@link JapaneseWord} to all of the {@link JapaneseKanji} it is made of.
-     */
-    void attachToKanji() {
-        for (JapaneseKanjiWithReading reading : kanjiList) {
-            reading.attachWord(this);
-        }
-    }
-
-    /**
      * Adds a new successful or failed attempt for each kanji.
      * @param succeeded If the attempt was successful.
      */
@@ -119,6 +110,26 @@ public class JapaneseWord {
             && getDefinition().equals(other.getDefinition());
     }
 
+    /**
+     * Replaces the original word values with new word values.  Also unattaches the word with all prior kanji readings.
+     * @param word The {@link JapaneseWord} values to replace with.
+     */
+    void replace(JapaneseWord word) {
+        // TODO: Implement replace.
+    }
+
+    /**
+     * Attaches the {@link JapaneseWord} to all of the {@link JapaneseKanji} it is made of.
+     */
+    void attachToKanji() {
+        for (JapaneseKanjiWithReading reading : kanjiList) {
+            reading.attachWord(this);
+        }
+    }
+
+    /**
+     * A representation of a {@link JapaneseWord} that holds the its kanji, furigana, and definition for the form it is taking like conjugation.
+     */
     public class Representation {
         private String kanji;
         private String furigana;

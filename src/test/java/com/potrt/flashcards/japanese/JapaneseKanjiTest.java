@@ -238,4 +238,25 @@ public class JapaneseKanjiTest implements TestingConstants {
         kanjiWithReadingPerson.attempt(true);
         assertThat(kanjiWithReadingPerson.getScore().getAttempts()).isZero();
     }
+
+    /**
+     * Test detaching a word from a kanji.
+     */
+    @Test
+    public void detachTest() {
+        JapaneseKanji kanjiOne = new JapaneseKanji(oneKanji, oneMeaning);
+        JapaneseKanjiWithReading kanjiOneWithReadingOnePerson = kanjiOne.withReading(wordOnePersonOneFurigana);
+        JapaneseKanjiWithReading kanjiPersonWithReadingOnePerson = kanji.withReading(wordOnePersonPersonFurigana);
+        builder.add(kanjiOneWithReadingOnePerson);
+        builder.add(kanjiPersonWithReadingOnePerson);
+        JapaneseWord wordOnePerson = new JapaneseWord(builder, wordOnePersonDefinition);
+        kanjiOneWithReadingOnePerson.attachWord(wordOnePerson);
+        kanjiPersonWithReadingOnePerson.attachWord(wordOnePerson);
+
+        assertThat(kanjiOne.numWords()).isEqualTo(1);
+
+        kanjiOneWithReadingOnePerson.detachWord(wordOnePerson);
+
+        assertThat(kanjiOne.numWords()).isZero();
+    }
 }

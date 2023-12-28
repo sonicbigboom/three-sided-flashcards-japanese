@@ -112,6 +112,25 @@ public class JapaneseWordTest implements TestingConstants {
     }
 
     /**
+     * Test detaching.
+     */
+    @Test
+    public void detachTest() {
+        builder.add(oneJapaneseKanji.withReading(wordOneFurigana));
+        builder.add(personJapaneseKanji.withReading(wordOnePersonPersonFurigana));
+        JapaneseWord word = new JapaneseWord(builder, wordOnePersonDefinition);
+        word.attachToKanji();
+
+        assertThat(oneJapaneseKanji.numWords(wordOneFurigana)).isEqualTo(1);
+        assertThat(personJapaneseKanji.numWords(wordOnePersonPersonFurigana)).isEqualTo(1);
+    
+        word.detachFromKanji();
+
+        assertThat(oneJapaneseKanji.numWords(wordOneFurigana)).isZero();
+        assertThat(personJapaneseKanji.numWords(wordOnePersonPersonFurigana)).isZero();
+    }
+
+    /**
      * Check that hash equality works.
      */
     @Test
@@ -157,7 +176,7 @@ public class JapaneseWordTest implements TestingConstants {
 
         assertThat(builtSentence).doesNotHaveSameHashCodeAs(changedSentence).isNotEqualTo(changedSentence);
         assertThat(changedSentence).doesNotHaveSameHashCodeAs(builtSentence).isNotEqualTo(builtSentence);
-        
+
         assertThat(builtSentence).isNotEqualTo(sentenceIAmAHuman);
     }
 }

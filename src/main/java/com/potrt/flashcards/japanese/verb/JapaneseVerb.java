@@ -80,6 +80,21 @@ public class JapaneseVerb extends JapaneseWord {
     } 
 
     @Override
+    protected void replace(JapaneseWord word) {
+        super.replace(word);
+
+        if (!(word instanceof JapaneseVerb)) {
+            return;
+        }
+
+        JapaneseVerb verb = (JapaneseVerb) word;
+        kanjiBase = kanji.substring(0, kanji.length()-1);
+        furiganaBase = furigana.substring(0, furigana.length()-1);
+        ending = JapaneseVerbEnding.from(kanji.substring(kanji.length()-1));
+        verbType = verb.verbType;
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(getKanji(), getFurigana(), getDefinition(), verbType);
     }

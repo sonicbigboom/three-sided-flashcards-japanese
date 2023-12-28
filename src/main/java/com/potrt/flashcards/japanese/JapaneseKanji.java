@@ -203,12 +203,23 @@ public class JapaneseKanji {
         }
 
         /**
-         * Attached a {@link JapaneseWord} to the kanji and reading.
+         * Attach a {@link JapaneseWord} to the kanji and reading.
          * @param japaneseWord
          */
         void attachWord(JapaneseWord word) {
             Reading reading = readingsMap.computeIfAbsent(furigana, Reading::new);
             reading.attachWord(word);
+        }
+
+        /**
+         * Detach a {@link JapaneseWord} from the kanji and reading.
+         * @param japaneseWord
+         */
+        void detachWord(JapaneseWord word) {
+            Reading reading = readingsMap.get(furigana);
+            if (reading == null) { return; }
+            
+            reading.detachWord(word);
         }
     }
 
@@ -259,6 +270,15 @@ public class JapaneseKanji {
         void attachWord(JapaneseWord word) {
             JapaneseKanji.this.words.put(word.getKanji(), word);
             words.put(word.getKanji(), word);
+        }
+
+        /**
+         * Detaches a word to this reading.
+         * @param word The new word.
+         */
+        void detachWord(JapaneseWord word) {
+            JapaneseKanji.this.words.remove(word.getKanji());
+            words.remove(word.getKanji());
         }
 
         /**

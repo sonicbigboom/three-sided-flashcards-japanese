@@ -113,9 +113,21 @@ public class JapaneseWord {
     /**
      * Replaces the original word values with new word values.  Also unattaches the word with all prior kanji readings.
      * @param word The {@link JapaneseWord} values to replace with.
+     * @apiNote This should be overriden by any sub-children to copy any additional relevant values.  The child can and should make a super call.
      */
-    void replace(JapaneseWord word) {
-        // TODO: Implement replace.
+    protected void replace(JapaneseWord word) {
+        if (!getKanji().equals(word.getKanji())) {
+            throw new IllegalArgumentException(
+                String.format("Attempted to replace word with kanji '%s' with a word with kanji '%s'.  These must match.", 
+                    getKanji(), 
+                    word.getKanji()));
+        }
+
+        detachFromKanji();
+        furigana = word.getFurigana();
+        definition = word.getDefinition();
+        kanaList = word.kanaList;
+        kanjiList = word.kanjiList;
     }
 
     /**
@@ -124,6 +136,15 @@ public class JapaneseWord {
     void attachToKanji() {
         for (JapaneseKanjiWithReading reading : kanjiList) {
             reading.attachWord(this);
+        }
+    }
+
+    /**
+     * Detaches the {@link JapaneseWord} from all of the {@link JapaneseKanji} it is made of.
+     */
+    void detachFromKanji() {
+        for (JapaneseKanjiWithReading reading : kanjiList) {
+            reading.detachWord(this);
         }
     }
 

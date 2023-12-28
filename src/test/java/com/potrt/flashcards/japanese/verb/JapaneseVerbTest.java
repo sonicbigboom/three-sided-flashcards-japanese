@@ -140,6 +140,6 @@ public class JapaneseVerbTest implements TestingConstants {
         JapaneseWord duplicate = new JapaneseWord(builder, godanVerbToDrinkDefinition);
 
         assertThat(verb).doesNotHaveSameHashCodeAs(duplicate).isNotEqualTo(duplicate);
-        // assertThat(duplicate).doesNotHaveSameHashCodeAs(verb).isNotEqualTo(verb);  // TODO: Is this actually expected behavior?
+        assertThat(duplicate).doesNotHaveSameHashCodeAs(verb).isEqualTo(verb); // Weird behavior, but technically the parent word class would see the 2 words as equal.
     }
 }

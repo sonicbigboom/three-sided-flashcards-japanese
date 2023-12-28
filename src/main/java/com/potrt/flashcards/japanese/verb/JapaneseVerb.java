@@ -1,13 +1,15 @@
 package com.potrt.flashcards.japanese.verb;
 
-import com.potrt.flashcards.japanese.JapaneseFlashcard;
+import java.util.Objects;
+
 import com.potrt.flashcards.japanese.JapaneseWord;
+import com.potrt.flashcards.japanese.JapaneseWordBuilder;
 import com.potrt.flashcards.japanese.verb.conjugation.JapaneseVerbConjugator;
 
 /**
  * A {@link JapaneseVerb} represents a Japanese verb that can be conjugated.
  */
-public class JapaneseVerb extends JapaneseFlashcard {
+public class JapaneseVerb extends JapaneseWord {
     private String kanjiBase;
     private String furiganaBase;
 
@@ -18,55 +20,25 @@ public class JapaneseVerb extends JapaneseFlashcard {
     private JapaneseVerbType verbType;
 
     /**
-     * Creates a new {@link JapaneseVerb} with the kanji and furigana bases, the ending, the verb type, and the definition.
-     * @param kanjiBase The kanji base.
-     * @param furiganaBase The furigana base.
-     * @param ending The dictionary form ending of the verb.
-     * @param definition The definition.
+     * Creates a new {@link JapaneseVerb} from a built Japanese dictionary-form verb and its definition and verb type.
+     * @param builder The {@link JapaneseWordBuilder} that has all the components of the dictionary-form verb.
+     * @param definition The meaning of the string.
      * @param verbType The verb's type: godan, ichidan, or irregular.
-     * @apiNote Irregular verbs are probably best created with one of the other constructors.
      */
-    public JapaneseVerb(String kanjiBase, String furiganaBase, JapaneseVerbEnding ending, String definition, JapaneseVerbType verbType) {
-        super(kanjiBase + ending, furiganaBase + ending, definition);
-        this.kanjiBase = kanjiBase;
-        this.furiganaBase = furiganaBase;
-        this.ending = ending;
-        this.verbType = verbType;
-    }
-
-    /**
-     * Creates a new {@link JapaneseVerb} with the kanji, furigana, the ending, the verb type, and the definition.
-     * @param kanji The kanji.
-     * @param furigana The furigana.
-     * @param definition The definition.
-     * @param verbType The verb's type: godan, ichidan, or irregular.
-     * @throws IllegalArgumentException Thrown if the kanji and furigana endings do not match, or it is not a valid verb ending.
-     */
-    public JapaneseVerb(String kanji, String furigana, String definition, JapaneseVerbType verbType) {
-        super(kanji, furigana, definition);
+    public JapaneseVerb(JapaneseWordBuilder builder, String definition, JapaneseVerbType verbType) {
+        super(builder, definition);
         this.kanjiBase = kanji.substring(0, kanji.length()-1);
         this.furiganaBase = furigana.substring(0, furigana.length()-1);
-        if (kanji.charAt(kanji.length()-1) != furigana.charAt(furigana.length()-1)) { throw new IllegalArgumentException("Kanji and furigana verb ending must be the same."); }
         this.ending = JapaneseVerbEnding.from(kanji.substring(kanji.length()-1));
         this.verbType = verbType;
     }
 
     /**
-     * Creates a new {@link JapaneseVerb} with the {@link JapaneseWord} and the verb type.
-     * @param verb The verb as a {@link JapaneseWord}.
-     * @param verbType The verb's type: godan, ichidan, or irregular.
-     * @throws IllegalArgumentException Thrown if the kanji and furigana endings do not match, or it is not a valid verb ending.
-     */
-    public JapaneseVerb(JapaneseWord verb, JapaneseVerbType verbType) {
-        this(verb.getKanji(), verb.getFurigana(), verb.getDefinition(), verbType);
-    }
-
-    /**
-     * Creates a new {@link JapaneseWord} that is a conjugated version of this verb to the given form.
+     * Creates a {@link JapaneseWord.Representation} of the {@link JapaneseVerb} that is the relevant conjugated version.
      * @param form The {@link JapaneseVerbForm} that the verb is being conjugated to.
      * @return A {@link JapaneseWord} representing this verb conjugated to the given form.
      */
-    public JapaneseWord conjugate(JapaneseVerbForm form) {
+    public JapaneseWord.Representation conjugate(JapaneseVerbForm form) {
         String conjugatedEnding;
         switch (verbType) {
             case GODAN:
@@ -78,9 +50,9 @@ public class JapaneseVerb extends JapaneseFlashcard {
             case IRREGULAR:
             default:
                 String conjugatedKana = JapaneseVerbConjugator.conjugateIrregularVerb(form, getKanji());
-                return new JapaneseWord(conjugatedKana, conjugatedKana, getDefinition() + " (" + form.toString() + ")");
+                return new Representation(conjugatedKana, conjugatedKana, getDefinition() + " (" + form.toString() + ")");
         }
-        return new JapaneseWord(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + " (" + form.toString() + ")");
+        return new Representation(kanjiBase + conjugatedEnding, furiganaBase + conjugatedEnding, getDefinition() + " (" + form.toString() + ")");
     }
 
     /**
@@ -106,6 +78,39 @@ public class JapaneseVerb extends JapaneseFlashcard {
     public JapaneseVerbEnding getEnding() {
         return ending;
     } 
+
+    @Override
+    protected void replace(JapaneseWord word) {
+        super.replace(word);
+
+        if (!(word instanceof JapaneseVerb)) {
+            return;
+        }
+
+        JapaneseVerb verb = (JapaneseVerb) word;
+        kanjiBase = kanji.substring(0, kanji.length()-1);
+        furiganaBase = furigana.substring(0, furigana.length()-1);
+        ending = JapaneseVerbEnding.from(kanji.substring(kanji.length()-1));
+        verbType = verb.verbType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getKanji(), getFurigana(), getDefinition(), verbType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof JapaneseVerb)) {
+            return false;
+        }   
+        JapaneseVerb other = (JapaneseVerb) obj;
+
+        return getKanji().equals(other.getKanji()) 
+            && getFurigana().equals(other.getFurigana()) 
+            && getDefinition().equals(other.getDefinition())
+            && verbType.equals(other.verbType);
+    }
 
     /**
      * Represents a Japanese verb type.

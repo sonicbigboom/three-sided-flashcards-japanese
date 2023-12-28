@@ -5,6 +5,7 @@ import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 public interface TestingConstants {
     public static final String particleTopic = "は";
     public static final String japanesePeriod = "。";
+    public static final String japaneseQuestionMark = "？";
     public static final String desu = "です";
     public static final Character IKanji = '私';
     public static final String IMeaning = "I";
@@ -16,11 +17,18 @@ public interface TestingConstants {
     public static final String personMeaningAlternate = "human";
     public static final Character oneKanji = '一';
     public static final String oneMeaning = "one";
-    public static final String wordOneFurigana = "ひと";
-    public static final String personKanjiReadingOnePerson = "り";
+    public static final String wordOneKanji = "一つ";
+    public static final String wordOneFurigana = "ひとつ";
+    public static final String wordOneAlternateKanji = "一";
+    public static final String wordOneAlternateFurigana = "いち";
+    public static final String wordOneDefinition = "one";
+    public static final String wordOnePersonOneFurigana = "ひと";
+    public static final String wordOnePersonPersonFurigana = "り";
     public static final String wordOnePersonKanji = "一人";
     public static final String wordOnePersonFurigana = "ひとり";
     public static final String wordOnePersonDefinition = "one person";
+    public static final Character playKanji = '遊';
+    public static final String playMeaning = "play";
     public static final String personKanjiReadingPerson = "ひと";
     public static final String wordPersonKanji = String.valueOf(personKanji);
     public static final String wordPersonFurigana = personKanjiReadingPerson;
@@ -28,8 +36,9 @@ public interface TestingConstants {
     public static final String wordAmPersonKanji = String.valueOf(personKanji) + desu;
     public static final String wordAmPersonFurigana = personKanjiReadingPerson + desu;
     public static final String wordAmPersonDefinition = "am person";
-    public static final Character toDrinkKanji = '飲';
-    public static final String godanVerbToDrinkKanjiBase = String.valueOf(toDrinkKanji);
+    public static final Character drinkKanji = '飲';
+    public static final String drinkMeaning = "drink";
+    public static final String godanVerbToDrinkKanjiBase = String.valueOf(drinkKanji);
     public static final String godanVerbToDrinkFuriganaBase = "の";
     public static final String godanVerbToDrinkEnding = "む";
     public static final String godanVerbToDrinkPoliteNegativeEnding = "みません";
@@ -40,7 +49,9 @@ public interface TestingConstants {
     public static final String godanVerbToPlayPoliteEnding = "びます";
     public static final String godanVerbToPlayNegativeEnding = "ばない";
     public static final String godanVerbToPlayDefinition = "to play";
-    public static final String ichidanVerbToSeeKanjiBase = "見";
+    public static final Character seeKanji = '見';
+    public static final String seeMeaning = "see";
+    public static final String ichidanVerbToSeeKanjiBase = String.valueOf(seeKanji);
     public static final String ichidanVerbToSeeFuriganaBase = "み";
     public static final String ichidanVerbToSeePastEnding = "た";
     public static final String ichidanVerbToSeeDefinition = "to see";
@@ -65,5 +76,6 @@ public interface TestingConstants {
     public static final String tsuPresentIndicativeNegativeEnding = "たない";
     public static final String ichidanDictionaryEnding = "る";
     public static final String ichidanPastIndicative = "た";
+    public static final String sentenceIAmAHuman = "I am a human.";
     public static final JapaneseVerbForm verbFormDictionary = new JapaneseVerbForm(true, true, presentIdicative);
 }

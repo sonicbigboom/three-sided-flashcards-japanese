@@ -6,33 +6,27 @@ import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
 import com.potrt.flashcards.japanese.verb.JapaneseVerb;
-import com.potrt.flashcards.japanese.verb.JapaneseVerbEnding;
 import com.potrt.flashcards.japanese.verb.JapaneseVerbForm;
 import com.potrt.flashcards.japanese.verb.JapaneseVerb.JapaneseVerbType;
 
 public class JapaneseFlashcardTest implements TestingConstants {
-    
-    /**
-     * Creates a simple flashcard.
-     */
-    @Test
-    public void basicTest() {
-        JapaneseFlashcard flashcard = new JapaneseFlashcard(wordIKanji, wordIFurigana, wordIDefinition);
-        assertThat(flashcard.getKanji()).isEqualTo(wordIKanji);
-        assertThat(flashcard.getFurigana()).isEqualTo(wordIFurigana);
-        assertThat(flashcard.getDefinition()).isEqualTo(wordIDefinition);
-    }
-
     /**
      * Creates a flashcard from a {@link JapaneseWord}.
      */
     @Test
     public void flashcardFromWordTest() {
-        JapaneseWord word = new JapaneseWord(wordOnePersonKanji, wordOnePersonFurigana, wordOnePersonDefinition);
+        JapaneseKanji oneJapaneseKanji = new JapaneseKanji(oneKanji, oneMeaning);
+        JapaneseKanji personJapaneseKanji = new JapaneseKanji(personKanji, personMeaning);
+        JapaneseWordBuilder builder = new JapaneseWordBuilder();
+        builder.add(oneJapaneseKanji.withReading(wordOnePersonOneFurigana));
+        builder.add(personJapaneseKanji.withReading(wordOnePersonPersonFurigana));
+
+        JapaneseWord word = new JapaneseWord(builder, wordOnePersonDefinition);
         JapaneseFlashcard flashcard = new JapaneseFlashcard(word);
         assertThat(flashcard.getKanji()).isEqualTo(wordOnePersonKanji);
         assertThat(flashcard.getFurigana()).isEqualTo(wordOnePersonFurigana);
         assertThat(flashcard.getDefinition()).isEqualTo(wordOnePersonDefinition);
+        assertThat(flashcard.getJapaneseWord()).isEqualTo(word);
     }
 
     /**
@@ -40,15 +34,22 @@ public class JapaneseFlashcardTest implements TestingConstants {
      */
     @Test
     public void flashcardFromVerbTest() {
-        JapaneseVerb verb = new JapaneseVerb(godanVerbToPlayKanjiBase, godanVerbToPlayFuriganaBase, JapaneseVerbEnding.from(godanVerbToPlayEnding), godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
-        JapaneseFlashcard flashcardPolite = new JapaneseFlashcard(verb, new JapaneseVerbForm(false, true, presentIdicative));
+        JapaneseWordBuilder builder = new JapaneseWordBuilder();
+        JapaneseKanji kanji = new JapaneseKanji(playKanji, playMeaning);
+        builder.add(kanji.withReading(godanVerbToPlayFuriganaBase));
+        builder.add(godanVerbToPlayEnding);
+        JapaneseVerb verb = new JapaneseVerb(builder, godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
+
+        JapaneseFlashcard flashcardPolite = new JapaneseFlashcard(verb.conjugate(new JapaneseVerbForm(false, true, presentIdicative)));
         assertThat(flashcardPolite.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayPoliteEnding);
         assertThat(flashcardPolite.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayPoliteEnding);
         assertThat(flashcardPolite.getDefinition()).isEqualTo(godanVerbToPlayDefinition + " (" + definitionPresentIndicativePolite + ")");
+        assertThat(flashcardPolite.getJapaneseWord()).isEqualTo(verb);
 
-        JapaneseFlashcard flashcardNegative = new JapaneseFlashcard(verb, new JapaneseVerbForm(true, false, presentIdicative));
+        JapaneseFlashcard flashcardNegative = new JapaneseFlashcard(verb.conjugate(new JapaneseVerbForm(true, false, presentIdicative)));
         assertThat(flashcardNegative.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayNegativeEnding);
         assertThat(flashcardNegative.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayNegativeEnding);
         assertThat(flashcardNegative.getDefinition()).isEqualTo(godanVerbToPlayDefinition + " (" + definitionPresentIndicativeNegative + ")");
+        assertThat(flashcardNegative.getJapaneseWord()).isEqualTo(verb);
     }
 }

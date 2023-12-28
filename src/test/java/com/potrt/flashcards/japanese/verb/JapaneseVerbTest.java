@@ -1,38 +1,36 @@
 package com.potrt.flashcards.japanese.verb;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.potrt.flashcards.TestingConstants;
+import com.potrt.flashcards.japanese.JapaneseKanji;
 import com.potrt.flashcards.japanese.JapaneseWord;
+import com.potrt.flashcards.japanese.JapaneseWordBuilder;
 import com.potrt.flashcards.japanese.verb.JapaneseVerb.JapaneseVerbType;
 
 public class JapaneseVerbTest implements TestingConstants {
+    private JapaneseWordBuilder builder;
 
-    /**
-     * Creates a basic verb.
-     */
-    @Test
-    public void basicVerbTest() {
+    @Before
+    public void setup() {
         
-        JapaneseVerb verb = new JapaneseVerb(godanVerbToDrinkKanjiBase, godanVerbToDrinkFuriganaBase, JapaneseVerbEnding.from(godanVerbToDrinkEnding), godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
-        assertThat(verb.getKanjiBase()).isEqualTo(godanVerbToDrinkKanjiBase);
-        assertThat(verb.getFuriganaBase()).isEqualTo(godanVerbToDrinkFuriganaBase);
-        assertThat(verb.getEnding()).hasToString(godanVerbToDrinkEnding);
-
-        assertThat(verb.getKanji()).isEqualTo(godanVerbToDrinkKanjiBase + godanVerbToDrinkEnding);
-        assertThat(verb.getFurigana()).isEqualTo(godanVerbToDrinkFuriganaBase + godanVerbToDrinkEnding);
-        assertThat(verb.getDefinition()).isEqualTo(verb.getDefinition());
+        builder = new JapaneseWordBuilder();
     }
+
+    
 
     /**
      * Creates a verb without explicitly specifying an ending.
      */
     @Test
     public void implicitEndingTest() {
-        JapaneseVerb verb = new JapaneseVerb(godanVerbToPlayKanjiBase + godanVerbToPlayEnding, godanVerbToPlayFuriganaBase + godanVerbToPlayEnding, godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
+        JapaneseKanji kanji = new JapaneseKanji(playKanji, playMeaning);
+        builder.add(kanji.withReading(godanVerbToPlayFuriganaBase));
+        builder.add(godanVerbToPlayEnding);
+        JapaneseVerb verb = new JapaneseVerb(builder, godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
         assertThat(verb.getKanjiBase()).isEqualTo(godanVerbToPlayKanjiBase);
         assertThat(verb.getFuriganaBase()).isEqualTo(godanVerbToPlayFuriganaBase);
         assertThat(verb.getEnding()).hasToString(godanVerbToPlayEnding);
@@ -41,44 +39,17 @@ public class JapaneseVerbTest implements TestingConstants {
         assertThat(verb.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayEnding);
         assertThat(verb.getDefinition()).isEqualTo(verb.getDefinition());
     }
-    
-    /**
-     * Test a verb throws an error with mismatched endings.
-     */
-    @Test
-    public void mismatchedEndingTest() {
-        assertThatThrownBy(() -> 
-            new JapaneseVerb(
-                godanVerbToPlayKanjiBase + godanVerbToPlayEnding, 
-                godanVerbToPlayFuriganaBase + godanVerbToDrinkEnding, 
-                godanVerbToPlayDefinition, 
-                JapaneseVerbType.GODAN
-            )).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    /**
-     * Creates a verb from a {@link JapaneseWord}.
-     */
-    @Test
-    public void fromWordTest() {
-        JapaneseWord word = new JapaneseWord(ichidanVerbToSeeKanjiBase + ichidanDictionaryEnding, ichidanVerbToSeeFuriganaBase + ichidanDictionaryEnding, ichidanVerbToSeeDefinition);
-        JapaneseVerb verb = new JapaneseVerb(word, JapaneseVerbType.ICHIDAN);
-        assertThat(verb.getKanjiBase()).isEqualTo(ichidanVerbToSeeKanjiBase);
-        assertThat(verb.getFuriganaBase()).isEqualTo(ichidanVerbToSeeFuriganaBase);
-        assertThat(verb.getEnding()).hasToString(ichidanDictionaryEnding);
-
-        assertThat(verb.getKanji()).isEqualTo(ichidanVerbToSeeKanjiBase + ichidanDictionaryEnding);
-        assertThat(verb.getFurigana()).isEqualTo(ichidanVerbToSeeFuriganaBase + ichidanDictionaryEnding);
-        assertThat(verb.getDefinition()).isEqualTo(ichidanVerbToSeeDefinition);
-    }
 
     /**
      * Test conjugating a godan verb.
      */
     @Test
     public void conjugateGodanTest() {
-        JapaneseVerb verb = new JapaneseVerb(godanVerbToDrinkKanjiBase, godanVerbToDrinkFuriganaBase, JapaneseVerbEnding.from(godanVerbToDrinkEnding), godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
-        JapaneseWord conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, false, presentIdicative));
+        JapaneseKanji kanji = new JapaneseKanji(drinkKanji, drinkMeaning);
+        builder.add(kanji.withReading(godanVerbToDrinkFuriganaBase));
+        builder.add(godanVerbToDrinkEnding);
+        JapaneseVerb verb = new JapaneseVerb(builder, godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
+        JapaneseWord.Representation conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, false, presentIdicative));
 
         assertThat(conjugatedVerb.getKanji()).isEqualTo(godanVerbToDrinkKanjiBase + godanVerbToDrinkPoliteNegativeEnding);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(godanVerbToDrinkFuriganaBase + godanVerbToDrinkPoliteNegativeEnding);
@@ -90,8 +61,11 @@ public class JapaneseVerbTest implements TestingConstants {
      */
     @Test
     public void conjugateIchidanTest() {
-        JapaneseVerb verb = new JapaneseVerb(ichidanVerbToSeeKanjiBase, ichidanVerbToSeeFuriganaBase, JapaneseVerbEnding.RU, ichidanVerbToSeeDefinition, JapaneseVerbType.ICHIDAN);
-        JapaneseWord conjugatedVerb = verb.conjugate(new JapaneseVerbForm(true, true, pastIdicative));
+        JapaneseKanji kanji = new JapaneseKanji(seeKanji, seeMeaning);
+        builder.add(kanji.withReading(ichidanVerbToSeeFuriganaBase));
+        builder.add(ichidanDictionaryEnding);
+        JapaneseVerb verb = new JapaneseVerb(builder, ichidanVerbToSeeDefinition, JapaneseVerbType.ICHIDAN);
+        JapaneseWord.Representation conjugatedVerb = verb.conjugate(new JapaneseVerbForm(true, true, pastIdicative));
 
         assertThat(conjugatedVerb.getKanji()).isEqualTo(ichidanVerbToSeeKanjiBase + ichidanVerbToSeePastEnding);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(ichidanVerbToSeeFuriganaBase + ichidanVerbToSeePastEnding);
@@ -103,11 +77,69 @@ public class JapaneseVerbTest implements TestingConstants {
      */
     @Test
     public void conjugateIrregularTest() {
-        JapaneseVerb verb = new JapaneseVerb(irregularVerbToDoKana, irregularVerbToDoKana, irregularVerbToDoDefinition, JapaneseVerbType.IRREGULAR);
-        JapaneseWord conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, true, presentIdicative));
+        builder.add(irregularVerbToDoKana);
+        JapaneseVerb verb = new JapaneseVerb(builder, irregularVerbToDoDefinition, JapaneseVerbType.IRREGULAR);
+        JapaneseWord.Representation conjugatedVerb = verb.conjugate(new JapaneseVerbForm(false, true, presentIdicative));
 
         assertThat(conjugatedVerb.getKanji()).isEqualTo(irregularVerbToDoPolite);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(irregularVerbToDoPolite);
         assertThat(conjugatedVerb.getDefinition()).isEqualTo(irregularVerbToDoDefinition + " (" + definitionPresentIndicativePolite + ")");
+    }
+
+    /**
+     * Check that hash equality works.
+     */
+    @Test
+    public void equalityTest() {
+        JapaneseKanji kanji = new JapaneseKanji(drinkKanji, drinkMeaning);
+        builder.add(kanji.withReading(godanVerbToDrinkFuriganaBase));
+        builder.add(godanVerbToDrinkEnding);
+        JapaneseVerb verb = new JapaneseVerb(builder, godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(kanji.withReading(godanVerbToDrinkFuriganaBase));
+        builder.add(godanVerbToDrinkEnding);
+        JapaneseWord duplicate = new JapaneseVerb(builder, godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
+
+        assertThat(verb).hasSameHashCodeAs(duplicate).isEqualTo(duplicate);
+        assertThat(duplicate).hasSameHashCodeAs(verb).isEqualTo(verb);
+    }
+
+    /**
+     * Check that hash inequality works.
+     */
+    @Test
+    public void inequalityTest() {
+        JapaneseKanji kanji = new JapaneseKanji(drinkKanji, drinkMeaning);
+        builder.add(kanji.withReading(godanVerbToDrinkFuriganaBase));
+        builder.add(godanVerbToDrinkEnding);
+        JapaneseVerb verb = new JapaneseVerb(builder, godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(kanji.withReading(godanVerbToDrinkFuriganaBase));
+        builder.add(godanVerbToDrinkEnding);
+        JapaneseWord invalidDuplicate = new JapaneseVerb(builder, godanVerbToDrinkDefinition, JapaneseVerbType.IRREGULAR);
+
+        assertThat(verb).doesNotHaveSameHashCodeAs(invalidDuplicate).isNotEqualTo(invalidDuplicate);
+        assertThat(invalidDuplicate).doesNotHaveSameHashCodeAs(verb).isNotEqualTo(verb);
+    }
+
+    /**
+     * Check that hash inequality works between verb and word.
+     */
+    @Test
+    public void wordInequalityTest() {
+        JapaneseKanji kanji = new JapaneseKanji(drinkKanji, drinkMeaning);
+        builder.add(kanji.withReading(godanVerbToDrinkFuriganaBase));
+        builder.add(godanVerbToDrinkEnding);
+        JapaneseVerb verb = new JapaneseVerb(builder, godanVerbToDrinkDefinition, JapaneseVerbType.GODAN);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(kanji.withReading(godanVerbToDrinkFuriganaBase));
+        builder.add(godanVerbToDrinkEnding);
+        JapaneseWord duplicate = new JapaneseWord(builder, godanVerbToDrinkDefinition);
+
+        assertThat(verb).doesNotHaveSameHashCodeAs(duplicate).isNotEqualTo(duplicate);
+        assertThat(duplicate).doesNotHaveSameHashCodeAs(verb).isEqualTo(verb); // Weird behavior, but technically the parent word class would see the 2 words as equal.
     }
 }

@@ -16,11 +16,8 @@ public class JapaneseVerbTest implements TestingConstants {
 
     @Before
     public void setup() {
-        
         builder = new JapaneseWordBuilder();
     }
-
-    
 
     /**
      * Creates a verb without explicitly specifying an ending.
@@ -34,10 +31,11 @@ public class JapaneseVerbTest implements TestingConstants {
         assertThat(verb.getKanjiBase()).isEqualTo(godanVerbToPlayKanjiBase);
         assertThat(verb.getFuriganaBase()).isEqualTo(godanVerbToPlayFuriganaBase);
         assertThat(verb.getEnding()).hasToString(godanVerbToPlayEnding);
+        assertThat(verb.getVerbType()).isEqualTo(JapaneseVerbType.GODAN);
 
         assertThat(verb.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayEnding);
         assertThat(verb.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayEnding);
-        assertThat(verb.getDefinition()).isEqualTo(verb.getDefinition());
+        assertThat(verb.getDefinition()).isEqualTo(godanVerbToPlayDefinition);
     }
 
     /**
@@ -84,6 +82,74 @@ public class JapaneseVerbTest implements TestingConstants {
         assertThat(conjugatedVerb.getKanji()).isEqualTo(irregularVerbToDoPolite);
         assertThat(conjugatedVerb.getFurigana()).isEqualTo(irregularVerbToDoPolite);
         assertThat(conjugatedVerb.getDefinition()).isEqualTo(irregularVerbToDoDefinition + " (" + definitionPresentIndicativePolite + ")");
+    }
+
+    /**
+     * Replace test.
+     */
+    @Test
+    public void replaceTest() {
+        JapaneseKanji kanji = new JapaneseKanji(playKanji, playMeaning);
+        builder.add(kanji.withReading(godanVerbToPlayFuriganaBase));
+        builder.add(godanVerbToPlayEnding);
+        JapaneseVerb verb = new JapaneseVerb(builder, godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
+        assertThat(verb.getKanjiBase()).isEqualTo(godanVerbToPlayKanjiBase);
+        assertThat(verb.getFuriganaBase()).isEqualTo(godanVerbToPlayFuriganaBase);
+        assertThat(verb.getEnding()).hasToString(godanVerbToPlayEnding);
+
+        assertThat(verb.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayEnding);
+        assertThat(verb.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayEnding);
+        assertThat(verb.getDefinition()).isEqualTo(godanVerbToPlayDefinition);
+        assertThat(verb.getVerbType()).isEqualTo(JapaneseVerbType.GODAN);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(kanji.withReading(godanVerbToPlayFuriganaBase));
+        builder.add(godanVerbToPlayEnding);
+        JapaneseVerb replacement = new JapaneseVerb(builder, ichidanVerbToSeeDefinition, JapaneseVerbType.ICHIDAN);
+        verb.replace(replacement);
+
+        assertThat(verb.getKanjiBase()).isEqualTo(godanVerbToPlayKanjiBase);
+        assertThat(verb.getFuriganaBase()).isEqualTo(godanVerbToPlayFuriganaBase);
+        assertThat(verb.getEnding()).hasToString(godanVerbToPlayEnding);
+
+        assertThat(verb.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayEnding);
+        assertThat(verb.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayEnding);
+        assertThat(verb.getDefinition()).isEqualTo(ichidanVerbToSeeDefinition);
+        assertThat(verb.getVerbType()).isEqualTo(JapaneseVerbType.ICHIDAN);
+    }
+
+    /**
+     * Replace test with word instead of verb.
+     */
+    @Test
+    public void wordReplaceTest() {
+        JapaneseKanji kanji = new JapaneseKanji(playKanji, playMeaning);
+        builder.add(kanji.withReading(godanVerbToPlayFuriganaBase));
+        builder.add(godanVerbToPlayEnding);
+        JapaneseVerb verb = new JapaneseVerb(builder, godanVerbToPlayDefinition, JapaneseVerbType.GODAN);
+        assertThat(verb.getKanjiBase()).isEqualTo(godanVerbToPlayKanjiBase);
+        assertThat(verb.getFuriganaBase()).isEqualTo(godanVerbToPlayFuriganaBase);
+        assertThat(verb.getEnding()).hasToString(godanVerbToPlayEnding);
+
+        assertThat(verb.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayEnding);
+        assertThat(verb.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayEnding);
+        assertThat(verb.getDefinition()).isEqualTo(godanVerbToPlayDefinition);
+        assertThat(verb.getVerbType()).isEqualTo(JapaneseVerbType.GODAN);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(kanji.withReading(godanVerbToPlayFuriganaBase));
+        builder.add(godanVerbToPlayEnding);
+        JapaneseWord replacement = new JapaneseWord(builder, ichidanVerbToSeeDefinition);
+        verb.replace(replacement);
+
+        assertThat(verb.getKanjiBase()).isEqualTo(godanVerbToPlayKanjiBase);
+        assertThat(verb.getFuriganaBase()).isEqualTo(godanVerbToPlayFuriganaBase);
+        assertThat(verb.getEnding()).hasToString(godanVerbToPlayEnding);
+
+        assertThat(verb.getKanji()).isEqualTo(godanVerbToPlayKanjiBase + godanVerbToPlayEnding);
+        assertThat(verb.getFurigana()).isEqualTo(godanVerbToPlayFuriganaBase + godanVerbToPlayEnding);
+        assertThat(verb.getDefinition()).isEqualTo(ichidanVerbToSeeDefinition);
+        assertThat(verb.getVerbType()).isEqualTo(JapaneseVerbType.GODAN);
     }
 
     /**

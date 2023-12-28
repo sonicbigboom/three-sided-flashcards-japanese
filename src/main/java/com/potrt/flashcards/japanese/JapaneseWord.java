@@ -111,9 +111,9 @@ public class JapaneseWord {
     }
 
     /**
-     * Replaces the original word values with new word values.  Also unattaches the word with all prior kanji readings.
+     * Replaces the original word values with new word values.  Also detaches the word with all prior kanji readings.
      * @param word The {@link JapaneseWord} values to replace with.
-     * @apiNote This should be overriden by any sub-children to copy any additional relevant values.  The child can and should make a super call.
+     * @apiNote This should be overridden by any sub-children to copy any additional relevant values.  The child can and should make a super call.
      */
     protected void replace(JapaneseWord word) {
         if (!getKanji().equals(word.getKanji())) {

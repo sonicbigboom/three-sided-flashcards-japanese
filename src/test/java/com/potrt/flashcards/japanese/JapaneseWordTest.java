@@ -1,6 +1,7 @@
 package com.potrt.flashcards.japanese;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -128,6 +129,50 @@ public class JapaneseWordTest implements TestingConstants {
 
         assertThat(oneJapaneseKanji.numWords(wordOneFurigana)).isZero();
         assertThat(personJapaneseKanji.numWords(wordOnePersonPersonFurigana)).isZero();
+    }
+
+    /**
+     * Test replacing a word.
+     */
+    @Test
+    public void replaceTest() {
+        JapaneseKanji kanjiOne = new JapaneseKanji(oneKanji, oneMeaning);
+        builder = new JapaneseWordBuilder();
+        builder.add(kanjiOne.withReading(wordOneFurigana));
+        JapaneseWord wordOne = new JapaneseWord(builder, wordOneDefinition);
+        String kanji = wordOne.getKanji();
+
+        builder = new JapaneseWordBuilder();
+        builder.add(kanjiOne.withReading(wordOneAlternateFurigana));
+        JapaneseWord wordOneReplacement = new JapaneseWord(builder, wordOneDefinition);
+
+        assertThat(wordOne.getKanji()).isEqualTo(kanji);
+        assertThat(wordOne.getFurigana()).isEqualTo(wordOneFurigana);
+        assertThat(wordOne.getDefinition()).isEqualTo(wordOneDefinition);
+
+        wordOne.replace(wordOneReplacement);
+
+        assertThat(wordOne.getKanji()).isEqualTo(kanji);
+        assertThat(wordOne.getFurigana()).isEqualTo(wordOneAlternateFurigana);
+        assertThat(wordOne.getDefinition()).isEqualTo(wordOneDefinition);
+    }
+
+    /**
+     * Attempt to replace a word with mismatched kanji.
+     */
+    @Test
+    public void mismatchedReplaceTest() {
+        JapaneseKanji kanjiOne = new JapaneseKanji(oneKanji, oneMeaning);
+        builder = new JapaneseWordBuilder();
+        builder.add(kanjiOne.withReading(wordOneFurigana));
+        JapaneseWord wordOne = new JapaneseWord(builder, wordOneDefinition);
+
+        builder = new JapaneseWordBuilder();
+        builder.add(kanjiOne.withReading(wordOneAlternateFurigana));
+        builder.add(desu);
+        JapaneseWord wordOneReplacement = new JapaneseWord(builder, wordOneDefinition);
+
+        assertThatThrownBy(() -> wordOne.replace(wordOneReplacement)).isInstanceOf(IllegalArgumentException.class);
     }
 
     /**

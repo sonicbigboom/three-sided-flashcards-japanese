@@ -250,6 +250,13 @@ public class JapaneseKanjiTest implements TestingConstants {
         builder.add(kanjiOneWithReadingOnePerson);
         builder.add(kanjiPersonWithReadingOnePerson);
         JapaneseWord wordOnePerson = new JapaneseWord(builder, wordOnePersonDefinition);
+
+        assertThat(kanjiOne.numWords()).isZero();
+
+        kanjiOneWithReadingOnePerson.detachWord(wordOnePerson);
+
+        assertThat(kanjiOne.numWords()).isZero();
+
         kanjiOneWithReadingOnePerson.attachWord(wordOnePerson);
         kanjiPersonWithReadingOnePerson.attachWord(wordOnePerson);
 

@@ -79,6 +79,14 @@ public class JapaneseVerb extends JapaneseWord {
         return ending;
     } 
 
+    /**
+     * Gets the verb type of the verb.
+     * @return The {@link JapaneseVerbType}.
+     */
+    public JapaneseVerbType getVerbType() {
+        return verbType;
+    }
+
     @Override
     protected void replace(JapaneseWord word) {
         super.replace(word);
